@@ -33,8 +33,7 @@ Plano::Plano(float c, float a, float f, float p){
  * 		
  */
 void Plano::desenhaXoY(){
-	
-	glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+
 	float larg = -this->a/2;
 	float incrementoX = this->c/this->f;
 	float incrementoY = this->a/this->p;
@@ -62,7 +61,7 @@ void Plano::desenhaXoY(){
  */
 
 void Plano::desenhaXoZ(){
-	glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+
 	float alt = -this->a/2;
 	float incrementoX = this->c/this->f;
 	float incrementoZ = this->a/this->p;
@@ -90,7 +89,7 @@ void Plano::desenhaXoZ(){
  */
 
 void Plano::desenhaYoZ(){
-	glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+
 	float alt = -this->a/2;
 	float incrementoY = this->a/this->p;
 	float incrementoZ = this->c/this->f;

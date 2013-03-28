@@ -44,7 +44,6 @@ Cubo::Cubo(float c,float a,float l, float f, float p){
  */
 
 void Cubo::desenha(){
-	glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 	//Variaveis Iniciais para comecar a desenhar 
 	float alt = -this->a/2;
 	float comp = -this->c/2;

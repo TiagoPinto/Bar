@@ -41,7 +41,6 @@ Cilindro::Cilindro(float r, float a,float f, float c){
  */
 
 void Cilindro::desenha(){
-	glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 	glBegin(GL_TRIANGLES);
 		float rotacao = 2 * M_PI/this->fatias;
 		float graus = 0;

@@ -84,12 +84,15 @@
     <ClCompile Include="cubo.cpp" />
     <ClCompile Include="esfera.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mesa.cpp" />
     <ClCompile Include="plano.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cadeira.h" />
     <ClInclude Include="cilindro.h" />
     <ClInclude Include="cubo.h" />
     <ClInclude Include="esfera.h" />
+    <ClInclude Include="mesa.h" />
     <ClInclude Include="plano.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

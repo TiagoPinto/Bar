@@ -35,7 +35,6 @@ Esfera:: Esfera(float r, float f, float c){
  *		
  */
 void Esfera:: desenha(){
-	glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 	float rotacaoR = 2 * M_PI / this->fatias;
 	float rotacaoC = M_PI / this->camadas;
 	float grausC = 0;

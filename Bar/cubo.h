@@ -3,8 +3,8 @@ class Cubo{
 		float c;	//comprimento
 		float a;	//altura
 		float l;	//largura
-		float f;	//fatias
-		float p;	//pisos
+		float f;	//camadas
+		float p;	//fatias
 
 	public:
 		Cubo();

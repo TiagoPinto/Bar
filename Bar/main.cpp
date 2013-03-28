@@ -6,19 +6,31 @@
 #include "cubo.h"
 #include "cilindro.h"
 #include "esfera.h"
+#include "mesa.h"
 
+//angulos de rotacao Sobre a propria figura
 float angX= 0.0f, angY = 0.0f;
+//angulos de rotacao da camara
 float angB = 0.0f;
 float angO = 0.0f;
 float raioC = 6.0f;
 float x = 0.0f;
 float y = 0.0f;
-float speed = 1000;
+float speed = 3.0f;
+//Cores Iniciais
+float red = 1.0f;
+float green = 0.5f;
+float blue = 0.0f;
+//Opcao do menu para desenhar os objectos
+int objecto = 0;
 
-Cilindro *cilindro = new Cilindro(1.1f,1.1f,7.0f,1.0f);
-Cubo *cubo = new Cubo(2.0f,1.0f,3.0f,10.0f,1.0f);
+
+Cilindro *cilindro = new Cilindro(1.0f,1.0f,10.0f,3.0f);
+Cubo *cubo = new Cubo(2.0f,2.0f,2.0f,3.0f,2.0f);
 Plano *plano = new Plano(2.0f,1.0f,1.0f,3.0f);
 Esfera *esfera = new Esfera(1.0f,20.0f,20.0f);
+Mesa *mesa = new Mesa(3.0f,2.0f,1.0f, 0.2f, 5.0f, 4.0f);
+
 void changeSize(int w, int h) {
 
 	// Prevent a divide by zero, when window is too short
@@ -76,15 +88,23 @@ void renderScene(void) {
     glEnd();
 
 // pôr instruções de desenho aqui
-	glColor3f(1.0f,0.5f,0.0f);
-	glRotatef(angX,0.0,1.0,0.0);
-	glRotatef(angY,1,0,0);
-	cilindro->desenha();
-	//plano->desenhaXoY();
-	//plano->desenhaXoZ();
-	//plano->desenhaYoZ();
-	//cubo->desenha();
-	//esfera->desenha();
+	glColor3f(red, green, blue);
+	glRotatef(angX, 0.0f, 1.0f, 0.0f);
+	glRotatef(angY, 1.0f, 0.0f, 0.0f);
+
+	switch(objecto) {
+		case 9: plano->desenhaXoY(); break;
+		case 10: plano->desenhaXoZ(); break;
+		case 11: plano->desenhaYoZ(); break;
+		case 12: cubo->desenha(); break;
+		case 13: cilindro->desenha(); break;
+		case 14: esfera->desenha(); break;
+		case 15: mesa->desenhaA();break;
+		case 16: mesa->desenhaB();break;
+		case 17: mesa->desenhaC();break;
+
+
+	}
 	//End of frame
 	glutSwapBuffers();
 }
@@ -114,13 +134,95 @@ void mouse(int x, int y){
 	float diff_x = x - 400;
 	float diff_y = y - 300;
 	
-	angX = speed*(diff_x/400);
-	angY = speed*(diff_y/300);
+	angB = -speed*(diff_x/400);
+	angO = speed*(diff_y/300);
 }
 
+void  menuPrincipal(int operador){
+	if(operador == 0)
+		;
+}
+
+void  menuEstilo(int operador){
+	switch(operador) {
+		case 1: glPolygonMode(GL_FRONT_AND_BACK,GL_LINE); break; 
+		case 2: glPolygonMode(GL_FRONT_AND_BACK,GL_FILL); break; 
+		case 3: glPolygonMode(GL_FRONT_AND_BACK,GL_POINT); break;
+		case 4: glFrontFace(GL_CCW); break;
+		case 5: glFrontFace(GL_CW); break;
+	}
+}
+
+void menuCor(int operador) {
+	switch(operador) {
+		case 6: red += 0.1f; green -= 0.1f; blue -= 0.1f; break;
+		case 7: green += 0.1f; red -= 0.1f; blue -= 0.1f; break;
+		case 8: blue += 0.1f; red -= 0.1f, green -= 0.1f; break;
+	}
+	if(red < 0.0f)
+		red = 0.0f;
+	if(red > 1.0f)
+		red = 1.0f;
+	if(green < 0.0f)
+		green = 0.0f;
+	if(green > 1.0f)
+		green = 1.0f;
+	if(blue < 0.0f)
+		blue = 0.0f;
+	if(blue > 1.0f)
+		blue = 1.0f;
+}
+
+void menuObjecto(int operador)	{
+	 objecto = operador;
+}
 
 // escrever função de processamento do menu
+void criarMenu(){
+	glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+	int principal, estilo, cor, objecto, plano, mesa, cadeira, candeeiro, copo;
 
+	estilo = glutCreateMenu(menuEstilo);
+
+		glutAddMenuEntry("Line", 1);
+		glutAddMenuEntry("Fill", 2);
+		glutAddMenuEntry("Point", 3);
+		glutAddMenuEntry("CCW", 4);
+		glutAddMenuEntry("CW", 5);
+
+	cor = glutCreateMenu(menuCor);
+		glutAddMenuEntry("Red", 6);
+		glutAddMenuEntry("Green", 7);
+		glutAddMenuEntry("Blue", 8);
+
+	plano = glutCreateMenu(menuObjecto);
+		glutAddMenuEntry("PlanoXoY", 9);
+		glutAddMenuEntry("PlanoXoZ", 10);
+		glutAddMenuEntry("PlanoYoZ", 11);
+
+	mesa = glutCreateMenu(menuObjecto);
+		glutAddMenuEntry("Mesa Standard", 15);
+		glutAddMenuEntry("Mesa Redonda", 16);
+		glutAddMenuEntry("Mesa Medieval", 17);
+
+	objecto = glutCreateMenu(menuObjecto);
+		glutAddSubMenu("Planos", plano);
+		glutAddMenuEntry("Cubo", 12);
+		glutAddMenuEntry("Cilindro", 13);
+		glutAddMenuEntry("Esfera", 14);
+		glutAddSubMenu("Mesas", mesa);
+		//glutAddSubMenu("Cadeira", cadeiras);
+		//glutAddSubMenu("Candeeiro", candeeiros);
+		//glutAddSubMenu("Copo", copos);
+		//glutAddMenuEntry("Bar", 9);
+		
+	principal = glutCreateMenu(menuPrincipal);
+		glutAddMenuEntry("Limpar",0);
+		glutAddSubMenu("Modo dos Poligonos",estilo);
+		glutAddSubMenu("Cores",cor);
+		glutAddSubMenu("Objectos",objecto);
+		glutAttachMenu(GLUT_RIGHT_BUTTON);
+}
 
 
 
@@ -142,9 +244,9 @@ int main(int argc, char **argv) {
 // pôr aqui registo da funções do teclado e rato
 	glutSpecialFunc(keyboard);
 	glutMotionFunc(mouse);
-
+	glutPostRedisplay();
 // pôr aqui a criação do menu
-
+	criarMenu();
 
 // alguns settings para OpenGL
 	glEnable(GL_DEPTH_TEST);
