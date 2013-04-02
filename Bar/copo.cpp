@@ -3,7 +3,11 @@
 #include <math.h>
 #include "copo.h"
 
-
+/**
+ * Construtor da class Copo.
+ * Inicializa todas as variaveis de instancia.
+ *
+ */
 Copo::Copo(){
 	this->raio = 0.0f;
 	this->altura = 0.0f;
@@ -12,6 +16,20 @@ Copo::Copo(){
 	this->camadas = 0.0f;
 }
 
+/**
+ * Construtor da class Copo.
+ * 
+ *@param r
+ * 	 Variavel que especifica o raio do copo	
+ *@param a
+ * 	 Variavel que especifica a altura do copo
+  *@param e
+ * 	 Variavel que especifica a espessura do copo
+  *@param f
+ * 	 Variavel que especifica as fatias do copo
+  *@param p
+ *	 Variavel que especifica as fatias do copo
+ */
 Copo::Copo(float r, float a, float e, float f, float p){
 	this->raio = r;
 	this->altura = a;
@@ -20,6 +38,8 @@ Copo::Copo(float r, float a, float e, float f, float p){
 	this->camadas = p;
 }
 
+
+/* Desenha um copo standard, em que o copo e cilindrico, mas que a base e inferior em raio a altura */
 void Copo::desenhaA(){
 	glBegin(GL_TRIANGLES);
 	float rotacao = 2 * M_PI/this->fatias;

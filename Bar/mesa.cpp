@@ -96,35 +96,35 @@ void Mesa::desenhaA(){
 void Mesa::desenhaB(){
 	Cilindro *base;
 	Cilindro *perna[4];
-	float rotacao = 2 * M_PI / this->fatias;
+	Cilindro *ligacao[2];
 	float graus = 0;
+
 	//Base da Mesa 
 	glPushMatrix();
 		glTranslatef(0.0f, this->altura, 0.0f);
 		base = new Cilindro(this->comprimento / 2, this->espessura , this->fatias, this->camadas);
 		base->desenha();
 	glPopMatrix();
-	//Pernas, ate 5 fatias, desenha quantas pernas quantas fatias houver, mais que 5, já desenha apenas 4 pernas
-	if(this->fatias <= 5.0f){
-		for(int i = 0; i < this->fatias; i++) {
-			glPushMatrix();
-				glTranslatef((this->comprimento / 2 - this->espessura) * cos(graus), this->altura / 2, (this->comprimento / 2 - this->espessura) * sin(graus));
-				perna[i] = new Cilindro((2 *this->espessura) / 3, this->altura - this->espessura, this->fatias * 3, this->camadas);
-				perna[i]->desenha();
-			glPopMatrix();	
-			graus = graus + rotacao;
-		}
+
+	for(int i = 0; i < 4; i++) {
+		glPushMatrix();
+		glTranslatef((this->comprimento / 2-this->espessura) * cos(graus), this->altura / 2, (this->comprimento / 2 - this->espessura) * sin(graus));
+			perna[i] = new Cilindro((2 * this->espessura) / 3, this->altura - this->espessura, this->fatias * 3, this->camadas);
+			perna[i]->desenha();
+		glPopMatrix();	
+		graus = graus + M_PI / 2;
 	}
-	else{
-		for(int i = 0; i < 4; i++) {
-			glPushMatrix();
-				glTranslatef((this->comprimento / 2-this->espessura) * cos(graus), this->altura / 2, (this->comprimento / 2 - this->espessura) * sin(graus));
-				perna[i] = new Cilindro((2 * this->espessura) / 3, this->altura - this->espessura, this->fatias * 3, this->camadas);
-				perna[i]->desenha();
-			glPopMatrix();	
-			graus = graus + M_PI / 2;
-		}
-	}
+		glPushMatrix();
+			glTranslatef(0.0f, this->altura / 4, 0.0f);
+			glRotatef(90.0f, 1.0f,0.0f,0.0f);
+			ligacao[0] = new Cilindro(this->espessura / 5, this->comprimento -2 *(3 * this->espessura ) / 2, this->fatias * 3, this->camadas);
+			ligacao[0]->desenha();
+
+			glRotatef(90.0f, 0.0f,0.0f,1.0f);
+			ligacao[1] = new Cilindro(this->espessura / 5, this->comprimento -2 *(3 * this->espessura) / 2, this->fatias * 3, this->camadas);
+			ligacao[1]->desenha();
+		glPopMatrix();
+
 }
 
 /**

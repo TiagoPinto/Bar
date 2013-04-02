@@ -44,6 +44,8 @@ Cadeira::Cadeira(float c, float l, float a, float e, float f, float p){
 	this->camadas = p;
 }
 
+/* Metodo que desenha o esqueleto de uma cadeira em que as pernas base e costas sao desenhadas a partir
+  * do construtor Cubo */
 void Cadeira::desenhaBasePernas(){
 	Cubo *base;
 	Cubo *perna[4];
@@ -92,6 +94,7 @@ void Cadeira::desenhaBasePernas(){
 	glPopMatrix();
 }
 
+/*Metodo que desenha uma cadeira standard, em que as pernas estao ligadas perpendicularmente */
 void Cadeira::desenhaA(){
 	Cubo *tabua[4];
 
@@ -126,6 +129,7 @@ void Cadeira::desenhaA(){
 	glPopMatrix();
 }
 
+/* metodo que desenha um Banco */
 void Cadeira::desenhaB(){
 	Cilindro *base;
 	Cilindro *perna[4];
@@ -147,6 +151,7 @@ void Cadeira::desenhaB(){
 	}
 }
 
+/* Metodo que desenha um banco comprido com uma tabua a ligar as pernas pelo meio  */
 void Cadeira::desenhaC(){
 	Cubo *base;
 	Cubo *perna[4];
@@ -175,9 +180,11 @@ void Cadeira::desenhaC(){
 	glPopMatrix();
 }
 
+/*Metodo que desenha a cadeira de um rei, com sitios para pousar os braços, esferas no topo da cadeira, e um meio cilindro */
 void Cadeira::desenhaD(){
 	Esfera *ornamento[2];
 	Cubo *bracos[4];
+	Cilindro *metade;
 
 	desenhaBasePernas();
 
@@ -220,55 +227,11 @@ void Cadeira::desenhaD(){
 		ornamento[0]->desenha();
 	glPopMatrix();
 
-	// Meia Circunferencia no Topo da cadeira
-	//Meia Circunferencia da parte de tras
 	glPushMatrix();
-		glTranslatef(0.0f, this->altura, -this->largura / 2);
-	float rotacaoRT = M_PI;
-	float rotacaoCT = (M_PI / 2) / this->camadas;
-	float grausCT = 0;
-	for(int k = 0; k < this->camadas; k++){
-		float grausRT = 0;
-		glBegin(GL_TRIANGLES);
-		glVertex3f((this->comprimento / 2 - this->espessura) * cos(grausRT) * sin(grausCT), (this->comprimento / 4) * cos(grausCT), (this->comprimento / 2 - this->espessura) * sin(grausRT) * sin(grausCT)); 
-		glVertex3f((this->comprimento / 2 - this->espessura) * cos(grausRT) * sin(grausCT + rotacaoCT), (this->comprimento / 4) * cos(grausCT + rotacaoCT), (this->comprimento / 2 - this->espessura) * sin(grausRT) * sin(grausCT + rotacaoCT));
-		glVertex3f((this->comprimento / 2 - this->espessura) * cos(grausRT + rotacaoRT) * sin(grausCT + rotacaoCT), (this->comprimento / 4) * cos(grausCT + rotacaoCT), (this->comprimento / 2 - this->espessura) * sin(grausRT + rotacaoRT) * sin(grausCT + rotacaoCT));
+		glTranslatef(0.0f,this->altura,-this->largura / 2 + this->espessura / 2);
+		glRotatef(270.0f,1.0f,0.0f,0.0f);
+		metade = new Cilindro(this->comprimento / 2 - this->espessura, this->espessura, this->fatias, this->camadas);
+		metade->meioCilindro();
 
-		glVertex3f((this->comprimento / 2 - this->espessura) * cos(grausRT) * sin(grausCT), (this->comprimento / 4) * cos(grausCT), (this->comprimento / 2 - this->espessura) * sin(grausRT) * sin(grausCT)); 				
-		glVertex3f((this->comprimento / 2 - this->espessura) * cos(grausRT + rotacaoRT) * sin(grausCT + rotacaoCT), (this->comprimento / 4) * cos(grausCT + rotacaoCT), (this->comprimento / 2 - this->espessura) * sin(grausRT + rotacaoRT) * sin(grausCT + rotacaoCT));
-		glVertex3f((this->comprimento / 2 - this->espessura) * cos(grausRT + rotacaoRT) * sin(grausCT), (this->comprimento / 4) * cos(grausCT), (this->comprimento / 2 - this->espessura) * sin(grausRT + rotacaoRT) * sin(grausCT));
-		glEnd();		
-		grausCT = grausCT + rotacaoCT;
-	}
-
-	//Meia Circunferencia da Frente
-	glTranslatef(0.0f,0.0f, this->espessura);
-	float rotacaoR = M_PI;
-	float rotacaoC = (M_PI / 2) / this->camadas;
-	float rotacaoA = M_PI / this->camadas;
-	float grausC = 0;
-	for(int k = 0; k < this->camadas; k++){
-		float grausR = 0;
-		glBegin(GL_TRIANGLES);
-		glVertex3f((this->comprimento / 2 - this->espessura) * cos(rotacaoR) * sin(grausC), (this->comprimento / 4) * cos(grausC), (this->comprimento / 2 - this->espessura) * sin(grausR) * sin(grausC)); 
-		glVertex3f((this->comprimento / 2 - this->espessura) * cos(rotacaoR) * sin(grausC + rotacaoC), (this->comprimento / 4) * cos(grausC + rotacaoC), (this->comprimento / 2 - this->espessura) * sin(grausR) * sin(grausC + rotacaoC));
-		glVertex3f((this->comprimento / 2 - this->espessura) * cos(grausR) * sin(grausC + rotacaoC), (this->comprimento / 4) * cos(grausC + rotacaoC), (this->comprimento / 2 - this->espessura) * sin(grausR + rotacaoR) * sin(grausC + rotacaoC));
-
-		glVertex3f((this->comprimento / 2 - this->espessura) * cos(rotacaoR) * sin(grausC), (this->comprimento / 4) * cos(grausC), (this->comprimento / 2 - this->espessura) * sin(grausR) * sin(grausC)); 				
-		glVertex3f((this->comprimento / 2 - this->espessura) * cos(grausR) * sin(grausC + rotacaoC), (this->comprimento / 4) * cos(grausC + rotacaoC), (this->comprimento / 2 - this->espessura) * sin(grausR + rotacaoR) * sin(grausC + rotacaoC));
-		glVertex3f((this->comprimento / 2 - this->espessura) * cos(grausR) * sin(grausC), (this->comprimento / 4) * cos(grausC), (this->comprimento / 2 - this->espessura) * sin(grausR + rotacaoR) * sin(grausC));
-
-		/*
-		glVertex3f((this->comprimento / 2 - this->espessura) * cos(grausR) * sin(grausC), (this->comprimento / 4) * cos(grausC), -this->espessura);
-		glVertex3f((this->comprimento / 2 - this->espessura) * cos(grausR) * sin(grausC), (this->comprimento / 4) * cos(grausC), 0.0f);
-		glVertex3f((this->comprimento / 2 - this->espessura) * cos(grausR + rotacaoA) * sin(grausC), (this->comprimento / 4) * cos(grausC - rotacaoC), 0.0f);
-
-		glVertex3f((this->comprimento / 2 - this->espessura) * cos(grausR) * sin(grausC), (this->comprimento / 4) * cos(grausC), -this->espessura);
-		glVertex3f((this->comprimento / 2 - this->espessura) * cos(grausR + rotacaoA) * sin(grausC), (this->comprimento / 4) * cos(grausC + rotacaoC), -this->espessura);
-		glVertex3f((this->comprimento / 2 - this->espessura) * cos(grausR + rotacaoA) * sin(grausC), (this->comprimento / 4) * cos(grausC + rotacaoC), 0.0f);
-		*/glEnd();		
-		grausC = grausC + rotacaoC;
-		grausR = grausR + rotacaoA;
-	}
 	glPopMatrix();
 }

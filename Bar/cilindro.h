@@ -11,4 +11,5 @@ class Cilindro{
 		Cilindro(float r, float a);
 		void desenha();
 		float getAltura();
+		void meioCilindro();
 };

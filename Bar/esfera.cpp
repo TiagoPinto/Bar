@@ -57,6 +57,33 @@ void Esfera:: desenha(){
 	}
 	
 }
+/**
+ * Desenha metade de uma esfera com as dimensoes do construtor
+ *		
+ */
+void Esfera:: meiaEsfera(){
+	float rotacaoR =  2 * M_PI / this->fatias;
+	float rotacaoC = (M_PI / 2) / this->camadas;
+	float grausC = 0;
+	for(int k = 0; k < this->camadas; k++){
+		float grausR = 0;
+		for(int i = 0; i < this->fatias; i++) {
+			glBegin(GL_TRIANGLES);
+			//Parte Superior da Esfera
+			glVertex3f(raio * cos(grausR) * sin(grausC), raio * cos(grausC), raio * sin(grausR) * sin(grausC)); 
+			glVertex3f(raio * cos(grausR) * sin(grausC + rotacaoC), raio * cos(grausC + rotacaoC), raio * sin(grausR) * sin(grausC + rotacaoC));
+			glVertex3f(raio * cos(grausR + rotacaoR) * sin(grausC + rotacaoC), raio * cos(grausC + rotacaoC), raio * sin(grausR + rotacaoR) * sin(grausC + rotacaoC));
+
+			glVertex3f(raio * cos(grausR) * sin(grausC), raio * cos(grausC), raio * sin(grausR) * sin(grausC)); 				
+			glVertex3f(raio * cos(grausR + rotacaoR) * sin(grausC + rotacaoC), raio * cos(grausC + rotacaoC), raio * sin(grausR + rotacaoR) * sin(grausC + rotacaoC));
+			glVertex3f(raio * cos(grausR + rotacaoR) * sin(grausC), raio * cos(grausC), raio * sin(grausR + rotacaoR) * sin(grausC));
+			glEnd();		
+		grausR = grausR + rotacaoR;	
+		}
+		grausC = grausC + rotacaoC;
+	}
+	
+}
 
 
 

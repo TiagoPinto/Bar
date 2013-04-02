@@ -15,7 +15,7 @@ float angX= 0.0f, angY = 0.0f;
 //angulos de rotacao da camara
 float angB = 0.0f;
 float angO = 0.0f;
-float raioC = 3.0f;
+float raioC = 6.0f;
 float x = 0.0f;
 float y = 0.0f;
 float speed = 3.0f;
@@ -32,7 +32,7 @@ Cubo *cubo = new Cubo(2.0f,1.0f,1.5f,3.0f,2.0f);
 Plano *plano = new Plano(2.0f,1.0f,1.0f,3.0f);
 Esfera *esfera = new Esfera(1.0f,20.0f,20.0f);
 Mesa *mesa = new Mesa(3.0f,2.0f,1.0f, 0.2f, 20.0f, 4.0f);
-Cadeira *cadeira = new Cadeira(1.5f, 0.7f, 2.0f, 0.2f, 10.0f, 10.0f);
+Cadeira *cadeira = new Cadeira(2.0f, 0.7f, 1.5f, 0.1f, 10.0f, 10.0f);
 
 Copo *copo = new Copo(1.0f,2.0f,0.1f,10.0f,5.0f);
 
@@ -110,7 +110,7 @@ void renderScene(void) {
 		case 20: cadeira->desenhaA(); break;
 		case 21: cadeira->desenhaB(); break;
 		case 22: cadeira-> desenhaC(); break;
-		case 23: glTranslatef(0.0f,-1.0f,0.0f); cadeira->desenhaD(); break;
+		case 23: cadeira->desenhaD(); break;
 		case 24: copo->desenhaA(); break;
 
 	}
@@ -251,7 +251,7 @@ void criarMenu(){
 		glutAddMenuEntry("Esfera", 16);
 		glutAddSubMenu("Mesa", mesa);
 		glutAddSubMenu("Cadeira", cadeira);
-		//glutAddSubMenu("Candeeiro", candeeiros);
+		//glutAddSubMenu("Candeeiro", candeeiro);
 		glutAddSubMenu("Copo", copo);
 		
 	principal = glutCreateMenu(menuPrincipal);

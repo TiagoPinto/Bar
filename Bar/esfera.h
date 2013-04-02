@@ -7,4 +7,5 @@ class Esfera {
 		Esfera();
 		Esfera(float r, float f, float c);
 		void desenha();
+		void meiaEsfera();
 };
