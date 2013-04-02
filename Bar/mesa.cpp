@@ -8,7 +8,7 @@
 
 /**
  * Construtor da class Mesa.
- * Inicializa as variaveis de comprimento, largura, altura, espessura, e camadas.	
+ * Inicializa as variaveis de comprimento, largura, altura, espessura, fatias e camadas.	
  */
 Mesa::Mesa(){
 	this->comprimento = 0.0f;
@@ -63,28 +63,28 @@ void Mesa::desenhaA(){
 	//Perna da Frente Direita
 	glPushMatrix();
 		glTranslatef(this->comprimento/2 - this->espessura, this->altura / 2, this->largura/2 - this->espessura);
-		perna[0] = new Cilindro(this->espessura, this->altura - this->espessura, this->fatias * 3, this->camadas);
+		perna[0] = new Cilindro((2 * this->espessura) / 3, this->altura - this->espessura, this->fatias * 3, this->camadas);
 		perna[0]->desenha();
 	glPopMatrix();	
 
 	//Perna da Frente Esquerda
 	glPushMatrix();
 		glTranslatef(-this->comprimento/2 + this->espessura, this->altura/2, this->largura/2 - this->espessura);
-		perna[1] = new Cilindro(this->espessura, this->altura - this->espessura, this->fatias * 3, this->camadas);
+		perna[1] = new Cilindro((2 * this->espessura) / 3, this->altura - this->espessura, this->fatias * 3, this->camadas);
 		perna[1]->desenha();
 	glPopMatrix();	
 	
 	//Perna de Tras Direita
 	glPushMatrix();
 		glTranslatef(this->comprimento/2 - this->espessura, this->altura/2, -this->largura/2 + this->espessura);
-		perna[2] = new Cilindro(this->espessura, this->altura - this->espessura, this->fatias * 3, this->camadas);
+		perna[2] = new Cilindro((2 * this->espessura) / 3, this->altura - this->espessura, this->fatias * 3, this->camadas);
 		perna[2]->desenha();
 	glPopMatrix();
 
 	//Perna de Tras Esquerda
 	glPushMatrix();
 		glTranslatef(-this->comprimento/2 + this->espessura, this->altura/2, -this->largura/2 + this->espessura);
-		perna[3] = new Cilindro(this->espessura, this->altura - this->espessura, this->fatias * 3, this->camadas);
+		perna[3] = new Cilindro((2 * this->espessura) / 3, this->altura - this->espessura, this->fatias * 3, this->camadas);
 		perna[3]->desenha();
 	glPopMatrix();
 }
@@ -101,16 +101,16 @@ void Mesa::desenhaB(){
 	//Base da Mesa 
 	glPushMatrix();
 		glTranslatef(0.0f, this->altura, 0.0f);
-		base = new Cilindro(this->comprimento, this->espessura , this->fatias, this->camadas);
+		base = new Cilindro(this->comprimento / 2, this->espessura , this->fatias, this->camadas);
 		base->desenha();
 	glPopMatrix();
 	//Pernas, ate 5 fatias, desenha quantas pernas quantas fatias houver, mais que 5, já desenha apenas 4 pernas
 	if(this->fatias <= 5.0f){
 		for(int i = 0; i < this->fatias; i++) {
 			glPushMatrix();
-				glTranslatef((this->comprimento - this->espessura) * cos(graus), this->altura / 2, (this->comprimento - this->espessura) * sin(graus));
-				perna[0] = new Cilindro(this->espessura, this->altura - this->espessura, this->fatias * 3, this->camadas);
-				perna[0]->desenha();
+				glTranslatef((this->comprimento / 2 - this->espessura) * cos(graus), this->altura / 2, (this->comprimento / 2 - this->espessura) * sin(graus));
+				perna[i] = new Cilindro((2 *this->espessura) / 3, this->altura - this->espessura, this->fatias * 3, this->camadas);
+				perna[i]->desenha();
 			glPopMatrix();	
 			graus = graus + rotacao;
 		}
@@ -118,9 +118,9 @@ void Mesa::desenhaB(){
 	else{
 		for(int i = 0; i < 4; i++) {
 			glPushMatrix();
-				glTranslatef((this->comprimento-this->espessura) * cos(graus), this->altura / 2, (this->comprimento - this->espessura) * sin(graus));
-				perna[0] = new Cilindro(this->espessura, this->altura - this->espessura, this->fatias * 3, this->camadas);
-				perna[0]->desenha();
+				glTranslatef((this->comprimento / 2-this->espessura) * cos(graus), this->altura / 2, (this->comprimento / 2 - this->espessura) * sin(graus));
+				perna[i] = new Cilindro((2 * this->espessura) / 3, this->altura - this->espessura, this->fatias * 3, this->camadas);
+				perna[i]->desenha();
 			glPopMatrix();	
 			graus = graus + M_PI / 2;
 		}
@@ -146,29 +146,29 @@ void Mesa::desenhaC(){
 	//Perna da direita 
 	glPushMatrix();
 		glTranslatef(this->comprimento / 2 - (this->comprimento / 10), this->altura / 2, 0.0f);
-		base = new Cubo(this->espessura / 2, this->altura,this->largura - this->largura / 8, this->fatias, this->camadas);
-		base->desenha();
+		perna[0] = new Cubo(this->espessura / 2, this->altura,this->largura - this->largura / 8, this->fatias, this->camadas);
+		perna[0]->desenha();
 	glPopMatrix();
 
 	//Perna do meio
 	glPushMatrix();
 		glTranslatef(0.0f, this->altura / 2, 0.0f);
-		base = new Cubo(this->espessura / 2, this->altura,this->largura - this->largura / 8, this->fatias, this->camadas);
-		base->desenha();
+		perna[1] = new Cubo(this->espessura / 2, this->altura,this->largura - this->largura / 8, this->fatias, this->camadas);
+		perna[1]->desenha();
 	glPopMatrix();
 
 	//Perna da esquerda
 	glPushMatrix();
 		glTranslatef(-this->comprimento / 2 + (this->comprimento / 10), this->altura / 2, 0.0f);
-		base = new Cubo(this->espessura / 2, this->altura, this->largura - this->largura / 8, this->fatias, this->camadas);
-		base->desenha();
+		perna[2] = new Cubo(this->espessura / 2, this->altura, this->largura - this->largura / 8, this->fatias, this->camadas);
+		perna[2]->desenha();
 	glPopMatrix();
 
 	//Tabua de baixo
 	glPushMatrix();
 		glTranslatef(0.0f, this->altura / 10, 0.0f);
-		base = new Cubo(this->comprimento, this->espessura / 3,this->largura / 10 , this->fatias, this->camadas);
-		base->desenha();
+		tabua = new Cubo(this->comprimento, this->espessura / 3,this->largura / 10 , this->fatias, this->camadas);
+		tabua->desenha();
 	glPopMatrix();
 
 }

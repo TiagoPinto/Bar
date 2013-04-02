@@ -80,7 +80,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cadeira.cpp" />
     <ClCompile Include="cilindro.cpp" />
+    <ClCompile Include="copo.cpp" />
     <ClCompile Include="cubo.cpp" />
     <ClCompile Include="esfera.cpp" />
     <ClCompile Include="main.cpp" />
@@ -90,6 +92,7 @@
   <ItemGroup>
     <ClInclude Include="cadeira.h" />
     <ClInclude Include="cilindro.h" />
+    <ClInclude Include="copo.h" />
     <ClInclude Include="cubo.h" />
     <ClInclude Include="esfera.h" />
     <ClInclude Include="mesa.h" />

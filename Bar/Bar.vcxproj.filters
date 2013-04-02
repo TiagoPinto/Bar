@@ -33,6 +33,12 @@
     <ClCompile Include="mesa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cadeira.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="copo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="plano.h">
@@ -51,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cadeira.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="copo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

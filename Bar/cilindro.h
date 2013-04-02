@@ -8,5 +8,7 @@ class Cilindro{
 	public:
 		Cilindro();
 		Cilindro(float r, float a, float f, float c);
+		Cilindro(float r, float a);
 		void desenha();
+		float getAltura();
 };

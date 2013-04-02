@@ -8,7 +8,7 @@ class Cubo{
 
 	public:
 		Cubo();
-		Cubo(float c, float l, float a, float f, float p);
+		Cubo(float c, float a, float l, float f, float p);
 		void desenha();
 
 };

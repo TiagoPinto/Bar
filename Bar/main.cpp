@@ -7,13 +7,15 @@
 #include "cilindro.h"
 #include "esfera.h"
 #include "mesa.h"
+#include "cadeira.h"
+#include "copo.h"
 
 //angulos de rotacao Sobre a propria figura
 float angX= 0.0f, angY = 0.0f;
 //angulos de rotacao da camara
 float angB = 0.0f;
 float angO = 0.0f;
-float raioC = 6.0f;
+float raioC = 3.0f;
 float x = 0.0f;
 float y = 0.0f;
 float speed = 3.0f;
@@ -25,11 +27,14 @@ float blue = 0.0f;
 int objecto = 0;
 
 
-Cilindro *cilindro = new Cilindro(1.0f,1.0f,10.0f,3.0f);
-Cubo *cubo = new Cubo(2.0f,2.0f,2.0f,3.0f,2.0f);
+Cilindro *cilindro = new Cilindro(2.0f,1.0f,10.0f,3.0f);
+Cubo *cubo = new Cubo(2.0f,1.0f,1.5f,3.0f,2.0f);
 Plano *plano = new Plano(2.0f,1.0f,1.0f,3.0f);
 Esfera *esfera = new Esfera(1.0f,20.0f,20.0f);
-Mesa *mesa = new Mesa(3.0f,2.0f,1.0f, 0.2f, 5.0f, 4.0f);
+Mesa *mesa = new Mesa(3.0f,2.0f,1.0f, 0.2f, 20.0f, 4.0f);
+Cadeira *cadeira = new Cadeira(1.5f, 0.7f, 2.0f, 0.2f, 10.0f, 10.0f);
+
+Copo *copo = new Copo(1.0f,2.0f,0.1f,10.0f,5.0f);
 
 void changeSize(int w, int h) {
 
@@ -72,7 +77,7 @@ void renderScene(void) {
 	//Eixos	
 	glBegin(GL_LINES);
 
-    /*glColor3f (0.0, 1.0, 0.0); // Green for x axis
+    glColor3f (0.0, 1.0, 0.0); // Green for x axis
     glVertex3f(-5,0,0);
     glVertex3f(5,0,0);
 
@@ -84,7 +89,7 @@ void renderScene(void) {
     glColor3f(0.0,0.0,1.0); // Blue for z axis
     glVertex3f(0,0,-10); 
     glVertex3f(0,0,10);
-	*/
+	
     glEnd();
 
 // pôr instruções de desenho aqui
@@ -93,16 +98,20 @@ void renderScene(void) {
 	glRotatef(angY, 1.0f, 0.0f, 0.0f);
 
 	switch(objecto) {
-		case 9: plano->desenhaXoY(); break;
-		case 10: plano->desenhaXoZ(); break;
-		case 11: plano->desenhaYoZ(); break;
-		case 12: cubo->desenha(); break;
-		case 13: cilindro->desenha(); break;
-		case 14: esfera->desenha(); break;
-		case 15: mesa->desenhaA();break;
-		case 16: mesa->desenhaB();break;
-		case 17: mesa->desenhaC();break;
-
+		case 11: plano->desenhaXoY(); break;
+		case 12: plano->desenhaXoZ(); break;
+		case 13: plano->desenhaYoZ(); break;
+		case 14: cubo->desenha(); break;
+		case 15: cilindro->desenha(); break;
+		case 16: esfera->desenha(); break;
+		case 17: mesa->desenhaA(); break;
+		case 18: mesa->desenhaB(); break;
+		case 19: mesa->desenhaC(); break;
+		case 20: cadeira->desenhaA(); break;
+		case 21: cadeira->desenhaB(); break;
+		case 22: cadeira-> desenhaC(); break;
+		case 23: glTranslatef(0.0f,-1.0f,0.0f); cadeira->desenhaD(); break;
+		case 24: copo->desenhaA(); break;
 
 	}
 	//End of frame
@@ -139,8 +148,15 @@ void mouse(int x, int y){
 }
 
 void  menuPrincipal(int operador){
-	if(operador == 0)
-		;
+	switch(operador){
+		case 0: ; break;
+		case 1: objecto = 0; break;
+		case 2: 
+		angX= 0.0f, angY = 0.0f;
+		angB = 0.0f, angO = 0.0f, raioC = 6.0f;
+		x = 0.0f, y = 0.0f, speed = 3.0f; break;
+		case 3: red = 1.0f, green = 0.5f, blue = 0.0f; break;
+	}
 }
 
 void  menuEstilo(int operador){
@@ -153,11 +169,18 @@ void  menuEstilo(int operador){
 	}
 }
 
+void menuCamara(int operador){
+	switch(operador){
+		case 6: ; break;
+		case 7: ; break;
+	}
+}
+
 void menuCor(int operador) {
 	switch(operador) {
-		case 6: red += 0.1f; green -= 0.1f; blue -= 0.1f; break;
-		case 7: green += 0.1f; red -= 0.1f; blue -= 0.1f; break;
-		case 8: blue += 0.1f; red -= 0.1f, green -= 0.1f; break;
+		case 8: red += 0.1f; green -= 0.1f; blue -= 0.1f; break;
+		case 9: green += 0.1f; red -= 0.1f; blue -= 0.1f; break;
+		case 10: blue += 0.1f; red -= 0.1f, green -= 0.1f; break;
 	}
 	if(red < 0.0f)
 		red = 0.0f;
@@ -180,45 +203,64 @@ void menuObjecto(int operador)	{
 // escrever função de processamento do menu
 void criarMenu(){
 	glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
-	int principal, estilo, cor, objecto, plano, mesa, cadeira, candeeiro, copo;
+	int principal, estilo, camara, cor, objecto, plano, mesa, cadeira, candeeiro, copo;
 
 	estilo = glutCreateMenu(menuEstilo);
-
 		glutAddMenuEntry("Line", 1);
 		glutAddMenuEntry("Fill", 2);
 		glutAddMenuEntry("Point", 3);
 		glutAddMenuEntry("CCW", 4);
 		glutAddMenuEntry("CW", 5);
+		
+
+	camara = glutCreateMenu(menuCamara);
+		glutAddMenuEntry("First Person",6);
+		glutAddMenuEntry("Polar Coordenates",7);
 
 	cor = glutCreateMenu(menuCor);
-		glutAddMenuEntry("Red", 6);
-		glutAddMenuEntry("Green", 7);
-		glutAddMenuEntry("Blue", 8);
+		glutAddMenuEntry("Red", 8);
+		glutAddMenuEntry("Green", 9);
+		glutAddMenuEntry("Blue", 10);
 
 	plano = glutCreateMenu(menuObjecto);
-		glutAddMenuEntry("PlanoXoY", 9);
-		glutAddMenuEntry("PlanoXoZ", 10);
-		glutAddMenuEntry("PlanoYoZ", 11);
+		glutAddMenuEntry("PlanoXoY", 11);
+		glutAddMenuEntry("PlanoXoZ", 12);
+		glutAddMenuEntry("PlanoYoZ", 13);
 
 	mesa = glutCreateMenu(menuObjecto);
-		glutAddMenuEntry("Mesa Standard", 15);
-		glutAddMenuEntry("Mesa Redonda", 16);
-		glutAddMenuEntry("Mesa Medieval", 17);
+		glutAddMenuEntry("Standard", 17);
+		glutAddMenuEntry("Redonda", 18);
+		glutAddMenuEntry("Medieval", 19);
+
+	cadeira = glutCreateMenu(menuObjecto);
+		glutAddMenuEntry("Standard", 20);
+		glutAddMenuEntry("Banco", 21);
+		glutAddMenuEntry("Medieval", 22);
+		glutAddMenuEntry("Rei", 23);
+
+	copo = glutCreateMenu(menuObjecto);
+		glutAddMenuEntry("Standard", 24);
+		glutAddMenuEntry("Caneca", 25);
+		glutAddMenuEntry("Vinho", 26);
+		glutAddMenuEntry("Corno", 27);
 
 	objecto = glutCreateMenu(menuObjecto);
 		glutAddSubMenu("Planos", plano);
-		glutAddMenuEntry("Cubo", 12);
-		glutAddMenuEntry("Cilindro", 13);
-		glutAddMenuEntry("Esfera", 14);
-		glutAddSubMenu("Mesas", mesa);
-		//glutAddSubMenu("Cadeira", cadeiras);
+		glutAddMenuEntry("Cubo", 14);
+		glutAddMenuEntry("Cilindro", 15);
+		glutAddMenuEntry("Esfera", 16);
+		glutAddSubMenu("Mesa", mesa);
+		glutAddSubMenu("Cadeira", cadeira);
 		//glutAddSubMenu("Candeeiro", candeeiros);
-		//glutAddSubMenu("Copo", copos);
-		//glutAddMenuEntry("Bar", 9);
+		glutAddSubMenu("Copo", copo);
 		
 	principal = glutCreateMenu(menuPrincipal);
-		glutAddMenuEntry("Limpar",0);
+		glutAddMenuEntry("Bar", 0);
+		glutAddMenuEntry("Limpar",1);
+		glutAddMenuEntry("Reset Camara", 2);
+		glutAddMenuEntry("Reset Cor", 3);
 		glutAddSubMenu("Modo dos Poligonos",estilo);
+		glutAddSubMenu("Modo da Camara", camara);
 		glutAddSubMenu("Cores",cor);
 		glutAddSubMenu("Objectos",objecto);
 		glutAttachMenu(GLUT_RIGHT_BUTTON);
