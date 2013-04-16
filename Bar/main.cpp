@@ -9,16 +9,16 @@
 #include "mesa.h"
 #include "cadeira.h"
 #include "copo.h"
+#include "torus.h"
 
 //angulos de rotacao Sobre a propria figura
 float angX= 0.0f, angY = 0.0f;
 //angulos de rotacao da camara
-float angB = 0.0f;
-float angO = 0.0f;
-float raioC = 6.0f;
+float alfa = 0.0f, beta = 0.0f, raio = 6.0f;
+float camX, camY, camZ;
 float x = 0.0f;
 float y = 0.0f;
-float speed = 3.0f;
+float speed = 2.0f;
 //Cores Iniciais
 float red = 1.0f;
 float green = 0.5f;
@@ -27,14 +27,21 @@ float blue = 0.0f;
 int objecto = 0;
 
 
-Cilindro *cilindro = new Cilindro(2.0f,1.0f,10.0f,3.0f);
+Cilindro *cilindro = new Cilindro(2.0f,1.0f,70.0f,3.0f);
 Cubo *cubo = new Cubo(2.0f,1.0f,1.5f,3.0f,2.0f);
 Plano *plano = new Plano(2.0f,1.0f,1.0f,3.0f);
 Esfera *esfera = new Esfera(1.0f,20.0f,20.0f);
 Mesa *mesa = new Mesa(3.0f,2.0f,1.0f, 0.2f, 20.0f, 4.0f);
-Cadeira *cadeira = new Cadeira(2.0f, 0.7f, 1.5f, 0.1f, 10.0f, 10.0f);
+Cadeira *cadeira = new Cadeira(2.0f, 1.0f, 1.5f, 0.1f, 5.0f, 5.0f);
+Torus *torus = new Torus(1.0f,0.5f,10.0f,10.0f);
+Copo *copo = new Copo(1.0f,2.0f,0.2f,20.0f,10.0f);
 
-Copo *copo = new Copo(1.0f,2.0f,0.1f,10.0f,5.0f);
+void converte() {
+
+	camX = raio * cos(beta) * sin(alfa);
+	camY = raio * sin(beta);
+	camZ = raio * cos(beta) * cos(alfa);
+}
 
 void changeSize(int w, int h) {
 
@@ -70,10 +77,9 @@ void renderScene(void) {
 
 	// set the camera
 	glLoadIdentity();
-	gluLookAt(raioC*sin(angB),raioC*cos(angB)*sin(angO),raioC*cos(angB)*cos(angO), 
+	gluLookAt(camX,camY,camZ, 
 		      0.0,0.0,0.0,
 			  0.0f,1.0f,0.0f);
-
 	//Eixos	
 	glBegin(GL_LINES);
 
@@ -96,7 +102,6 @@ void renderScene(void) {
 	glColor3f(red, green, blue);
 	glRotatef(angX, 0.0f, 1.0f, 0.0f);
 	glRotatef(angY, 1.0f, 0.0f, 0.0f);
-
 	switch(objecto) {
 		case 11: plano->desenhaXoY(); break;
 		case 12: plano->desenhaXoZ(); break;
@@ -104,14 +109,17 @@ void renderScene(void) {
 		case 14: cubo->desenha(); break;
 		case 15: cilindro->desenha(); break;
 		case 16: esfera->desenha(); break;
-		case 17: mesa->desenhaA(); break;
-		case 18: mesa->desenhaB(); break;
-		case 19: mesa->desenhaC(); break;
-		case 20: cadeira->desenhaA(); break;
-		case 21: cadeira->desenhaB(); break;
-		case 22: cadeira-> desenhaC(); break;
-		case 23: cadeira->desenhaD(); break;
-		case 24: copo->desenhaA(); break;
+		case 17: torus->desenha(); break;
+		case 18: mesa->desenhaA(); break;
+		case 19: mesa->desenhaB(); break;
+		case 20: mesa->desenhaC(); break;
+		case 21: cadeira->desenhaA(); break;
+		case 22: cadeira->desenhaB(); break;
+		case 23: cadeira-> desenhaC(); break;
+		case 24: cadeira->desenhaD(); break;
+		case 25: copo->desenhaA(); break;
+		case 26: copo->desenhaB(); break;
+		case 28: copo->desenhaD(); break;
 
 	}
 	//End of frame
@@ -143,8 +151,24 @@ void mouse(int x, int y){
 	float diff_x = x - 400;
 	float diff_y = y - 300;
 	
-	angB = -speed*(diff_x/400);
-	angO = speed*(diff_y/300);
+	alfa = -speed*(diff_x/400);
+
+	beta = speed*(diff_y/300);
+	if (beta > 1.5f)
+		beta = 1.5f;
+	if (beta < -1.5f)
+		beta = -1.5f;
+	converte();
+	glutPostRedisplay();
+}
+
+void rato(int botao, int estado, int x, int y){
+	switch(botao){
+		case 3:
+			raio=+1.0f; break;
+		case 4:
+			raio =-1.0f; break;
+	}
 }
 
 void  menuPrincipal(int operador){
@@ -153,7 +177,8 @@ void  menuPrincipal(int operador){
 		case 1: objecto = 0; break;
 		case 2: 
 		angX= 0.0f, angY = 0.0f;
-		angB = 0.0f, angO = 0.0f, raioC = 6.0f;
+		alfa = 0.0f; beta = 0.0f; raio = 6.0f;
+		converte();
 		x = 0.0f, y = 0.0f, speed = 3.0f; break;
 		case 3: red = 1.0f, green = 0.5f, blue = 0.0f; break;
 	}
@@ -228,27 +253,28 @@ void criarMenu(){
 		glutAddMenuEntry("PlanoYoZ", 13);
 
 	mesa = glutCreateMenu(menuObjecto);
-		glutAddMenuEntry("Standard", 17);
-		glutAddMenuEntry("Redonda", 18);
-		glutAddMenuEntry("Medieval", 19);
+		glutAddMenuEntry("Standard", 18);
+		glutAddMenuEntry("Redonda", 19);
+		glutAddMenuEntry("Medieval", 20);
 
 	cadeira = glutCreateMenu(menuObjecto);
-		glutAddMenuEntry("Standard", 20);
-		glutAddMenuEntry("Banco", 21);
-		glutAddMenuEntry("Medieval", 22);
-		glutAddMenuEntry("Rei", 23);
+		glutAddMenuEntry("Standard", 21);
+		glutAddMenuEntry("Banco", 22);
+		glutAddMenuEntry("Medieval", 23);
+		glutAddMenuEntry("Rei", 24);
 
 	copo = glutCreateMenu(menuObjecto);
-		glutAddMenuEntry("Standard", 24);
-		glutAddMenuEntry("Caneca", 25);
-		glutAddMenuEntry("Vinho", 26);
-		glutAddMenuEntry("Corno", 27);
+		glutAddMenuEntry("Standard", 25);
+		glutAddMenuEntry("Caneca", 26);
+		glutAddMenuEntry("Calice", 27);
+		glutAddMenuEntry("Corno", 28);
 
 	objecto = glutCreateMenu(menuObjecto);
 		glutAddSubMenu("Planos", plano);
 		glutAddMenuEntry("Cubo", 14);
 		glutAddMenuEntry("Cilindro", 15);
 		glutAddMenuEntry("Esfera", 16);
+		glutAddMenuEntry("Torus",17);
 		glutAddSubMenu("Mesa", mesa);
 		glutAddSubMenu("Cadeira", cadeira);
 		//glutAddSubMenu("Candeeiro", candeeiro);
@@ -286,14 +312,17 @@ int main(int argc, char **argv) {
 // pôr aqui registo da funções do teclado e rato
 	glutSpecialFunc(keyboard);
 	glutMotionFunc(mouse);
-	glutPostRedisplay();
+	glutMouseFunc(rato);
 // pôr aqui a criação do menu
 	criarMenu();
-
+	converte();
 // alguns settings para OpenGL
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
-	
+
+//init
+	converte();
+
 // entrar no ciclo do GLUT 
 	glutMainLoop();
 	

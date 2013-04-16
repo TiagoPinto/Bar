@@ -2,6 +2,7 @@
 #include <GL/glut.h>
 #include <math.h>
 #include "copo.h"
+#include "torus.h"
 
 /**
  * Construtor da class Copo.
@@ -102,4 +103,118 @@ void Copo::desenhaA(){
 	}
 	glEnd();
 	
+}
+
+/* Metodo que desenha um copo em forma de caneca com as medidas definidas no construtor*/
+void Copo:: desenhaB(){
+	Torus *pega;
+
+	glBegin(GL_TRIANGLES);
+	float rotacaoF = (2 * M_PI) / this->fatias;
+	float graus = 0.0f;
+	float incA = (this->altura -this->espessura)/this->camadas;
+		
+	while(graus <= 2 * M_PI){
+		//Topo da Caneca
+		glVertex3f((raio - espessura) * cos(graus), altura/2, (raio -espessura) * sin(graus));
+		glVertex3f(raio * cos(graus + rotacaoF), altura/2, raio * sin(graus + rotacaoF));
+		glVertex3f(raio * cos(graus), altura/2, raio * sin(graus));
+
+		glVertex3f((raio - espessura) * cos(graus), altura/2, (raio - espessura) * sin(graus));
+		glVertex3f((raio - espessura) * cos(graus + rotacaoF), altura/2, (raio - espessura) * sin(graus + rotacaoF));
+		glVertex3f(raio * cos(graus + rotacaoF), altura/2, raio * sin(graus + rotacaoF));
+
+		//Parte de Baixo da caneca
+		glVertex3f(0.0f, -altura/2, 0.0f);
+		glVertex3f((raio + espessura) * cos(graus), -altura/2, (raio + espessura) * sin(graus));
+		glVertex3f((raio + espessura) * cos(graus + rotacaoF), -altura/2, (raio + espessura) * sin(graus + rotacaoF));
+		
+		//Base da Caneca Cilindrica com o inferior com maior raio que a parte superior
+		for(int k = 0; k < this->fatias; k++){
+			glVertex3f((raio + espessura) * cos(graus), -altura/2 , (raio + espessura) * -sin(graus));
+			glVertex3f(raio * cos(graus + rotacaoF), -altura/ 2 + espessura, raio * -sin(graus + rotacaoF));			
+			glVertex3f(raio * cos(graus), -altura / 2 + espessura, raio * -sin(graus));
+
+			glVertex3f((raio + espessura) * cos(graus), -altura/2 , (raio + espessura) * -sin(graus));
+			glVertex3f((raio + espessura) * cos(graus + rotacaoF), -altura/ 2, (raio + espessura) * -sin(graus + rotacaoF));			
+			glVertex3f(raio * cos(graus + rotacaoF), -altura/ 2 + espessura, raio * -sin(graus + rotacaoF));	
+		}
+		
+		float cam = -this->altura/2 + this->espessura;
+		for(int i = 0; i < this->camadas; i++) {
+			glVertex3f(raio * cos(graus), cam, raio * sin(graus)); 
+			glVertex3f(raio * cos(graus), cam + incA, raio * sin(graus));					
+			glVertex3f(raio * cos(graus + rotacaoF), cam + incA, raio * sin(graus + rotacaoF));
+			
+			glVertex3f(raio* cos(graus), cam , raio* sin(graus)); 				
+			glVertex3f(raio* cos(graus + rotacaoF), cam +incA, raio * sin(graus + rotacaoF));				
+			glVertex3f(raio* cos(graus + rotacaoF), cam, raio* sin(graus + rotacaoF));
+			cam = cam + incA;		//Incrementa a altura, para fazer as outras camadas;
+		}
+		cam = -this->altura/2 + this->espessura;
+		//Parte Interior
+		//Base Baixo
+		glVertex3f(0.0f, cam, 0.0f);
+		glVertex3f((raio - espessura) * cos(graus + rotacaoF), cam, (raio - espessura ) * sin(graus + rotacaoF));
+		glVertex3f((raio - espessura)* cos(graus), cam, (raio - espessura) * sin(graus));
+		
+		//Parte lateral Interior
+		for(int i = 0; i < this->camadas; i++) {
+			glVertex3f((raio - espessura) * cos(graus + rotacaoF), cam, (raio - espessura) * sin(graus + rotacaoF));
+			glVertex3f((raio - espessura) * cos(graus + rotacaoF), cam + incA, (raio - espessura) * sin(graus + rotacaoF));
+			glVertex3f((raio - espessura) * cos(graus), cam + incA, (raio - espessura) * sin(graus));				
+			
+			glVertex3f((raio - espessura) * cos(graus + rotacaoF), cam, (raio - espessura) * sin(graus + rotacaoF));
+			glVertex3f((raio - espessura) * cos(graus), cam +incA, (raio - espessura) * sin(graus));				
+			glVertex3f((raio - espessura) * cos(graus), cam , (raio - espessura) * sin(graus));
+			cam = cam + incA;		//Incrementa a altura, para fazer as outras camadas;
+		}
+		graus = graus + rotacaoF;
+	}
+
+	glEnd();
+
+	glPushMatrix();
+		glRotatef(90,0,1,0);
+		glRotatef(90,0,0,1);
+		glTranslatef(0.0f,0.0f, this->raio);
+		pega = new Torus(this->altura / 4, 2 * this->espessura / 3 ,this->fatias, this->camadas);
+		pega->meioTorus();
+	glPopMatrix();
+}
+
+void Copo::desenhaD(){
+	float incR = M_PI / fatias;
+	float incA = M_PI / (camadas);
+	float grausA = -M_PI;
+	float grausE = -M_PI/2;
+	float somatorio = raio * cos(grausE);
+	float somatorio2 = raio * cos(grausE + incA);
+	for(int a = 0; a < camadas; a++){
+		float grausR = 0.0f;
+		for(int l = 0; l < fatias; l++){
+			glBegin(GL_TRIANGLES);
+			glVertex3f((raio + somatorio) * cos(grausR), altura * cos(grausA), (raio + somatorio) * sin(grausR)); 
+			glVertex3f((raio + somatorio2)  * cos(grausR), altura * cos(grausA + incA), (raio + somatorio2) * sin(grausR));
+			glVertex3f((raio + somatorio2) * cos(grausR + incR), altura * cos(grausA + incA), (raio + somatorio2) * sin(grausR + incR));
+
+			glVertex3f((raio + somatorio) * cos(grausR), altura * cos(grausA), (raio + somatorio) * sin(grausR)); 
+			glVertex3f((raio + somatorio2) * cos(grausR + incR), altura * cos(grausA + incA), (raio + somatorio2) * sin(grausR + incR));
+			glVertex3f((raio + somatorio)  * cos(grausR + incR), altura * cos(grausA), (raio + somatorio) * sin(grausR + incR));
+			/*
+			glVertex3f((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR));
+			glVertex3f((raioI + raioE - somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR));
+			glVertex3f((raioI + raioE - somatorio2)  * cos(grausR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR));
+			
+			glVertex3f((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR)); 
+			glVertex3f((raioI + raioE - somatorio) * cos(grausR + incR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR + incR));
+			glVertex3f((raioI + raioE - somatorio2)  * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR));
+			*/glEnd();
+			grausR = grausR + incR;
+		}
+		grausA = grausA + incA;
+		grausE = grausE + incA;
+		somatorio = raio * cos(grausE);
+		somatorio2 = raio * cos(grausE + incA);		
+	}
 }

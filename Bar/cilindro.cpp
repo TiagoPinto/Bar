@@ -11,25 +11,12 @@
 Cilindro::Cilindro(){
 	this->raio = 0.0;
 	this->altura = 0.0;
-	this->fatias = 18;
-	this->camadas = 1;
+	this->fatias = 0.0;
+	this->camadas = 0.0;
 }
 
 float Cilindro::getAltura(){
 	return this->altura;
-}
-
-Cilindro::Cilindro(float r, float h){
-	this->raio=r;
-	this->altura=h;
-	this->fatias = 18;			//precisao base do "circlo": quanto mais alta,mais fatias tem as base e o "tronco" 
-	this->camadas = 1;			//numero base de camadas do "tronco"
- 	
-	/*
-	this->tx=this->ty=this->tz=0;
-	this->alpha_x=0.0;
-	this->alpha_y=0.0;
-		this->v=10.0;*/
 }
 
 /**

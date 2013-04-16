@@ -88,6 +88,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mesa.cpp" />
     <ClCompile Include="plano.cpp" />
+    <ClCompile Include="torus.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cadeira.h" />
@@ -97,6 +98,7 @@
     <ClInclude Include="esfera.h" />
     <ClInclude Include="mesa.h" />
     <ClInclude Include="plano.h" />
+    <ClInclude Include="torus.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

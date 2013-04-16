@@ -14,6 +14,7 @@ class Copo{
 	void desenhaA();
 	void desenhaB();
 	void desenhaC();
+	void desenhaD();
 
 
 };
