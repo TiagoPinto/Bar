@@ -42,6 +42,15 @@
     <ClCompile Include="torus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="bar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="candeeiro.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="piramide.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="plano.h">
@@ -66,6 +75,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="torus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="candeeiro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="piramide.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

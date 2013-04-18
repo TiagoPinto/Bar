@@ -1,7 +1,9 @@
 #define _USE_MATH_DEFINES
 #include <GL/glut.h>
+#include <stdio.h>
 #include <math.h>
 #include "copo.h"
+#include "esfera.h"
 #include "torus.h"
 
 /**
@@ -183,34 +185,55 @@ void Copo:: desenhaB(){
 	glPopMatrix();
 }
 
+void Copo::desenhaC(){
+	Esfera *calice;
+
+	glPushMatrix();
+		glRotatef(180,1,0,0);
+		glTranslatef(0.0f, - 2 * this->altura / 3 -this->raio, 0.0f);
+		calice = new Esfera(this->altura / 3,3*this->fatias, 3*this->camadas);
+		calice->meiaEsfera();
+	glPopMatrix();
+
+
+}
+
 void Copo::desenhaD(){
-	float incR = M_PI / fatias;
-	float incA = M_PI / (camadas);
+	float incR = M_PI / ( 2* fatias);
+	float incA = M_PI / (2* camadas);
 	float grausA = -M_PI;
 	float grausE = -M_PI/2;
+	float graus = -M_PI/2;
 	float somatorio = raio * cos(grausE);
 	float somatorio2 = raio * cos(grausE + incA);
+	float valor = 0;
+	float incr = raio / 3;
+	float raioC = raio * cos(graus);
+	float raioC2 = raio * cos(graus - incR);
 	for(int a = 0; a < camadas; a++){
 		float grausR = 0.0f;
-		for(int l = 0; l < fatias; l++){
-			glBegin(GL_TRIANGLES);
-			glVertex3f((raio + somatorio) * cos(grausR), altura * cos(grausA), (raio + somatorio) * sin(grausR)); 
-			glVertex3f((raio + somatorio2)  * cos(grausR), altura * cos(grausA + incA), (raio + somatorio2) * sin(grausR));
-			glVertex3f((raio + somatorio2) * cos(grausR + incR), altura * cos(grausA + incA), (raio + somatorio2) * sin(grausR + incR));
 
-			glVertex3f((raio + somatorio) * cos(grausR), altura * cos(grausA), (raio + somatorio) * sin(grausR)); 
-			glVertex3f((raio + somatorio2) * cos(grausR + incR), altura * cos(grausA + incA), (raio + somatorio2) * sin(grausR + incR));
-			glVertex3f((raio + somatorio)  * cos(grausR + incR), altura * cos(grausA), (raio + somatorio) * sin(grausR + incR));
-			/*
-			glVertex3f((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR));
-			glVertex3f((raioI + raioE - somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR));
-			glVertex3f((raioI + raioE - somatorio2)  * cos(grausR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR));
+		for(int l = 0; l < 1; l++){
+			glBegin(GL_TRIANGLES);
 			
-			glVertex3f((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR)); 
-			glVertex3f((raioI + raioE - somatorio) * cos(grausR + incR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR + incR));
-			glVertex3f((raioI + raioE - somatorio2)  * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR));
-			*/glEnd();
+			
+			glVertex3f((altura + raio + somatorio) * cos(grausR), raio * cos(grausA), (altura + raio + somatorio) * sin(grausR)); 
+			glVertex3f((altura + raio + somatorio2) * cos(grausR + incR), raio * cos(grausA + incA), (altura + raio + somatorio2) * sin(grausR + incR));
+			glVertex3f((altura + raio + somatorio)  * cos(grausR + incR), raio * cos(grausA), (altura + raio + somatorio) * sin(grausR + incR));
+			/*
+			glVertex3f((altura + raio - somatorio) * cos(grausR), raio * cos(grausA), (altura + raio - somatorio) * sin(grausR));
+			glVertex3f((altura + raio - somatorio2) * cos(grausR + incR), raio * cos(grausA + incA), (altura + raio - somatorio2) * sin(grausR + incR));
+			glVertex3f((altura + raio - somatorio2)  * cos(grausR), raio * cos(grausA + incA), (altura + raio - somatorio2) * sin(grausR));
+			
+			glVertex3f((altura + raio - somatorio) * cos(grausR), raio * cos(grausA), (altura + raio - somatorio) * sin(grausR)); 
+			glVertex3f((altura + raio - somatorio) * cos(grausR + incR), raio * cos(grausA), (altura + raio - somatorio) * sin(grausR + incR));
+			glVertex3f((altura + raio - somatorio2)  * cos(grausR + incR), raio * cos(grausA + incA), (altura + raio - somatorio2) * sin(grausR + incR));
+			*/
+			glEnd();
 			grausR = grausR + incR;
+			graus = graus - incR;
+			raioC = raio * sin(graus);
+			raioC2 = raio * sin(graus - incR);
 		}
 		grausA = grausA + incA;
 		grausE = grausE + incA;

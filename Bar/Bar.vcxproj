@@ -80,23 +80,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bar.cpp" />
     <ClCompile Include="cadeira.cpp" />
+    <ClCompile Include="candeeiro.cpp" />
     <ClCompile Include="cilindro.cpp" />
     <ClCompile Include="copo.cpp" />
     <ClCompile Include="cubo.cpp" />
     <ClCompile Include="esfera.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mesa.cpp" />
+    <ClCompile Include="piramide.cpp" />
     <ClCompile Include="plano.cpp" />
     <ClCompile Include="torus.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bar.h" />
     <ClInclude Include="cadeira.h" />
+    <ClInclude Include="candeeiro.h" />
     <ClInclude Include="cilindro.h" />
     <ClInclude Include="copo.h" />
     <ClInclude Include="cubo.h" />
     <ClInclude Include="esfera.h" />
+    <ClInclude Include="menu.h" />
     <ClInclude Include="mesa.h" />
+    <ClInclude Include="piramide.h" />
     <ClInclude Include="plano.h" />
     <ClInclude Include="torus.h" />
   </ItemGroup>
