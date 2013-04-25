@@ -9,12 +9,12 @@ Cubo *cubo = new Cubo(2.0f,1.0f,1.5f,4.0f,2.0f);
 Plano *plano = new Plano(2.0f,1.0f,1.0f,3.0f);
 Esfera *esfera = new Esfera(1.0f,20.0f,20.0f);
 Torus *torus = new Torus(1.0f,0.5f,4.0f,2.0f);
-Piramide *piramide = new Piramide(3, 2, 5, 3, 2);
+Piramide *piramide = new Piramide(2, 2, 2, 3, 2);
 Mesa *mesa = new Mesa(3.0f,2.0f,1.0f, 0.2f, 20.0f, 4.0f);
 Cadeira *cadeira = new Cadeira(2.0f, 1.0f, 1.5f, 0.1f, 5.0f, 5.0f);
-Copo *copo = new Copo(0.8f,2.0f,0.2f,3.0f,2.0f);
+Copo *copo = new Copo(0.8f,2.0f,0.2f,50.0f,2.0f);
 Bar *bar = new Bar(50, 60, 6, 8, 2);
-Candeeiro *candeeiro = new Candeeiro(1,2,5,5);
+Candeeiro *candeeiro = new Candeeiro(2,3,15,4);
 
 
 void changeSize(int w, int h) {
@@ -76,7 +76,6 @@ void renderScene(void) {
 	glColor3f(red, green, blue);
 	glRotatef(angX, 0.0f, 1.0f, 0.0f);
 	glRotatef(angY, 1.0f, 0.0f, 0.0f);
-	piramide->desenhaR();
 	switch(objecto) {
 		case 100: bar->desenha(); break;
 		case 11: plano->desenhaXoY(); break;
@@ -86,14 +85,16 @@ void renderScene(void) {
 		case 15: cilindro->desenha(); break;
 		case 16: esfera->desenha(); break;
 		case 17: torus->desenha(); break;
-		case 18: mesa->desenhaA(); break;
-		case 19: mesa->desenhaB(); break;
-		case 20: mesa->desenhaC(); break;
-		case 21: cadeira->desenhaA(); break;
-		case 22: cadeira->desenhaB(); break;
-		case 23: cadeira-> desenhaC(); break;
-		case 24: cadeira->desenhaD(); break;
-		case 25: candeeiro->desenhaA(); break;
+		case 18: piramide->desenhaR(); break;
+		case 19: mesa->desenhaA(); break;
+		case 20: mesa->desenhaB(); break;
+		case 21: mesa->desenhaC(); break;
+		case 22: cadeira->desenhaA(); break;
+		case 23: cadeira->desenhaB(); break;
+		case 24: cadeira-> desenhaC(); break;
+		case 25: cadeira->desenhaD(); break;
+		case 26: candeeiro->desenhaA(); break;
+		case 27: candeeiro->desenhaB(); break;
 		case 28: copo->desenhaA(); break;
 		case 29: copo->desenhaB(); break;
 		case 30: copo->desenhaC(); break;

@@ -92,6 +92,7 @@
     <ClCompile Include="piramide.cpp" />
     <ClCompile Include="plano.cpp" />
     <ClCompile Include="torus.cpp" />
+    <ClCompile Include="vbo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bar.h" />
@@ -106,6 +107,7 @@
     <ClInclude Include="piramide.h" />
     <ClInclude Include="plano.h" />
     <ClInclude Include="torus.h" />
+    <ClInclude Include="vbo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

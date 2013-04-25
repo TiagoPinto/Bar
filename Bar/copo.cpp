@@ -1,6 +1,5 @@
 #define _USE_MATH_DEFINES
 #include <GL/glut.h>
-#include <stdio.h>
 #include <math.h>
 #include "copo.h"
 #include "esfera.h"

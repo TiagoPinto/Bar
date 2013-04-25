@@ -13,7 +13,7 @@
 //angulos de rotacao Sobre a propria figura
 float angX= 0.0f, angY = 0.0f;
 //angulos de rotacao da camara
-float alfa = 0.0f, beta = 0.0f, raio = 30.0f;
+float alfa = 0.0f, beta = 0.0f, raio = 6.0f;
 float camX, camY, camZ;
 float x = 0.0f;
 float y = 0.0f;
@@ -121,19 +121,19 @@ void criarMenu(){
 		glutAddMenuEntry("PlanoYoZ", 13);
 
 	mesa = glutCreateMenu(menuObjecto);
-		glutAddMenuEntry("Standard", 18);
-		glutAddMenuEntry("Redonda", 19);
-		glutAddMenuEntry("Medieval", 20);
+		glutAddMenuEntry("Standard", 19);
+		glutAddMenuEntry("Redonda", 20);
+		glutAddMenuEntry("Medieval", 21);
 
 	cadeira = glutCreateMenu(menuObjecto);
-		glutAddMenuEntry("Standard", 21);
-		glutAddMenuEntry("Banco", 22);
-		glutAddMenuEntry("Medieval", 23);
-		glutAddMenuEntry("Rei", 24);
+		glutAddMenuEntry("Standard", 22);
+		glutAddMenuEntry("Banco", 23);
+		glutAddMenuEntry("Medieval", 24);
+		glutAddMenuEntry("Rei", 25);
 
 	candeeiro = glutCreateMenu(menuObjecto);
-		glutAddMenuEntry("Parede",25);
-		glutAddMenuEntry("Candelabro",26);
+		glutAddMenuEntry("Parede",26);
+		glutAddMenuEntry("Candelabro",27);
 
 
 	copo = glutCreateMenu(menuObjecto);
@@ -148,6 +148,7 @@ void criarMenu(){
 		glutAddMenuEntry("Cilindro", 15);
 		glutAddMenuEntry("Esfera", 16);
 		glutAddMenuEntry("Torus",17);
+		glutAddMenuEntry("Piramide", 18);
 		glutAddSubMenu("Mesa", mesa);
 		glutAddSubMenu("Cadeira", cadeira);
 		glutAddSubMenu("Candeeiro", candeeiro);
