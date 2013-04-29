@@ -1,9 +1,14 @@
+#pragma once
+
+
 class Candeeiro{
 	private:
 		float comprimento;
 		float altura;
 		float fatias;
 		float camadas;
+		GLuint vbo;
+		int nVertices;
 
 	public:
 		Candeeiro();

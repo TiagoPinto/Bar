@@ -12,5 +12,5 @@ private:
 
 public:
 
-	void adicionar(float x, float y, float z);
+	void adicionar(float x, float y, float z, float nx = 0, float ny = 0, float nz = 0, float s0 = 0, float t0 = 0);
 };

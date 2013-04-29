@@ -6,6 +6,8 @@ class Mesa{
 		float espessura;
 		float fatias;
 		float camadas;
+		GLuint vbo;
+		int nVertices;
 		
 	public:
 		Mesa();

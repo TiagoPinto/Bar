@@ -1,6 +1,22 @@
-#include <GL/glut.h>
+#include "includes.h"
 #include "cubo.h"
 
+struct vertex{
+	float vertices[3];
+	float texturas[2];
+	float normais[3];
+
+	vertex(float x,float y, float z, float nx = 0, float ny = 0, float nz = 0, float tt = 0, float ts = 0){
+		vertices[0] = x;
+		vertices[1] = y;
+		vertices[2] = z;
+		normais[0] = nx;
+		normais[1] = ny;
+		normais[2] = nz;
+		texturas[0] = tt;
+		texturas[1] = ts;
+	}
+};
 
 /**
  * Construtor da class Cubo.
@@ -12,6 +28,14 @@ Cubo::Cubo(){
 	this->a = 0.0f;
 	this->f = 0.0f;
 	this->p = 0.0f;
+}
+
+/**
+ * Destrutor da class Cubo.
+ * Destroi o VBO criado, para nao ficar alocada memoria na placa grafica	
+ */
+Cubo::~Cubo(){
+	glDeleteBuffers(1,&vbo);
 }
 
 /**
@@ -36,14 +60,9 @@ Cubo::Cubo(float c,float a,float l, float f, float p){
 	this->l = l;
 	this->f = f;
 	this->p = p;
-}
 
-/**
- * Desenha um cubo, com as dimensoes definidas no construtor
- *		
- */
+	std::vector <vertex> vertices;
 
-void Cubo::desenha(){
 	//Variaveis Iniciais para comecar a desenhar 
 	float alt = -this->a/2;
 	float comp = -this->c/2;
@@ -60,27 +79,24 @@ void Cubo::desenha(){
 	for(int j = 0; j < this->f; j++){
 		float comp = -this->c/2;
 		for(int i = 0; i < this->p; i++){
-			glBegin(GL_TRIANGLES);
 			//Face Frontal Triangulo
-				glVertex3f(comp, alt, l/2);
-				glVertex3f(comp + incrementoX, alt + incrementoY, l/2);
-				glVertex3f(comp, alt + incrementoY, l/2);
+			vertices.push_back(vertex(comp,alt,l/2));
+			vertices.push_back(vertex(comp + incrementoX, alt + incrementoY, l/2));
+			vertices.push_back(vertex(comp, alt + incrementoY, l/2));
 
-				glVertex3f(comp, alt, l/2);
-				glVertex3f(comp + incrementoX, alt, l/2);
-				glVertex3f(comp + incrementoX, alt + incrementoY, l/2); 
+			vertices.push_back(vertex(comp, alt, l/2));
+			vertices.push_back(vertex(comp + incrementoX, alt, l/2));
+			vertices.push_back(vertex(comp + incrementoX, alt + incrementoY, l/2)); 
 
 			//Face Traseira Triangulo
-				glVertex3f(comp, alt, -l/2);
-				glVertex3f(comp, alt + incrementoY, -l/2);
-				glVertex3f(comp + incrementoX, alt + incrementoY, -l/2);
+			vertices.push_back(vertex(comp, alt, -l/2));
+			vertices.push_back(vertex(comp, alt + incrementoY, -l/2));
+			vertices.push_back(vertex(comp + incrementoX, alt + incrementoY, -l/2));
 
-				glVertex3f(comp, alt, -l/2);
-				glVertex3f(comp + incrementoX, alt + incrementoY, -l/2);
-				glVertex3f(comp + incrementoX, alt , -l/2);
-
-				comp = comp + incrementoX;
-			glEnd();
+			vertices.push_back(vertex(comp, alt, -l/2));
+			vertices.push_back(vertex(comp + incrementoX, alt + incrementoY, -l/2));
+			vertices.push_back(vertex(comp + incrementoX, alt , -l/2));
+			comp = comp + incrementoX;
 		}
 		alt = alt + incrementoY;
 	}
@@ -89,27 +105,25 @@ void Cubo::desenha(){
 	for(int i = 0; i < this->f; i++){
 		float larg = -this->l/2;
 		for(int i = 0; i < this->p; i++){
-			glBegin(GL_TRIANGLES);
 			//Face Lateral Direita
-				glVertex3f(c/2,alt,larg);
-				glVertex3f(c/2,alt + incY, larg);
-				glVertex3f(c/2, alt + incY,larg + incZ);
+			vertices.push_back(vertex(c/2,alt,larg));
+			vertices.push_back(vertex(c/2,alt + incY, larg));
+			vertices.push_back(vertex(c/2, alt + incY,larg + incZ));
 
-				glVertex3f(c/2, alt, larg);
-				glVertex3f(c/2, alt + incY, larg + incZ);
-				glVertex3f(c/2, alt, larg + incZ);
+			vertices.push_back(vertex(c/2, alt, larg));
+			vertices.push_back(vertex(c/2, alt + incY, larg + incZ));
+			vertices.push_back(vertex(c/2, alt, larg + incZ));
 
 			//Face Lateral Esquerda
-				glVertex3f(-c/2,alt,larg);
-				glVertex3f(-c/2, alt + incY, larg + incZ);
-				glVertex3f(-c/2,alt + incY, larg);			
+			vertices.push_back(vertex(-c/2,alt,larg));
+			vertices.push_back(vertex(-c/2, alt + incY, larg + incZ));
+			vertices.push_back(vertex(-c/2,alt + incY, larg));			
 
-				glVertex3f(-c/2, alt, larg);
-				glVertex3f(-c/2, alt, larg + incZ);
-				glVertex3f(-c/2, alt + incY, larg + incZ);
+			vertices.push_back(vertex(-c/2, alt, larg));
+			vertices.push_back(vertex(-c/2, alt, larg + incZ));
+			vertices.push_back(vertex(-c/2, alt + incY, larg + incZ));
 				
-				larg = larg + incZ;
-		glEnd();
+			larg = larg + incZ;
 		}
 		alt = alt + incY;
 	}
@@ -118,27 +132,40 @@ void Cubo::desenha(){
 	for(int z = 0; z < this->f; z++){
 		float larg = -this->l/2;
 		for(int x = 0; x < this->p; x++){
-			glBegin(GL_TRIANGLES);
 			//Face de Cima
-				glVertex3f(comp, a/2, larg);
-				glVertex3f(comp, a/2, larg + incrementoZ);
-				glVertex3f(comp + incrementoX, a/2, larg + incrementoZ);
+			vertices.push_back(vertex(comp, a/2, larg));
+			vertices.push_back(vertex(comp, a/2, larg + incrementoZ));
+			vertices.push_back(vertex(comp + incrementoX, a/2, larg + incrementoZ));
 
-				glVertex3f(comp, a/2, larg);
-				glVertex3f(comp + incrementoX, a/2, larg + incrementoZ);
-				glVertex3f(comp + incrementoX, a/2, larg);
+			vertices.push_back(vertex(comp, a/2, larg));
+			vertices.push_back(vertex(comp + incrementoX, a/2, larg + incrementoZ));
+			vertices.push_back(vertex(comp + incrementoX, a/2, larg));
 
 			//Face de Baixo
-				glVertex3f(comp, -a/2, larg);
-				glVertex3f(comp + incrementoX, -a/2, larg + incrementoZ);
-				glVertex3f(comp, -a/2, larg + incrementoZ);			
+			vertices.push_back(vertex(comp, -a/2, larg));
+			vertices.push_back(vertex(comp + incrementoX, -a/2, larg + incrementoZ));
+			vertices.push_back(vertex(comp, -a/2, larg + incrementoZ));			
 
-				glVertex3f(comp, -a/2, larg);
-				glVertex3f(comp + incrementoX, -a/2, larg);
-				glVertex3f(comp + incrementoX, -a/2, larg + incrementoZ);
-				larg = larg + incrementoZ;
-			glEnd();
+			vertices.push_back(vertex(comp, -a/2, larg));
+			vertices.push_back(vertex(comp + incrementoX, -a/2, larg));
+			vertices.push_back(vertex(comp + incrementoX, -a/2, larg + incrementoZ));
+			larg = larg + incrementoZ;
 		}
 		comp = comp + incrementoX;
 	}
+	nVertices = vertices.size();
+	glGenBuffers(1,&vbo);
+	glBindBuffer(GL_ARRAY_BUFFER,vbo);
+	glBufferData(GL_ARRAY_BUFFER,vertices.size()*sizeof(vertex), &vertices[0], GL_STATIC_DRAW);
+}
+
+/**
+ * Desenha um cubo, com as dimensoes definidas no construtor
+ *		
+ */
+
+void Cubo::desenha(){
+	glBindBuffer(GL_ARRAY_BUFFER,vbo);
+	glVertexPointer(3,GL_FLOAT,sizeof(vertex),(void*)offsetof(vertex,vertices));
+	glDrawArrays(GL_TRIANGLES,0,nVertices);
 }

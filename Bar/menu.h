@@ -13,7 +13,7 @@
 //angulos de rotacao Sobre a propria figura
 float angX= 0.0f, angY = 0.0f;
 //angulos de rotacao da camara
-float alfa = 0.0f, beta = 0.0f, raio = 6.0f;
+float alfa = 0.0f, beta = 0.0f, raio = 20.0f;
 float camX, camY, camZ;
 float x = 0.0f;
 float y = 0.0f;

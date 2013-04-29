@@ -4,6 +4,8 @@ class Cilindro{
 		float altura;				//altura do cilindro
 		float fatias;				//precisao circulo quanto mais alta,mais fatias tem as bases e o "tronco" 
 		float camadas;				//numero de camadas do tronco
+		GLuint vbo;
+		int nVertices;
 
 	public:
 		Cilindro();

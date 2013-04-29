@@ -6,6 +6,8 @@ private:
 	float espessura;
 	float fatias;
 	float camadas;
+	GLuint vbo;
+	int nVertices;
 	
 public:
 	Cadeira();

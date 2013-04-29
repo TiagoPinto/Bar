@@ -1,7 +1,4 @@
-#define _USE_MATH_DEFINES
-#include <GL/glut.h>
-#include <math.h>
-#include <stdio.h>
+#include "includes.h"
 #include "torus.h"
 
 /**

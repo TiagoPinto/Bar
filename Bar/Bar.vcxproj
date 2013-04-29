@@ -59,6 +59,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -92,7 +93,6 @@
     <ClCompile Include="piramide.cpp" />
     <ClCompile Include="plano.cpp" />
     <ClCompile Include="torus.cpp" />
-    <ClCompile Include="vbo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bar.h" />
@@ -102,6 +102,7 @@
     <ClInclude Include="copo.h" />
     <ClInclude Include="cubo.h" />
     <ClInclude Include="esfera.h" />
+    <ClInclude Include="includes.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="mesa.h" />
     <ClInclude Include="piramide.h" />

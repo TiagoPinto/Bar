@@ -1,10 +1,8 @@
-#define _USE_MATH_DEFINES
-
+#include "includes.h"
 #include "mesa.h"
 #include "cubo.h"
 #include "cilindro.h"
-#include <GL/glut.h>
-#include <math.h>
+
 
 /**
  * Construtor da class Mesa.
@@ -58,6 +56,7 @@ void Mesa::desenhaA(){
 		glTranslatef(0.0f, this->altura, 0.0f);
 		base = new Cubo(this->comprimento, this->espessura,this->largura , this->fatias, this->camadas);
 		base->desenha();
+		delete base;
 	glPopMatrix();
 
 	//Perna da Frente Direita
@@ -65,6 +64,7 @@ void Mesa::desenhaA(){
 		glTranslatef(this->comprimento/2 - this->espessura, this->altura / 2, this->largura/2 - this->espessura);
 		perna[0] = new Cilindro((2 * this->espessura) / 3, this->altura - this->espessura, this->fatias * 3, this->camadas);
 		perna[0]->desenha();
+		delete perna[0];
 	glPopMatrix();	
 
 	//Perna da Frente Esquerda
@@ -72,6 +72,7 @@ void Mesa::desenhaA(){
 		glTranslatef(-this->comprimento/2 + this->espessura, this->altura/2, this->largura/2 - this->espessura);
 		perna[1] = new Cilindro((2 * this->espessura) / 3, this->altura - this->espessura, this->fatias * 3, this->camadas);
 		perna[1]->desenha();
+		delete perna[1];
 	glPopMatrix();	
 	
 	//Perna de Tras Direita
@@ -79,6 +80,7 @@ void Mesa::desenhaA(){
 		glTranslatef(this->comprimento/2 - this->espessura, this->altura/2, -this->largura/2 + this->espessura);
 		perna[2] = new Cilindro((2 * this->espessura) / 3, this->altura - this->espessura, this->fatias * 3, this->camadas);
 		perna[2]->desenha();
+		delete perna[2];
 	glPopMatrix();
 
 	//Perna de Tras Esquerda
@@ -86,6 +88,7 @@ void Mesa::desenhaA(){
 		glTranslatef(-this->comprimento/2 + this->espessura, this->altura/2, -this->largura/2 + this->espessura);
 		perna[3] = new Cilindro((2 * this->espessura) / 3, this->altura - this->espessura, this->fatias * 3, this->camadas);
 		perna[3]->desenha();
+		delete perna[3];
 	glPopMatrix();
 }
 

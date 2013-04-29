@@ -1,6 +1,4 @@
-#define _USE_MATH_DEFINES
-#include <GL/glut.h>
-#include <math.h>
+#include "includes.h"
 #include "candeeiro.h"
 #include "cilindro.h"
 #include "esfera.h"
@@ -58,59 +56,59 @@ void Candeeiro::desenhaA(){
 	//parede da caixa, parte traseira
 	glPushMatrix();
 		glTranslatef(0.0f,-this->altura /6, -this->comprimento/2);
-		caixa[0] = new Plano(this->comprimento, this->altura / 2, this->fatias, this->camadas);
-		caixa[0]->desenhaXoY();
+		caixa[0] = new Plano(this->comprimento, this->altura / 2, this->fatias, this->camadas,1);
+		caixa[0]->desenha();
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(0.0f,-this->altura /6, -this->comprimento/2);
 		glRotatef(180,0,1,0);
-		caixa[1] = new Plano(this->comprimento, this->altura / 2, this->fatias, this->camadas);
-		caixa[1]->desenhaXoY();
+		caixa[1] = new Plano(this->comprimento, this->altura / 2, this->fatias, this->camadas,1);
+		caixa[1]->desenha();
 	glPopMatrix();
 
 	//parede da caixa, parte frontal
 	glPushMatrix();
 		glTranslatef(0.0f,-this->altura /6, this->comprimento/2);
-		caixa[2] = new Plano(this->comprimento, this->altura / 2, this->fatias, this->camadas);
-		caixa[2]->desenhaXoY();
+		caixa[2] = new Plano(this->comprimento, this->altura / 2, this->fatias, this->camadas,1);
+		caixa[2]->desenha();
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(0.0f,-this->altura /6, this->comprimento/2);
 		glRotatef(180,0,1,0);
-		caixa[3] = new Plano(this->comprimento, this->altura / 2, this->fatias, this->camadas);
-		caixa[3]->desenhaXoY();
+		caixa[3] = new Plano(this->comprimento, this->altura / 2, this->fatias, this->camadas,1);
+		caixa[3]->desenha();
 	glPopMatrix();
 
 	//parede da caixa, parte lateral direita
 	glPushMatrix();
 		glTranslatef(this->comprimento/2,-this->altura /6, 0.0f);
 		glRotatef(90,0,1,0);
-		caixa[4] = new Plano(this->comprimento, this->altura / 2, this->fatias, this->camadas);
-		caixa[4]->desenhaXoY();
+		caixa[4] = new Plano(this->comprimento, this->altura / 2, this->fatias, this->camadas,1);
+		caixa[4]->desenha();
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(this->comprimento/2,-this->altura /6, 0.0f);
 		glRotatef(-90,0,1,0);
-		caixa[5] = new Plano(this->comprimento, this->altura / 2, this->fatias, this->camadas);
-		caixa[5]->desenhaXoY();
+		caixa[5] = new Plano(this->comprimento, this->altura / 2, this->fatias, this->camadas,1);
+		caixa[5]->desenha();
 	glPopMatrix();
 
 	//parede da caixa, parte lateral esquerda
 	glPushMatrix();
 		glTranslatef(-this->comprimento/2,-this->altura /6, 0.0f);
 		glRotatef(90,0,1,0);
-		caixa[6] = new Plano(this->comprimento, this->altura / 2, this->fatias, this->camadas);
-		caixa[6]->desenhaXoY();
+		caixa[6] = new Plano(this->comprimento, this->altura / 2, this->fatias, this->camadas,1);
+		caixa[6]->desenha();
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(-this->comprimento/2,-this->altura /6, 0.0f);
 		glRotatef(-90,0,1,0);
-		caixa[7] = new Plano(this->comprimento, this->altura / 2, this->fatias, this->camadas);
-		caixa[7]->desenhaXoY();
+		caixa[7] = new Plano(this->comprimento, this->altura / 2, this->fatias, this->camadas,1);
+		caixa[7]->desenha();
 	glPopMatrix();
 
 	//piramide no topo

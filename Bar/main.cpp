@@ -1,16 +1,13 @@
-#include <GL/glut.h>
-#define _USE_MATH_DEFINES
-#include <math.h>
-#include <stdio.h>
+#include "includes.h"
 #include "menu.h"
 
 Cilindro *cilindro = new Cilindro(2.0f,1.0f,70.0f,3.0f);
-Cubo *cubo = new Cubo(2.0f,1.0f,1.5f,4.0f,2.0f);
-Plano *plano = new Plano(2.0f,1.0f,1.0f,3.0f);
+Cubo *cubo;
+Plano *plano;
 Esfera *esfera = new Esfera(1.0f,20.0f,20.0f);
 Torus *torus = new Torus(1.0f,0.5f,4.0f,2.0f);
 Piramide *piramide = new Piramide(2, 2, 2, 3, 2);
-Mesa *mesa = new Mesa(3.0f,2.0f,1.0f, 0.2f, 20.0f, 4.0f);
+Mesa *mesa;
 Cadeira *cadeira = new Cadeira(2.0f, 1.0f, 1.5f, 0.1f, 5.0f, 5.0f);
 Copo *copo = new Copo(0.8f,2.0f,0.2f,50.0f,2.0f);
 Bar *bar = new Bar(50, 60, 6, 8, 2);
@@ -78,9 +75,9 @@ void renderScene(void) {
 	glRotatef(angY, 1.0f, 0.0f, 0.0f);
 	switch(objecto) {
 		case 100: bar->desenha(); break;
-		case 11: plano->desenhaXoY(); break;
-		case 12: plano->desenhaXoZ(); break;
-		case 13: plano->desenhaYoZ(); break;
+		case 11: plano = new Plano(2.0f,1.0f,1.0f,3.0f,1); plano->desenha(); break;
+		case 12: plano = new Plano(2.0f,1.0f,1.0f,3.0f,2); plano->desenha(); break;
+		case 13: plano = new Plano(2.0f,1.0f,1.0f,3.0f,3); plano->desenha(); break;
 		case 14: cubo->desenha(); break;
 		case 15: cilindro->desenha(); break;
 		case 16: esfera->desenha(); break;
@@ -158,7 +155,7 @@ int main(int argc, char **argv) {
 	glutInitWindowPosition(300,100);
 	glutInitWindowSize(800,600);
 	glutCreateWindow("Bar@DI-UM");
-		
+	glewInit();	
 
 // registo de funções 
 	glutDisplayFunc(renderScene);
@@ -175,6 +172,10 @@ int main(int argc, char **argv) {
 // alguns settings para OpenGL
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
+	glEnableClientState(GL_VERTEX_ARRAY);
+
+cubo = new Cubo(2.0f,1.0f,1.5f,4.0f,2.0f);
+mesa = new Mesa(3.0f,2.0f,1.0f, 0.2f, 20.0f, 4.0f);
 
 //init
 	converte();

@@ -1,11 +1,8 @@
-#define _USE_MATH_DEFINES
-
+#include "includes.h"
 #include "cadeira.h"
 #include "cubo.h"
 #include "cilindro.h"
 #include "esfera.h"
-#include <GL/glut.h>
-#include <math.h>
 
 /**
  * Construtor da class Cadeira.

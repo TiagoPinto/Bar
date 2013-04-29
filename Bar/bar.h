@@ -1,3 +1,4 @@
+
 class Bar{
 	private:
 		float c;	//comprimento
@@ -5,6 +6,8 @@ class Bar{
 		float a;	//altura
 		float f;	//fatias
 		float p;	//camadas
+		GLuint vbo;
+		int nVertices;
 		
 	public:
 		Bar();
