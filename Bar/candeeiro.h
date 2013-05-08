@@ -15,4 +15,6 @@ class Candeeiro{
 		Candeeiro(float c, float a, float f, float p);
 		void desenhaA();
 		void desenhaB();
+		void preparaB();
+		~Candeeiro();
 };

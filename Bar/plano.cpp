@@ -1,23 +1,6 @@
 #include "includes.h"
 #include "plano.h"
 
-struct vertex{
-	float vertices[3];
-	float texturas[2];
-	float normais[3];
-
-	vertex(float x,float y, float z, float nx = 0, float ny = 0, float nz = 0, float tt = 0, float ts = 0){
-		vertices[0] = x;
-		vertices[1] = y;
-		vertices[2] = z;
-		normais[0] = nx;
-		normais[1] = ny;
-		normais[2] = nz;
-		texturas[0] = tt;
-		texturas[1] = ts;
-	}
-};
-
 
 /**
  * Construtor da class Plano.
@@ -48,7 +31,7 @@ Plano::Plano(float c, float a, float f, float p, int tri){
 	this->tri = tri;
 
 
-	std::vector <vertex> vertices;
+	std:: vector <vertex> vertice;
 
 	//Desenha um Plano no eixo XoY;
 	if(tri == 1){
@@ -58,13 +41,13 @@ Plano::Plano(float c, float a, float f, float p, int tri){
 		for(int j = 0; j < this->p; j++){
 			float comp = -this->c/2;
 			for(int i = 0; i < this->f; i++){
-				vertices.push_back(vertex( comp, larg, 0.0f ));
-				vertices.push_back(vertex( comp + incrementoX, larg, 0.0f ));
-				vertices.push_back(vertex( comp + incrementoX, larg + incrementoY, 0.0f ));
+				vertice.push_back(vertex( comp, larg, 0.0f, 0, 0, 1));
+				vertice.push_back(vertex( comp + incrementoX, larg, 0.0f, 0, 0, 1));
+				vertice.push_back(vertex( comp + incrementoX, larg + incrementoY, 0.0f, 0, 0, 1));
 		 
-				vertices.push_back(vertex( comp, larg, 0.0f ));
-				vertices.push_back(vertex( comp + incrementoX, larg + incrementoY, 0.0f ));
-				vertices.push_back(vertex( comp, larg + incrementoY, 0.0f ));
+				vertice.push_back(vertex( comp, larg, 0.0f, 0, 0, 1));
+				vertice.push_back(vertex( comp + incrementoX, larg + incrementoY, 0.0f, 0, 0, 1));
+				vertice.push_back(vertex( comp, larg + incrementoY, 0.0f, 0, 0, 1));
 				comp = comp + incrementoX;
 			}
 			larg = larg + incrementoY;
@@ -78,14 +61,14 @@ Plano::Plano(float c, float a, float f, float p, int tri){
 		for(int j = 0; j < this->p; j++){
 			float comp = -this->c/2;
 			for(int i = 0; i < this->f; i++){
-				vertices.push_back(vertex( comp, 0.0f, alt ));
-				vertices.push_back(vertex( comp, 0.0f, alt + incrementoZ ));
-				vertices.push_back(vertex( comp + incrementoX, 0.0f, alt + incrementoZ ));
+				vertice.push_back(vertex( comp, 0.0f, alt, 0, 1, 0));
+				vertice.push_back(vertex( comp, 0.0f, alt + incrementoZ, 0, 1, 0));
+				vertice.push_back(vertex( comp + incrementoX, 0.0f, alt + incrementoZ, 0, 1, 0));
 				
 				
-				vertices.push_back(vertex( comp , 0.0f, alt ));
-				vertices.push_back(vertex( comp + incrementoX, 0.0f, alt + incrementoZ ));
-				vertices.push_back(vertex( comp + incrementoX, 0.0f, alt ));
+				vertice.push_back(vertex( comp , 0.0f, alt, 0, 1, 0));
+				vertice.push_back(vertex( comp + incrementoX, 0.0f, alt + incrementoZ, 0, 1, 0));
+				vertice.push_back(vertex( comp + incrementoX, 0.0f, alt, 0, 1, 0));
 				comp = comp + incrementoX;
 			}
 			alt = alt + incrementoZ;
@@ -100,22 +83,22 @@ Plano::Plano(float c, float a, float f, float p, int tri){
 		for(int j = 0; j < this->f; j++){
 			float comp = -this->c/2;
 			for(int i = 0; i < this->p; i++){
-				vertices.push_back(vertex( 0.0f, alt, comp ));
-				vertices.push_back(vertex( 0.0f, alt + incrementoY, comp));
-				vertices.push_back(vertex( 0.0f, alt + incrementoY, comp + incrementoZ ));
+				vertice.push_back(vertex( 0.0f, alt, comp, 1, 0, 0));
+				vertice.push_back(vertex( 0.0f, alt + incrementoY, comp, 1, 0, 0));
+				vertice.push_back(vertex( 0.0f, alt + incrementoY, comp + incrementoZ, 1, 0, 0));
 
-				vertices.push_back(vertex( 0.0f, alt, comp ));
-				vertices.push_back(vertex( 0.0f, alt + incrementoY, comp + incrementoZ ));
-				vertices.push_back(vertex( 0.0f, alt, comp + incrementoZ ));
+				vertice.push_back(vertex( 0.0f, alt, comp, 1, 0, 0));
+				vertice.push_back(vertex( 0.0f, alt + incrementoY, comp + incrementoZ, 1, 0 , 0));
+				vertice.push_back(vertex( 0.0f, alt, comp + incrementoZ, 1, 0, 0));
 				alt = alt + incrementoY;
 			}
 		comp = comp + incrementoZ;
 		}
 	}
-	nVertices = vertices.size();
+	nVertices = vertice.size();
 	glGenBuffers(1,&vbo);
 	glBindBuffer(GL_ARRAY_BUFFER,vbo);
-	glBufferData(GL_ARRAY_BUFFER,vertices.size()*sizeof(vertex), &vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER,vertice.size()*sizeof(vertex), &vertice[0], GL_STATIC_DRAW);
 }
 
 /**
@@ -130,5 +113,6 @@ Plano::~Plano(){
 void Plano:: desenha(){
 	glBindBuffer(GL_ARRAY_BUFFER,vbo);
 	glVertexPointer(3,GL_FLOAT,sizeof(vertex),(void*)offsetof(vertex,vertices));
+	glNormalPointer(GL_FLOAT,sizeof(vertex),(void*)offsetof(vertex,normais));
 	glDrawArrays(GL_TRIANGLES,0,nVertices);
 }

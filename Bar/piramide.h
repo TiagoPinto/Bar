@@ -5,12 +5,12 @@ class Piramide{
 		float largura;	//largura
 		float fatias;	//camadas
 		float camadas;	//fatias
-		GLint vbo;
+		GLuint vbo;
 		int nVertices;
 
 	public:
 		Piramide();
 		Piramide(float c, float a, float l, float f, float p);
-		void desenhaR();
-		void desenhaC();
+		void desenha();
+		~Piramide();
 };

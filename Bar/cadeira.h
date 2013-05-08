@@ -17,4 +17,5 @@ public:
 	void desenhaB();
 	void desenhaC();
 	void desenhaD();
+	~Cadeira();
 };

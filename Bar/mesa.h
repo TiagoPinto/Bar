@@ -15,4 +15,5 @@ class Mesa{
 		void desenhaA();
 		void desenhaB();
 		void desenhaC();
+		~Mesa();
 };

@@ -53,6 +53,7 @@ void Cadeira::desenhaBasePernas(){
 		glTranslatef(0.0f, 4.5f * this->altura / 10.0f, 0.0f);
 		base = new Cubo(this->comprimento, this->espessura, this->largura, this->fatias, this->camadas);;
 		base->desenha();
+		delete base;
 	glPopMatrix();
 
 	//Perna da Frente Direita
@@ -60,6 +61,7 @@ void Cadeira::desenhaBasePernas(){
 		glTranslatef(this->comprimento/2 - this->espessura/2, (2.25f * this->altura) / 10.0f - this->espessura / 4, this->largura/2 - this->espessura/2);
 		perna[0] = new Cubo(this->espessura, (4.5f * this->altura / 10.0f) - this->espessura/2 , this->espessura, this->fatias, this->camadas);
 		perna[0]->desenha();
+		delete perna[0];
 	glPopMatrix();	
 
 	//Perna da Frente Esquerda
@@ -67,6 +69,7 @@ void Cadeira::desenhaBasePernas(){
 		glTranslatef(-this->comprimento/2 + this->espessura/2, (2.25f * this->altura) / 10.0f - this->espessura / 4, this->largura/2 - this->espessura/2);
 		perna[1] = new Cubo(this->espessura, (4.5f * this->altura / 10.0f) - this->espessura/2 , this->espessura, this->fatias, this->camadas);
 		perna[1]->desenha();
+		delete perna[1];
 	glPopMatrix();	
 	
 	//Perna de Tras Direita
@@ -74,6 +77,7 @@ void Cadeira::desenhaBasePernas(){
 		glTranslatef(this->comprimento/2 - this->espessura/2, (2.25f * this->altura) / 10.0f - this->espessura / 4, -this->largura/2 + this->espessura/2);
 		perna[2] = new Cubo(this->espessura, (4.5f * this->altura / 10.0f) - this->espessura/2 , this->espessura, this->fatias, this->camadas);
 		perna[2]->desenha();
+		delete perna[2];
 	glPopMatrix();
 
 	//Perna de Tras Esquerda
@@ -81,6 +85,7 @@ void Cadeira::desenhaBasePernas(){
 		glTranslatef(-this->comprimento/2 + this->espessura/2, (2.25f * this->altura) / 10.0f - this->espessura / 4, -this->largura/2 + this->espessura/2);
 		perna[3] = new Cubo(this->espessura, (4.5f * this->altura / 10.0f) - this->espessura/2 , this->espessura, this->fatias, this->camadas);
 		perna[3]->desenha();
+		delete perna[3];
 	glPopMatrix();
 
 	//Tabua Para as Costas
@@ -88,6 +93,7 @@ void Cadeira::desenhaBasePernas(){
 		glTranslatef(0.0f, 7.25f * this->altura / 10 + this->espessura / 4, - this->largura / 2 + this->espessura/2);
 		costas = new Cubo(this->comprimento, (5.5f * this->altura / 10.0f) - this->espessura /2, this->espessura, this->fatias, this->camadas);
 		costas->desenha();
+		delete costas;
 	glPopMatrix();
 }
 
@@ -102,6 +108,7 @@ void Cadeira::desenhaA(){
 		glTranslatef(this->comprimento/2 - this->espessura/2, this->altura / 10.0f, 0.0f);
 		tabua[0] = new Cubo(this->espessura, this->espessura / 2, this->largura - 2 * this->espessura, this->fatias, this->camadas);
 		tabua[0]->desenha();
+		delete tabua[0];
 	glPopMatrix();
 	
 	//Tabua que Liga as Pernas da Esquerda
@@ -109,6 +116,7 @@ void Cadeira::desenhaA(){
 		glTranslatef(-this->comprimento/2 + this->espessura/2, this->altura / 10, 0.0f);
 		tabua[1] = new Cubo(this->espessura, this->espessura / 2, this->largura - 2* this->espessura, this->fatias, this->camadas);
 		tabua[1]->desenha();
+		delete tabua[1];
 	glPopMatrix();
 	
 	//Tabua que Liga as Pernas da Frente
@@ -116,6 +124,7 @@ void Cadeira::desenhaA(){
 		glTranslatef(0.0f, this->altura / 10, this->largura/2 - this->espessura/2);
 		tabua[2] = new Cubo(this->comprimento - 2 * this->espessura, this->espessura/2, this->espessura, this->fatias, this->camadas);
 		tabua[2]->desenha();
+		delete tabua[2];
 	glPopMatrix();
 
 	//Tabua que Liga as Pernas de Tras
@@ -123,6 +132,7 @@ void Cadeira::desenhaA(){
 		glTranslatef(0.0f, this->altura / 10, -this->largura/2 + this->espessura/2);
 		tabua[3] = new Cubo(this->comprimento - 2 * this->espessura, this->espessura/2, this->espessura, this->fatias, this->camadas);
 		tabua[3]->desenha();
+		delete tabua[3];
 	glPopMatrix();
 }
 
@@ -134,15 +144,17 @@ void Cadeira::desenhaB(){
 	//Base da Mesa 
 	glPushMatrix();
 		glTranslatef(0.0f, this->altura, 0.0f);
-		base = new Cilindro(this->largura, this->espessura, this->fatias * 3, this->camadas * 2);
+		base = new Cilindro(this->largura, this->espessura, this->fatias * 3, this->camadas * 2,1);
 		base->desenha();
+		delete base;
 	glPopMatrix();
 	//Pernas
 	for(int i = 0; i < 4; i++) {
 		glPushMatrix();
 			glTranslatef((this->largura - this->espessura) * cos(graus), this->altura / 2, (this->largura - this->espessura) * sin(graus));
-			perna[i] = new Cilindro(this->espessura / 2, this->altura - this->espessura, this->fatias * 3, this->camadas);
+			perna[i] = new Cilindro(this->espessura / 2, this->altura - this->espessura, this->fatias * 3, this->camadas,1);
 			perna[i]->desenha();
+			delete perna[i];
 		glPopMatrix();	
 		graus = graus + M_PI / 2;
 	}
@@ -160,6 +172,7 @@ void Cadeira::desenhaC(){
 		glTranslatef(this->comprimento/2 - this->espessura/2, this->altura / 10, 0.0f);
 		tabua[0] = new Cubo(this->espessura, this->espessura / 2, this->largura - 2 * this->espessura, this->fatias, this->camadas);
 		tabua[0]->desenha();
+		delete tabua[0];
 	glPopMatrix();
 
 	//Tabua que Liga as Pernas da Esquerda
@@ -167,6 +180,7 @@ void Cadeira::desenhaC(){
 		glTranslatef(-this->comprimento/2 + this->espessura/2, this->altura / 10, 0.0f);
 		tabua[1] = new Cubo(this->espessura, this->espessura / 2, this->largura - 2 * this->espessura, this->fatias, this->camadas);
 		tabua[1]->desenha();
+		delete tabua[1];
 	glPopMatrix();
 
 	//Tabua Central
@@ -174,6 +188,7 @@ void Cadeira::desenhaC(){
 		glTranslatef(0.0f, this->altura / 10, 0.0f);
 		tabua[2] = new Cubo(this->comprimento - 2 * this->espessura, this->espessura / 2, this->espessura, this->fatias, this->camadas);
 		tabua[2]->desenha();
+		delete tabua[2];
 	glPopMatrix();
 }
 
@@ -190,12 +205,14 @@ void Cadeira::desenhaD(){
 		glTranslatef(this->comprimento/2 - this->espessura / 4, 7.0f * this->altura / 10.0f, this->espessura/2);
 		bracos[0] = new Cubo(this->espessura / 2, this->espessura / 2, this->largura - this->espessura, this->fatias, this->camadas);
 		bracos[0]->desenha();
+		delete bracos[0];
 	glPopMatrix();
 	
 	glPushMatrix();
 		glTranslatef(this->comprimento / 2 - this->espessura / 4, 5.75f * this->altura / 10.0f - this->espessura/8 + this->espessura / 4, this->largura/2 - this->espessura/4);
-		bracos[0] = new Cubo(this->espessura / 2, 2.5f * this->altura / 10.0f - this->espessura / 4 - this->espessura / 2, this->espessura / 2, this->fatias, this->camadas);
-		bracos[0]->desenha();
+		bracos[1] = new Cubo(this->espessura / 2, 2.5f * this->altura / 10.0f - this->espessura / 4 - this->espessura / 2, this->espessura / 2, this->fatias, this->camadas);
+		bracos[1]->desenha();
+		delete bracos[1];
 	glPopMatrix();
 
 	//Desenho do Braço Esquerdo
@@ -203,32 +220,36 @@ void Cadeira::desenhaD(){
 		glTranslatef(-this->comprimento/2 + this->espessura / 4, 7.0f * this->altura / 10.0f, this->espessura/2);
 		bracos[2] = new Cubo(this->espessura / 2, this->espessura / 2, this->largura - this->espessura, this->fatias, this->camadas);
 		bracos[2]->desenha();
+		delete bracos[2];
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(-this->comprimento / 2 + this->espessura / 4, 5.75f * this->altura / 10.0f - this->espessura/8 + this->espessura / 4, this->largura/2 - this->espessura/4);
-		bracos[0] = new Cubo(this->espessura / 2, 2.5f * this->altura / 10.0f - this->espessura / 4 - this->espessura / 2, this->espessura / 2, this->fatias, this->camadas);
-		bracos[0]->desenha();
+		bracos[3] = new Cubo(this->espessura / 2, 2.5f * this->altura / 10.0f - this->espessura / 4 - this->espessura / 2, this->espessura / 2, this->fatias, this->camadas);
+		bracos[3]->desenha();
+		delete bracos[3];
 	glPopMatrix();
 
 	//Bolas No Canto Superior da Cadeira
 	glPushMatrix();
 		glTranslatef(-this->comprimento / 2 + this->espessura / 2, this->altura + this->espessura /2, -this->largura / 2 + this->espessura / 2);
-		ornamento[0] = new Esfera(this->espessura / 2, this->fatias * 4, this->camadas * 3);
+		ornamento[0] = new Esfera(this->espessura / 2, this->fatias * 4, this->camadas * 3,1);
 		ornamento[0]->desenha();
+		delete ornamento[0];
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(this->comprimento / 2 - this->espessura / 2, this->altura + this->espessura /2, -this->largura / 2 + this->espessura / 2);
-		ornamento[0] = new Esfera(this->espessura / 2, this->fatias * 4, this->camadas * 3);
-		ornamento[0]->desenha();
+		ornamento[1] = new Esfera(this->espessura / 2, this->fatias * 4, this->camadas * 3,1);
+		ornamento[1]->desenha();
+		delete ornamento[1];
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(0.0f,this->altura,-this->largura / 2 + this->espessura / 2);
 		glRotatef(270.0f,1.0f,0.0f,0.0f);
-		metade = new Cilindro(this->comprimento / 2 - this->espessura, this->espessura, this->fatias, this->camadas);
-		metade->meioCilindro();
-
+		metade = new Cilindro(this->comprimento / 2 - this->espessura, this->espessura, this->fatias, this->camadas,2);
+		metade->desenha();
+		delete metade;
 	glPopMatrix();
 }

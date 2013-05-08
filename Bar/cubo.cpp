@@ -1,22 +1,7 @@
 #include "includes.h"
 #include "cubo.h"
 
-struct vertex{
-	float vertices[3];
-	float texturas[2];
-	float normais[3];
 
-	vertex(float x,float y, float z, float nx = 0, float ny = 0, float nz = 0, float tt = 0, float ts = 0){
-		vertices[0] = x;
-		vertices[1] = y;
-		vertices[2] = z;
-		normais[0] = nx;
-		normais[1] = ny;
-		normais[2] = nz;
-		texturas[0] = tt;
-		texturas[1] = ts;
-	}
-};
 
 /**
  * Construtor da class Cubo.
@@ -80,22 +65,22 @@ Cubo::Cubo(float c,float a,float l, float f, float p){
 		float comp = -this->c/2;
 		for(int i = 0; i < this->p; i++){
 			//Face Frontal Triangulo
-			vertices.push_back(vertex(comp,alt,l/2));
-			vertices.push_back(vertex(comp + incrementoX, alt + incrementoY, l/2));
-			vertices.push_back(vertex(comp, alt + incrementoY, l/2));
+			vertices.push_back(vertex(comp,alt,l/2,0,0,1));
+			vertices.push_back(vertex(comp + incrementoX, alt + incrementoY, l/2,0,0,1));
+			vertices.push_back(vertex(comp, alt + incrementoY, l/2,0,0,1));
 
-			vertices.push_back(vertex(comp, alt, l/2));
-			vertices.push_back(vertex(comp + incrementoX, alt, l/2));
-			vertices.push_back(vertex(comp + incrementoX, alt + incrementoY, l/2)); 
+			vertices.push_back(vertex(comp, alt, l/2,0,0,1));
+			vertices.push_back(vertex(comp + incrementoX, alt, l/2,0,0,1));
+			vertices.push_back(vertex(comp + incrementoX, alt + incrementoY, l/2,0,0,1)); 
 
 			//Face Traseira Triangulo
-			vertices.push_back(vertex(comp, alt, -l/2));
-			vertices.push_back(vertex(comp, alt + incrementoY, -l/2));
-			vertices.push_back(vertex(comp + incrementoX, alt + incrementoY, -l/2));
+			vertices.push_back(vertex(comp, alt, -l/2,0,0,-1));
+			vertices.push_back(vertex(comp, alt + incrementoY, -l/2,0,0,-1));
+			vertices.push_back(vertex(comp + incrementoX, alt + incrementoY, -l/2,0,0,-1));
 
-			vertices.push_back(vertex(comp, alt, -l/2));
-			vertices.push_back(vertex(comp + incrementoX, alt + incrementoY, -l/2));
-			vertices.push_back(vertex(comp + incrementoX, alt , -l/2));
+			vertices.push_back(vertex(comp, alt, -l/2,0,0,-1));
+			vertices.push_back(vertex(comp + incrementoX, alt + incrementoY, -l/2,0,0,-1));
+			vertices.push_back(vertex(comp + incrementoX, alt , -l/2,0,0,-1));
 			comp = comp + incrementoX;
 		}
 		alt = alt + incrementoY;
@@ -106,22 +91,22 @@ Cubo::Cubo(float c,float a,float l, float f, float p){
 		float larg = -this->l/2;
 		for(int i = 0; i < this->p; i++){
 			//Face Lateral Direita
-			vertices.push_back(vertex(c/2,alt,larg));
-			vertices.push_back(vertex(c/2,alt + incY, larg));
-			vertices.push_back(vertex(c/2, alt + incY,larg + incZ));
+			vertices.push_back(vertex(c/2,alt,larg,1,0,0));
+			vertices.push_back(vertex(c/2,alt + incY, larg,1,0,0));
+			vertices.push_back(vertex(c/2, alt + incY,larg + incZ,1,0,0));
 
-			vertices.push_back(vertex(c/2, alt, larg));
-			vertices.push_back(vertex(c/2, alt + incY, larg + incZ));
-			vertices.push_back(vertex(c/2, alt, larg + incZ));
+			vertices.push_back(vertex(c/2, alt, larg,1,0,0));
+			vertices.push_back(vertex(c/2, alt + incY, larg + incZ,1,0,0));
+			vertices.push_back(vertex(c/2, alt, larg + incZ,1,0,0));
 
 			//Face Lateral Esquerda
-			vertices.push_back(vertex(-c/2,alt,larg));
-			vertices.push_back(vertex(-c/2, alt + incY, larg + incZ));
-			vertices.push_back(vertex(-c/2,alt + incY, larg));			
+			vertices.push_back(vertex(-c/2,alt,larg,-1,0,0));
+			vertices.push_back(vertex(-c/2, alt + incY, larg + incZ,-1,0,0));
+			vertices.push_back(vertex(-c/2,alt + incY, larg,-1,0,0));			
 
-			vertices.push_back(vertex(-c/2, alt, larg));
-			vertices.push_back(vertex(-c/2, alt, larg + incZ));
-			vertices.push_back(vertex(-c/2, alt + incY, larg + incZ));
+			vertices.push_back(vertex(-c/2, alt, larg,-1,0,0));
+			vertices.push_back(vertex(-c/2, alt, larg + incZ,-1,0,0));
+			vertices.push_back(vertex(-c/2, alt + incY, larg + incZ,-1,0,0));
 				
 			larg = larg + incZ;
 		}
@@ -133,22 +118,22 @@ Cubo::Cubo(float c,float a,float l, float f, float p){
 		float larg = -this->l/2;
 		for(int x = 0; x < this->p; x++){
 			//Face de Cima
-			vertices.push_back(vertex(comp, a/2, larg));
-			vertices.push_back(vertex(comp, a/2, larg + incrementoZ));
-			vertices.push_back(vertex(comp + incrementoX, a/2, larg + incrementoZ));
+			vertices.push_back(vertex(comp, a/2, larg,0,1,0));
+			vertices.push_back(vertex(comp, a/2, larg + incrementoZ,0,1,0));
+			vertices.push_back(vertex(comp + incrementoX, a/2, larg + incrementoZ,0,1,0));
 
-			vertices.push_back(vertex(comp, a/2, larg));
-			vertices.push_back(vertex(comp + incrementoX, a/2, larg + incrementoZ));
-			vertices.push_back(vertex(comp + incrementoX, a/2, larg));
+			vertices.push_back(vertex(comp, a/2, larg,0,1,0));
+			vertices.push_back(vertex(comp + incrementoX, a/2, larg + incrementoZ,0,1,0));
+			vertices.push_back(vertex(comp + incrementoX, a/2, larg,0,1,0));
 
 			//Face de Baixo
-			vertices.push_back(vertex(comp, -a/2, larg));
-			vertices.push_back(vertex(comp + incrementoX, -a/2, larg + incrementoZ));
-			vertices.push_back(vertex(comp, -a/2, larg + incrementoZ));			
+			vertices.push_back(vertex(comp, -a/2, larg,0,-1,0));
+			vertices.push_back(vertex(comp + incrementoX, -a/2, larg + incrementoZ,0,-1,0));
+			vertices.push_back(vertex(comp, -a/2, larg + incrementoZ,0,-1,0));			
 
-			vertices.push_back(vertex(comp, -a/2, larg));
-			vertices.push_back(vertex(comp + incrementoX, -a/2, larg));
-			vertices.push_back(vertex(comp + incrementoX, -a/2, larg + incrementoZ));
+			vertices.push_back(vertex(comp, -a/2, larg,0,-1,0));
+			vertices.push_back(vertex(comp + incrementoX, -a/2, larg,0,-1,0));
+			vertices.push_back(vertex(comp + incrementoX, -a/2, larg + incrementoZ,0,-1,0));
 			larg = larg + incrementoZ;
 		}
 		comp = comp + incrementoX;
@@ -167,5 +152,6 @@ Cubo::Cubo(float c,float a,float l, float f, float p){
 void Cubo::desenha(){
 	glBindBuffer(GL_ARRAY_BUFFER,vbo);
 	glVertexPointer(3,GL_FLOAT,sizeof(vertex),(void*)offsetof(vertex,vertices));
+	glNormalPointer(GL_FLOAT,sizeof(vertex),(void*)offsetof(vertex,normais));
 	glDrawArrays(GL_TRIANGLES,0,nVertices);
 }

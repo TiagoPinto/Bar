@@ -8,15 +8,14 @@ class Copo{
 		float camadas;
 		GLuint vbo;
 		int nVertices;
-
+		int tipo;
 
 	public:
 	Copo();
-	Copo(float r, float a, float e, float f, float p);
-	void desenhaA();
-	void desenhaB();
+	Copo(float r, float a, float e, float f, float p, int t);
+	void desenha();
 	void desenhaC();
 	void desenhaD();
-
+	~Copo();
 
 };

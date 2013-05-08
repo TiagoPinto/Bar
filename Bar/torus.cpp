@@ -11,6 +11,7 @@ Torus::Torus(){
 	this->raioE = 0.0;
 	this->fatias = 0.0;
 	this->camadas = 0.0;
+	this->tipo = 0;
 }
 
 /**
@@ -26,81 +27,99 @@ Torus::Torus(){
  * 	 Variavel que especifica as camadas do torus
  */
 
-Torus::Torus(float ri, float re, float f, float c){
+Torus::Torus(float ri, float re, float f, float c, int t){
 	this->raioI = ri;
 	this->raioE = re;
 	this->fatias = f; 
 	this->camadas = c;
+	this->tipo = t;
+
+	std:: vector <vertex> vertices;
+
+	if(tipo == 1){
+		float incR = 2 * M_PI / fatias;
+		float incA = M_PI / (camadas);
+		float grausA = -M_PI;
+		float grausE = -M_PI/2;
+		float somatorio = raioE * cos(grausE);
+		float somatorio2 = raioE * cos(grausE + incA);
+		for(int a = 0; a < camadas; a++){
+			float grausR = 0.0f;
+			for(int l = 0; l < fatias; l++){
+				vertices.push_back(vertex((raioI + raioE + somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR),1,0,0)); 
+				vertices.push_back(vertex((raioI + raioE + somatorio2)  * cos(grausR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR),1,0,0));
+				vertices.push_back(vertex((raioI + raioE + somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR + incR),1,0,0));
+
+				vertices.push_back(vertex((raioI + raioE + somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR),1,0,0)); 
+				vertices.push_back(vertex((raioI + raioE + somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR + incR),1,0,0));
+				vertices.push_back(vertex((raioI + raioE + somatorio)  * cos(grausR + incR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR + incR),1,0,0));
+			
+				vertices.push_back(vertex((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR),1,0,0));
+				vertices.push_back(vertex((raioI + raioE - somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR),1,0,0));
+				vertices.push_back(vertex((raioI + raioE - somatorio2)  * cos(grausR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR),1,0,0));
+			
+				vertices.push_back(vertex((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR),1,0,0)); 
+				vertices.push_back(vertex((raioI + raioE - somatorio) * cos(grausR + incR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR + incR),1,0,0));
+				vertices.push_back(vertex((raioI + raioE - somatorio2)  * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR),1,0,0));
+				grausR = grausR + incR;
+			}
+			grausA = grausA + incA;
+			grausE = grausE + incA;
+			somatorio = raioE * cos(grausE);
+			somatorio2 = raioE * cos(grausE + incA);		
+		}
+	}
+
+	//Desenha Metade de um torus
+	if(tipo == 2){
+		float incR = M_PI / fatias;
+		float incA = M_PI / (camadas);
+		float grausA = -M_PI;
+		float grausE = -M_PI/2;
+		float somatorio = raioE * cos(grausE);
+		float somatorio2 = raioE * cos(grausE + incA);
+		for(int a = 0; a < camadas; a++){
+			float grausR = 0.0f;
+			for(int l = 0; l < fatias; l++){
+				vertices.push_back(vertex((raioI + raioE + somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR),1,0,0)); 
+				vertices.push_back(vertex((raioI + raioE + somatorio2)  * cos(grausR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR),1,0,0));
+				vertices.push_back(vertex((raioI + raioE + somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR + incR),1,0,0));
+
+				vertices.push_back(vertex((raioI + raioE + somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR),1,0,0)); 
+				vertices.push_back(vertex((raioI + raioE + somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR + incR),1,0,0));
+				vertices.push_back(vertex((raioI + raioE + somatorio)  * cos(grausR + incR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR + incR),1,0,0));
+			
+				vertices.push_back(vertex((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR),1,0,0));
+				vertices.push_back(vertex((raioI + raioE - somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR),1,0,0));
+				vertices.push_back(vertex((raioI + raioE - somatorio2)  * cos(grausR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR),1,0,0));
+			
+				vertices.push_back(vertex((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR),1,0,0)); 
+				vertices.push_back(vertex((raioI + raioE - somatorio) * cos(grausR + incR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR + incR),1,0,0));
+				vertices.push_back(vertex((raioI + raioE - somatorio2)  * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR),1,0,0));
+				grausR = grausR + incR;
+			}
+			grausA = grausA + incA;
+			grausE = grausE + incA;
+			somatorio = raioE * cos(grausE);
+			somatorio2 = raioE * cos(grausE + incA);		
+		}
+	}
+	nVertices = vertices.size();
+	glGenBuffers(1,&vbo);
+	glBindBuffer(GL_ARRAY_BUFFER,vbo);
+	glBufferData(GL_ARRAY_BUFFER,vertices.size()*sizeof(vertex), &vertices[0], GL_STATIC_DRAW);
 }
 
 void Torus::desenha(){
-	float incR = 2 * M_PI / fatias;
-	float incA = M_PI / (camadas);
-	float grausA = -M_PI;
-	float grausE = -M_PI/2;
-	float somatorio = raioE * cos(grausE);
-	float somatorio2 = raioE * cos(grausE + incA);
-	for(int a = 0; a < camadas; a++){
-		float grausR = 0.0f;
-		for(int l = 0; l < fatias; l++){
-			glBegin(GL_TRIANGLES);
-			glVertex3f((raioI + raioE + somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR)); 
-			glVertex3f((raioI + raioE + somatorio2)  * cos(grausR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR));
-			glVertex3f((raioI + raioE + somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR + incR));
-
-			glVertex3f((raioI + raioE + somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR)); 
-			glVertex3f((raioI + raioE + somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR + incR));
-			glVertex3f((raioI + raioE + somatorio)  * cos(grausR + incR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR + incR));
-			
-			glVertex3f((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR));
-			glVertex3f((raioI + raioE - somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR));
-			glVertex3f((raioI + raioE - somatorio2)  * cos(grausR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR));
-			
-			glVertex3f((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR)); 
-			glVertex3f((raioI + raioE - somatorio) * cos(grausR + incR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR + incR));
-			glVertex3f((raioI + raioE - somatorio2)  * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR));
-			glEnd();
-			grausR = grausR + incR;
-		}
-		grausA = grausA + incA;
-		grausE = grausE + incA;
-		somatorio = raioE * cos(grausE);
-		somatorio2 = raioE * cos(grausE + incA);		
-	}
+	glBindBuffer(GL_ARRAY_BUFFER,vbo);
+	glVertexPointer(3,GL_FLOAT,sizeof(vertex),(void*)offsetof(vertex,vertices));
+	glDrawArrays(GL_TRIANGLES,0,nVertices);
 }
 
-void Torus::meioTorus(){
-	float incR = M_PI / fatias;
-	float incA = M_PI / (camadas);
-	float grausA = -M_PI;
-	float grausE = -M_PI/2;
-	float somatorio = raioE * cos(grausE);
-	float somatorio2 = raioE * cos(grausE + incA);
-	for(int a = 0; a < camadas; a++){
-		float grausR = 0.0f;
-		for(int l = 0; l < fatias; l++){
-			glBegin(GL_TRIANGLES);
-			glVertex3f((raioI + raioE + somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR)); 
-			glVertex3f((raioI + raioE + somatorio2)  * cos(grausR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR));
-			glVertex3f((raioI + raioE + somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR + incR));
-
-			glVertex3f((raioI + raioE + somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR)); 
-			glVertex3f((raioI + raioE + somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR + incR));
-			glVertex3f((raioI + raioE + somatorio)  * cos(grausR + incR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR + incR));
-			
-			glVertex3f((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR));
-			glVertex3f((raioI + raioE - somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR));
-			glVertex3f((raioI + raioE - somatorio2)  * cos(grausR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR));
-			
-			glVertex3f((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR)); 
-			glVertex3f((raioI + raioE - somatorio) * cos(grausR + incR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR + incR));
-			glVertex3f((raioI + raioE - somatorio2)  * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR));
-			glEnd();
-			grausR = grausR + incR;
-		}
-		grausA = grausA + incA;
-		grausE = grausE + incA;
-		somatorio = raioE * cos(grausE);
-		somatorio2 = raioE * cos(grausE + incA);		
-	}
+/**
+ * Destrutor da class Torus.
+ * Destroi o VBO criado, para nao ficar alocada memoria na placa grafica	
+ */
+Torus::~Torus(){
+	glDeleteBuffers(1,&vbo);
 }

@@ -9,6 +9,7 @@ Esfera:: Esfera(){
 	this->raio = 0.0f;
 	this->fatias = 0.0f;
 	this->camadas = 0.0f;
+	this->tipo = 0;
 }
 
 /**
@@ -22,10 +23,62 @@ Esfera:: Esfera(){
  * 	 Variavel que especifica as camadas da esfera
  *		
  */
-Esfera:: Esfera(float r, float f, float c){
+Esfera:: Esfera(float r, float f, float c, int t){
 	this->raio = r;
 	this->fatias = f;
 	this->camadas = c;
+	this->tipo = t;
+
+	std:: vector <vertex> vertices;
+
+	if(tipo == 1){
+		float rotacaoR = 2 * M_PI / this->fatias;
+		float rotacaoC = M_PI / this->camadas;
+		float grausC = 0;
+		for(int k = 0; k < this->camadas; k++){
+			float grausR = 0;
+			for(int i = 0; i < this->fatias; i++) {
+				//Parte Superior da Esfera
+				vertices.push_back(vertex(raio * cos(grausR) * sin(grausC), raio * cos(grausC), raio * sin(grausR) * sin(grausC),1,0,0)); 
+				vertices.push_back(vertex(raio * cos(grausR) * sin(grausC + rotacaoC), raio * cos(grausC + rotacaoC), raio * sin(grausR) * sin(grausC + rotacaoC),1,0,0));
+				vertices.push_back(vertex(raio * cos(grausR + rotacaoR) * sin(grausC + rotacaoC), raio * cos(grausC + rotacaoC), raio * sin(grausR + rotacaoR) * sin(grausC + rotacaoC),1,0,0));
+
+				vertices.push_back(vertex(raio * cos(grausR) * sin(grausC), raio * cos(grausC), raio * sin(grausR) * sin(grausC),1,0,0)); 				
+				vertices.push_back(vertex(raio * cos(grausR + rotacaoR) * sin(grausC + rotacaoC), raio * cos(grausC + rotacaoC), raio * sin(grausR + rotacaoR) * sin(grausC + rotacaoC),1,0,0));
+				vertices.push_back(vertex(raio * cos(grausR + rotacaoR) * sin(grausC), raio * cos(grausC), raio * sin(grausR + rotacaoR) * sin(grausC),1,0,0));		
+				grausR = grausR + rotacaoR;	
+			}
+			grausC = grausC + rotacaoC;
+		}
+	}
+
+	//Desenha apenas metade de uma Esfera
+	if(tipo == 2){
+		float rotacaoR =  2 * M_PI / this->fatias;
+		float rotacaoC = (M_PI / 2) / this->camadas;
+		float grausC = 0;
+		for(int k = 0; k < this->camadas; k++){
+			float grausR = 0;
+			for(int i = 0; i < this->fatias; i++) {
+				glBegin(GL_TRIANGLES);
+				//Parte Superior da Esfera
+				vertices.push_back(vertex(raio * cos(grausR) * sin(grausC), raio * cos(grausC), raio * sin(grausR) * sin(grausC),1,0,0)); 
+				vertices.push_back(vertex(raio * cos(grausR) * sin(grausC + rotacaoC), raio * cos(grausC + rotacaoC), raio * sin(grausR) * sin(grausC + rotacaoC),1,0,0));
+				vertices.push_back(vertex(raio * cos(grausR + rotacaoR) * sin(grausC + rotacaoC), raio * cos(grausC + rotacaoC), raio * sin(grausR + rotacaoR) * sin(grausC + rotacaoC),1,0,0));
+
+				vertices.push_back(vertex(raio * cos(grausR) * sin(grausC), raio * cos(grausC), raio * sin(grausR) * sin(grausC),1,0,0)); 				
+				vertices.push_back(vertex(raio * cos(grausR + rotacaoR) * sin(grausC + rotacaoC), raio * cos(grausC + rotacaoC), raio * sin(grausR + rotacaoR) * sin(grausC + rotacaoC),1,0,0));
+				vertices.push_back(vertex(raio * cos(grausR + rotacaoR) * sin(grausC), raio * cos(grausC), raio * sin(grausR + rotacaoR) * sin(grausC),1,0,0));
+				glEnd();		
+			grausR = grausR + rotacaoR;	
+			}
+			grausC = grausC + rotacaoC;
+		}
+	}
+	nVertices = vertices.size();
+	glGenBuffers(1,&vbo);
+	glBindBuffer(GL_ARRAY_BUFFER,vbo);
+	glBufferData(GL_ARRAY_BUFFER,vertices.size()*sizeof(vertex), &vertices[0], GL_STATIC_DRAW);
 }
 
 /**
@@ -33,58 +86,18 @@ Esfera:: Esfera(float r, float f, float c){
  *		
  */
 void Esfera:: desenha(){
-	float rotacaoR = 2 * M_PI / this->fatias;
-	float rotacaoC = M_PI / this->camadas;
-	float grausC = 0;
-	for(int k = 0; k < this->camadas; k++){
-		float grausR = 0;
-		for(int i = 0; i < this->fatias; i++) {
-			glBegin(GL_TRIANGLES);
-			//Parte Superior da Esfera
-			glVertex3f(raio * cos(grausR) * sin(grausC), raio * cos(grausC), raio * sin(grausR) * sin(grausC)); 
-			glVertex3f(raio * cos(grausR) * sin(grausC + rotacaoC), raio * cos(grausC + rotacaoC), raio * sin(grausR) * sin(grausC + rotacaoC));
-			glVertex3f(raio * cos(grausR + rotacaoR) * sin(grausC + rotacaoC), raio * cos(grausC + rotacaoC), raio * sin(grausR + rotacaoR) * sin(grausC + rotacaoC));
-
-			glVertex3f(raio * cos(grausR) * sin(grausC), raio * cos(grausC), raio * sin(grausR) * sin(grausC)); 				
-			glVertex3f(raio * cos(grausR + rotacaoR) * sin(grausC + rotacaoC), raio * cos(grausC + rotacaoC), raio * sin(grausR + rotacaoR) * sin(grausC + rotacaoC));
-			glVertex3f(raio * cos(grausR + rotacaoR) * sin(grausC), raio * cos(grausC), raio * sin(grausR + rotacaoR) * sin(grausC));
-			glEnd();		
-		grausR = grausR + rotacaoR;	
-		}
-		grausC = grausC + rotacaoC;
-	}
-	
+	glBindBuffer(GL_ARRAY_BUFFER,vbo);
+	glVertexPointer(3,GL_FLOAT,sizeof(vertex),(void*)offsetof(vertex,vertices));
+	glDrawArrays(GL_TRIANGLES,0,nVertices);
 }
+
 /**
- * Desenha metade de uma esfera com as dimensoes do construtor
- *		
+ * Destrutor da class Esfera.
+ * Destroi o VBO criado, para nao ficar alocada memoria na placa grafica	
  */
-void Esfera:: meiaEsfera(){
-	float rotacaoR =  2 * M_PI / this->fatias;
-	float rotacaoC = (M_PI / 2) / this->camadas;
-	float grausC = 0;
-	for(int k = 0; k < this->camadas; k++){
-		float grausR = 0;
-		for(int i = 0; i < this->fatias; i++) {
-			glBegin(GL_TRIANGLES);
-			//Parte Superior da Esfera
-			glVertex3f(raio * cos(grausR) * sin(grausC), raio * cos(grausC), raio * sin(grausR) * sin(grausC)); 
-			glVertex3f(raio * cos(grausR) * sin(grausC + rotacaoC), raio * cos(grausC + rotacaoC), raio * sin(grausR) * sin(grausC + rotacaoC));
-			glVertex3f(raio * cos(grausR + rotacaoR) * sin(grausC + rotacaoC), raio * cos(grausC + rotacaoC), raio * sin(grausR + rotacaoR) * sin(grausC + rotacaoC));
-
-			glVertex3f(raio * cos(grausR) * sin(grausC), raio * cos(grausC), raio * sin(grausR) * sin(grausC)); 				
-			glVertex3f(raio * cos(grausR + rotacaoR) * sin(grausC + rotacaoC), raio * cos(grausC + rotacaoC), raio * sin(grausR + rotacaoR) * sin(grausC + rotacaoC));
-			glVertex3f(raio * cos(grausR + rotacaoR) * sin(grausC), raio * cos(grausC), raio * sin(grausR + rotacaoR) * sin(grausC));
-			glEnd();		
-		grausR = grausR + rotacaoR;	
-		}
-		grausC = grausC + rotacaoC;
-	}
-	
+Esfera::~Esfera(){
+	glDeleteBuffers(1,&vbo);
 }
-
-
-
 
 
 

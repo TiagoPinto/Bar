@@ -6,10 +6,11 @@ private:
 	float camadas;
 	GLuint vbo;
 	int nVertices;
+	int tipo;
 
 public:
 	Torus();
-	Torus(float ri, float re, float f, float c);
+	Torus(float ri, float re, float f, float c, int t);
 	void desenha();
-	void meioTorus();
+	~Torus();
 };

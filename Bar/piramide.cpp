@@ -35,15 +35,9 @@ Piramide::Piramide(float c, float a,float l, float f, float p){
 	this->largura = l;
 	this->fatias = f; 
 	this->camadas = p;
-}
 
+	std:: vector <vertex> vertices;
 
-/**
- * Desenha uma piramide com base rectangular, com as dimensoes definidas no construtor
- *		
- */
-
-void Piramide::desenhaR(){
 	//Variaveis Iniciais para comecar a desenhar 
 	float alt = -this->altura/2;
 	float tamanhoC = comprimento;
@@ -68,53 +62,50 @@ void Piramide::desenhaR(){
 		incrementoZ = tamanhoL/fatias;
 		incrementoZ2 = tamanhoL2/ fatias;
 		for(int i = 0; i < fatias; i++){
-				if(i == 0)
-				{
-					y = comp2;
-					z = larg3;
-				}
-			glBegin(GL_TRIANGLES);
+			if(i == 0){
+				y = comp2;
+				z = larg3;
+			}
 			//Face Frontal Triangulo
-				glVertex3f(comp, alt, larg);
-				glVertex3f(comp + incrementoX, alt, larg);
-				glVertex3f(comp2, alt + incrementoY, decrementoL);
+			vertices.push_back(vertex(comp, alt, larg,1,0,0));
+			vertices.push_back(vertex(comp + incrementoX, alt, larg,1,0,0));
+			vertices.push_back(vertex(comp2, alt + incrementoY, decrementoL,1,0,0));
 				
-				glVertex3f(comp + incrementoX, alt, larg);
-				glVertex3f(comp2 + incrementoX2, alt + incrementoY, decrementoL);
-				glVertex3f(comp2, alt + incrementoY, decrementoL); 
+			vertices.push_back(vertex(comp + incrementoX, alt, larg,1,0,0));
+			vertices.push_back(vertex(comp2 + incrementoX2, alt + incrementoY, decrementoL,1,0,0));
+			vertices.push_back(vertex(comp2, alt + incrementoY, decrementoL,1,0,0)); 
 				
 			//Face Traseira Triangulo
-				glVertex3f(comp, alt, -larg);
-				glVertex3f(comp2, alt + incrementoY, -decrementoL);
-				glVertex3f(comp2 + incrementoX2, alt + incrementoY, -decrementoL);
+			vertices.push_back(vertex(comp, alt, -larg,1,0,0));
+			vertices.push_back(vertex(comp2, alt + incrementoY, -decrementoL,1,0,0));
+			vertices.push_back(vertex(comp2 + incrementoX2, alt + incrementoY, -decrementoL,1,0,0));
 
-				glVertex3f(comp, alt, -larg);
-				glVertex3f(comp2 + incrementoX2, alt + incrementoY, -decrementoL);
-				glVertex3f(comp + incrementoX, alt , -larg);
+			vertices.push_back(vertex(comp, alt, -larg,1,0,0));
+			vertices.push_back(vertex(comp2 + incrementoX2, alt + incrementoY, -decrementoL,1,0,0));
+			vertices.push_back(vertex(comp + incrementoX, alt , -larg,1,0,0));
 
 			//Face Lateral Direita
-				glVertex3f(comprimentoL,alt,larg2);
-				glVertex3f(decrementoL,alt + incrementoY, larg3);
-				glVertex3f(decrementoL, alt + incrementoY,larg3 + incrementoZ2);
+			vertices.push_back(vertex(comprimentoL,alt,larg2,1,0,0));
+			vertices.push_back(vertex(decrementoL,alt + incrementoY, larg3,1,0,0));
+			vertices.push_back(vertex(decrementoL, alt + incrementoY,larg3 + incrementoZ2,1,0,0));
 
-				glVertex3f(comprimentoL, alt, larg2);
-				glVertex3f(decrementoL, alt + incrementoY, larg3 + incrementoZ2);
-				glVertex3f(comprimentoL, alt, larg2 + incrementoZ);
+			vertices.push_back(vertex(comprimentoL, alt, larg2,1,0,0));
+			vertices.push_back(vertex(decrementoL, alt + incrementoY, larg3 + incrementoZ2,1,0,0));
+			vertices.push_back(vertex(comprimentoL, alt, larg2 + incrementoZ,1,0,0));
 
 			//Face Lateral Esquerda
-				glVertex3f(-comprimentoL,alt,larg2);
-				glVertex3f(-decrementoL, alt + incrementoY, larg3 + incrementoZ2);
-				glVertex3f(-decrementoL,alt + incrementoY, larg3);			
+			vertices.push_back(vertex(-comprimentoL,alt,larg2,1,0,0));
+			vertices.push_back(vertex(-decrementoL, alt + incrementoY, larg3 + incrementoZ2,1,0,0));
+			vertices.push_back(vertex(-decrementoL,alt + incrementoY, larg3,1,0,0));			
 
-				glVertex3f(-comprimentoL, alt, larg2);
-				glVertex3f(-comprimentoL, alt, larg2 + incrementoZ);
-				glVertex3f(-decrementoL, alt + incrementoY, larg3 + incrementoZ2);
+			vertices.push_back(vertex(-comprimentoL, alt, larg2,1,0,0));
+			vertices.push_back(vertex(-comprimentoL, alt, larg2 + incrementoZ,1,0,0));
+			vertices.push_back(vertex(-decrementoL, alt + incrementoY, larg3 + incrementoZ2,1,0,0));
 
-				comp = comp + incrementoX;
-				comp2 = comp2 + incrementoX2;
-				larg2 = larg2 + incrementoZ;
-				larg3 = larg3 + incrementoZ2;
-			glEnd();
+			comp = comp + incrementoX;
+			comp2 = comp2 + incrementoX2;
+			larg2 = larg2 + incrementoZ;
+			larg3 = larg3 + incrementoZ2;
 		}
 
 		comp = y;
@@ -138,19 +129,40 @@ void Piramide::desenhaR(){
 	for(int z = 0; z < this->camadas; z++){
 		float larg = -this->largura/2;
 		for(int x = 0; x < this->fatias; x++){
-			glBegin(GL_TRIANGLES);
-
 			//Face de Baixo
-				glVertex3f(comp, -altura/2, larg);
-				glVertex3f(comp + incrementoX, -altura/2, larg + incrementoZ);
-				glVertex3f(comp, -altura/2, larg + incrementoZ);			
+			vertices.push_back(vertex(comp, -altura/2, larg,1,0,0));
+			vertices.push_back(vertex(comp + incrementoX, -altura/2, larg + incrementoZ,1,0,0));
+			vertices.push_back(vertex(comp, -altura/2, larg + incrementoZ,1,0,0));			
 
-				glVertex3f(comp, -altura/2, larg);
-				glVertex3f(comp + incrementoX, -altura/2, larg);
-				glVertex3f(comp + incrementoX, -altura/2, larg + incrementoZ);
-				larg = larg + incrementoZ;
-			glEnd();
+			vertices.push_back(vertex(comp, -altura/2, larg,1,0,0));
+			vertices.push_back(vertex(comp + incrementoX, -altura/2, larg,1,0,0));
+			vertices.push_back(vertex(comp + incrementoX, -altura/2, larg + incrementoZ,1,0,0));
+			larg = larg + incrementoZ;
 		}
 		comp = comp + incrementoX;
 	}
+	nVertices = vertices.size();
+	glGenBuffers(1,&vbo);
+	glBindBuffer(GL_ARRAY_BUFFER,vbo);
+	glBufferData(GL_ARRAY_BUFFER,vertices.size()*sizeof(vertex), &vertices[0], GL_STATIC_DRAW);
+}
+
+
+/**
+ * Desenha uma piramide com base rectangular, com as dimensoes definidas no construtor
+ *		
+ */
+
+void Piramide::desenha(){
+	glBindBuffer(GL_ARRAY_BUFFER,vbo);
+	glVertexPointer(3,GL_FLOAT,sizeof(vertex),(void*)offsetof(vertex,vertices));
+	glDrawArrays(GL_TRIANGLES,0,nVertices);
+}
+
+/**
+ * Destrutor da class Piramide.
+ * Destroi o VBO criado, para nao ficar alocada memoria na placa grafica	
+ */
+Piramide::~Piramide(){
+	glDeleteBuffers(1,&vbo);
 }
