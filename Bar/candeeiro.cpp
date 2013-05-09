@@ -164,96 +164,96 @@ void Candeeiro::desenhaA(){
 		
 	//anel a volta
 	//parte Superior
-		vertices.push_back(vertex((comprimento -comprimento*0.2)* cos(graus), -altura/2 + comprimento*0.1, (comprimento -comprimento*0.2) * sin(graus),0,0,0));
-		vertices.push_back(vertex(comprimento * cos(graus + rotacaoF), -altura/2 + comprimento*0.1, comprimento * sin(graus + rotacaoF),0,0,0));
-		vertices.push_back(vertex(comprimento * cos(graus), -altura/2 + comprimento*0.1, comprimento * sin(graus),0,0,0));
+		vertices.push_back(vertex((comprimento -comprimento*0.2)* cos(graus), -altura/2 + comprimento*0.1, (comprimento -comprimento*0.2) * sin(graus), 0,1,0));
+		vertices.push_back(vertex(comprimento * cos(graus + rotacaoF), -altura/2 + comprimento*0.1, comprimento * sin(graus + rotacaoF),0,1,0));
+		vertices.push_back(vertex(comprimento * cos(graus), -altura/2 + comprimento*0.1, comprimento * sin(graus),0,1,0));
 
-		vertices.push_back(vertex((comprimento -comprimento*0.2) * cos(graus), -altura/2 + comprimento*0.1, (comprimento-comprimento*0.2) * sin(graus),0,0,0));
-		vertices.push_back(vertex((comprimento-comprimento*0.2) * cos(graus + rotacaoF), -altura/2+comprimento*0.1, (comprimento-comprimento*0.2) * sin(graus + rotacaoF),0,0,0));
-		vertices.push_back(vertex(comprimento * cos(graus + rotacaoF), -altura/2+comprimento*0.1, comprimento * sin(graus + rotacaoF),0,0,0));
+		vertices.push_back(vertex((comprimento -comprimento*0.2) * cos(graus), -altura/2 + comprimento*0.1, (comprimento-comprimento*0.2) * sin(graus),0,1,0));
+		vertices.push_back(vertex((comprimento-comprimento*0.2) * cos(graus + rotacaoF), -altura/2+comprimento*0.1, (comprimento-comprimento*0.2) * sin(graus + rotacaoF),0,1,0));
+		vertices.push_back(vertex(comprimento * cos(graus + rotacaoF), -altura/2+comprimento*0.1, comprimento * sin(graus + rotacaoF),0,1,0));
 
 	//parte Inferior
-		vertices.push_back(vertex((comprimento -comprimento*0.2)* cos(graus), -altura/2, (comprimento -comprimento*0.2) * sin(graus),0,0,0));
-		vertices.push_back(vertex(comprimento * cos(graus), -altura/2, comprimento * sin(graus),0,0,0));
-		vertices.push_back(vertex(comprimento * cos(graus + rotacaoF), -altura/2, comprimento * sin(graus + rotacaoF),0,0,0));
+		vertices.push_back(vertex((comprimento -comprimento*0.2)* cos(graus), -altura/2, (comprimento -comprimento*0.2) * sin(graus),0,-1,0));
+		vertices.push_back(vertex(comprimento * cos(graus), -altura/2, comprimento * sin(graus),0,-1,0));
+		vertices.push_back(vertex(comprimento * cos(graus + rotacaoF), -altura/2, comprimento * sin(graus + rotacaoF),0,-1,0));
 			
 
-		vertices.push_back(vertex((comprimento -comprimento*0.2) * cos(graus), -altura/2, (comprimento-comprimento*0.2) * sin(graus),0,0,0));
-		vertices.push_back(vertex(comprimento * cos(graus + rotacaoF), -altura/2, comprimento * sin(graus + rotacaoF),0,0,0));
-		vertices.push_back(vertex((comprimento-comprimento*0.2) * cos(graus + rotacaoF), -altura/2, (comprimento-comprimento*0.2) * sin(graus + rotacaoF),0,0,0));		
+		vertices.push_back(vertex((comprimento -comprimento*0.2) * cos(graus), -altura/2, (comprimento-comprimento*0.2) * sin(graus),0,-1,0));
+		vertices.push_back(vertex(comprimento * cos(graus + rotacaoF), -altura/2, comprimento * sin(graus + rotacaoF),0,-1,0));
+		vertices.push_back(vertex((comprimento-comprimento*0.2) * cos(graus + rotacaoF), -altura/2, (comprimento-comprimento*0.2) * sin(graus + rotacaoF),0,-1,0));		
 
 		float incA = (comprimento*0.1)/this->camadas;
 		float cam = -this->altura/2;
 		for(int i = 0; i < this->camadas; i++) {
 			//Parte exterior do anel
-			vertices.push_back(vertex(comprimento * cos(graus), cam, comprimento * sin(graus),0,0,0)); 
-			vertices.push_back(vertex(comprimento * cos(graus), cam + incA, comprimento * sin(graus),0,0,0));
-			vertices.push_back(vertex(comprimento * cos(graus + rotacao), cam + incA, comprimento * sin(graus + rotacao),0,0,0));
+			vertices.push_back(vertex(comprimento * cos(graus), cam, comprimento * sin(graus),cos(graus),0,sin(graus))); 
+			vertices.push_back(vertex(comprimento * cos(graus), cam + incA, comprimento * sin(graus),cos(graus),0,sin(graus)));
+			vertices.push_back(vertex(comprimento * cos(graus + rotacao), cam + incA, comprimento * sin(graus + rotacao),cos(graus+rotacao),0,sin(graus+rotacao)));
 			
-			vertices.push_back(vertex(comprimento * cos(graus), cam , comprimento * sin(graus),0,0,0)); 				
-			vertices.push_back(vertex(comprimento * cos(graus + rotacao), cam +incA, comprimento * sin(graus + rotacao),0,0,0));
-			vertices.push_back(vertex(comprimento * cos(graus + rotacao), cam, comprimento * sin(graus + rotacao),0,0,0));
+			vertices.push_back(vertex(comprimento * cos(graus), cam , comprimento * sin(graus),cos(graus),0,sin(graus))); 				
+			vertices.push_back(vertex(comprimento * cos(graus + rotacao), cam +incA, comprimento * sin(graus + rotacao),cos(graus+rotacao),0,sin(graus+rotacao)));
+			vertices.push_back(vertex(comprimento * cos(graus + rotacao), cam, comprimento * sin(graus + rotacao),cos(graus+rotacao),0,sin(graus+rotacao)));
 			cam = cam + incA;		//Incrementa a altura, para fazer as outras camadas;
 		}
 		incA = (comprimento*0.1)/this->camadas;
 		cam = -this->altura/2;
 		for(int i = 0; i < this->camadas; i++) {
 			//Parte interior do anel
-			vertices.push_back(vertex((comprimento-comprimento*0.2) * cos(graus), cam, (comprimento-comprimento*0.2) * sin(graus),0,0,0)); 
-			vertices.push_back(vertex((comprimento-comprimento*0.2) * cos(graus + rotacao), cam + incA, (comprimento-comprimento*0.2) * sin(graus + rotacao),0,0,0));
-			vertices.push_back(vertex((comprimento-comprimento*0.2) * cos(graus), cam + incA, (comprimento-comprimento*0.2) * sin(graus),0,0,0));
+			vertices.push_back(vertex((comprimento-comprimento*0.2) * cos(graus), cam, (comprimento-comprimento*0.2) * sin(graus),-cos(graus),0,-sin(graus))); 
+			vertices.push_back(vertex((comprimento-comprimento*0.2) * cos(graus + rotacao), cam + incA, (comprimento-comprimento*0.2) * sin(graus + rotacao),-cos(graus+rotacao),0,-sin(graus+rotacao)));
+			vertices.push_back(vertex((comprimento-comprimento*0.2) * cos(graus), cam + incA, (comprimento-comprimento*0.2) * sin(graus),-cos(graus),0,-sin(graus)));
 			
-			vertices.push_back(vertex((comprimento-comprimento*0.2) * cos(graus), cam , (comprimento-comprimento*0.2) * sin(graus),0,0,0)); 
-			vertices.push_back(vertex((comprimento-comprimento*0.2) * cos(graus + rotacao), cam, (comprimento-comprimento*0.2) * sin(graus + rotacao),0,0,0));
-			vertices.push_back(vertex((comprimento-comprimento*0.2) * cos(graus + rotacao), cam +incA, (comprimento-comprimento*0.2) * sin(graus + rotacao),0,0,0));	
+			vertices.push_back(vertex((comprimento-comprimento*0.2) * cos(graus), cam , (comprimento-comprimento*0.2) * sin(graus),-cos(graus),0,-sin(graus))); 
+			vertices.push_back(vertex((comprimento-comprimento*0.2) * cos(graus + rotacao), cam, (comprimento-comprimento*0.2) * sin(graus + rotacao),-cos(graus+rotacao),0,-sin(graus+rotacao)));
+			vertices.push_back(vertex((comprimento-comprimento*0.2) * cos(graus + rotacao), cam +incA, (comprimento-comprimento*0.2) * sin(graus + rotacao),-cos(graus+rotacao),0,-sin(graus+rotacao)));	
 			cam = cam + incA;		//Incrementa a altura, para fazer as outras camadas;
 		}
 		//ANEL Superior
 
 		//anel a volta
 		//parte Superior
-			vertices.push_back(vertex((comprimento/2 -comprimento*0.2)* cos(graus), comprimento*0.1, (comprimento/2 -comprimento*0.2) * sin(graus),0,0,0));
-			vertices.push_back(vertex(comprimento/2 * cos(graus + rotacaoF), comprimento*0.1, comprimento/2 * sin(graus + rotacaoF),0,0,0));
-			vertices.push_back(vertex(comprimento/2 * cos(graus), comprimento*0.1, comprimento/2 * sin(graus),0,0,0));
+			vertices.push_back(vertex((comprimento/2 -comprimento*0.2)* cos(graus), comprimento*0.1, (comprimento/2 -comprimento*0.2) * sin(graus),0,1,0));
+			vertices.push_back(vertex(comprimento/2 * cos(graus + rotacaoF), comprimento*0.1, comprimento/2 * sin(graus + rotacaoF),0,1,0));
+			vertices.push_back(vertex(comprimento/2 * cos(graus), comprimento*0.1, comprimento/2 * sin(graus),0,1,0));
 
-			vertices.push_back(vertex((comprimento/2 -comprimento*0.2) * cos(graus), comprimento*0.1, (comprimento/2-comprimento*0.2) * sin(graus),0,0,0));
-			vertices.push_back(vertex((comprimento/2-comprimento*0.2) * cos(graus + rotacaoF), comprimento*0.1, (comprimento/2-comprimento*0.2) * sin(graus + rotacaoF),0,0,0));
-			vertices.push_back(vertex(comprimento/2 * cos(graus + rotacaoF), comprimento*0.1, comprimento/2 * sin(graus + rotacaoF),0,0,0));
+			vertices.push_back(vertex((comprimento/2 -comprimento*0.2) * cos(graus), comprimento*0.1, (comprimento/2-comprimento*0.2) * sin(graus),0,1,0));
+			vertices.push_back(vertex((comprimento/2-comprimento*0.2) * cos(graus + rotacaoF), comprimento*0.1, (comprimento/2-comprimento*0.2) * sin(graus + rotacaoF),0,1,0));
+			vertices.push_back(vertex(comprimento/2 * cos(graus + rotacaoF), comprimento*0.1, comprimento/2 * sin(graus + rotacaoF),0,1,0));
 
 		//parte Inferior
-			vertices.push_back(vertex((comprimento/2 -comprimento*0.2)* cos(graus), 0, (comprimento/2 -comprimento*0.2) * sin(graus),0,0,0));
-			vertices.push_back(vertex(comprimento/2 * cos(graus), 0, comprimento/2 * sin(graus),0,0,0));
-			vertices.push_back(vertex(comprimento/2 * cos(graus + rotacaoF), 0, comprimento/2 * sin(graus + rotacaoF),0,0,0));
+			vertices.push_back(vertex((comprimento/2 -comprimento*0.2)* cos(graus), 0, (comprimento/2 -comprimento*0.2) * sin(graus),0,-1,0));
+			vertices.push_back(vertex(comprimento/2 * cos(graus), 0, comprimento/2 * sin(graus),0,-1,0));
+			vertices.push_back(vertex(comprimento/2 * cos(graus + rotacaoF), 0, comprimento/2 * sin(graus + rotacaoF),0,-1,0));
 
-			vertices.push_back(vertex((comprimento/2 -comprimento*0.2) * cos(graus), 0, (comprimento/2-comprimento*0.2) * sin(graus),0,0,0));
-			vertices.push_back(vertex(comprimento/2 * cos(graus + rotacaoF), 0, comprimento/2 * sin(graus + rotacaoF),0,0,0));
-			vertices.push_back(vertex((comprimento/2-comprimento*0.2) * cos(graus + rotacaoF), 0, (comprimento/2-comprimento*0.2) * sin(graus + rotacaoF),0,0,0));
+			vertices.push_back(vertex((comprimento/2 -comprimento*0.2) * cos(graus), 0, (comprimento/2-comprimento*0.2) * sin(graus),0,-1,0));
+			vertices.push_back(vertex(comprimento/2 * cos(graus + rotacaoF), 0, comprimento/2 * sin(graus + rotacaoF),0,-1,0));
+			vertices.push_back(vertex((comprimento/2-comprimento*0.2) * cos(graus + rotacaoF), 0, (comprimento/2-comprimento*0.2) * sin(graus + rotacaoF),0,-1,0));
 
 		incA = (comprimento*0.1)/this->camadas;
 		cam = 0;
 		for(int i = 0; i < this->camadas; i++) {
 			//Parte exterior do anel
-			vertices.push_back(vertex(comprimento/2 * cos(graus), cam, comprimento/2 * sin(graus),0,0,0)); 
-			vertices.push_back(vertex(comprimento/2 * cos(graus), cam + incA, comprimento/2 * sin(graus),0,0,0));
-			vertices.push_back(vertex(comprimento/2 * cos(graus + rotacao), cam + incA, comprimento/2 * sin(graus + rotacao),0,0,0));
+			vertices.push_back(vertex(comprimento/2 * cos(graus), cam, comprimento/2 * sin(graus),cos(graus),0,sin(graus))); 
+			vertices.push_back(vertex(comprimento/2 * cos(graus), cam + incA, comprimento/2 * sin(graus),cos(graus),0,sin(graus)));
+			vertices.push_back(vertex(comprimento/2 * cos(graus + rotacao), cam + incA, comprimento/2 * sin(graus + rotacao),cos(graus+rotacao),0,sin(graus+rotacao)));
 			
-			vertices.push_back(vertex(comprimento/2 * cos(graus), cam , comprimento/2 * sin(graus),0,0,0)); 				
-			vertices.push_back(vertex(comprimento/2 * cos(graus + rotacao), cam +incA, comprimento/2 * sin(graus + rotacao),0,0,0));
-			vertices.push_back(vertex(comprimento/2 * cos(graus + rotacao), cam, comprimento/2 * sin(graus + rotacao),0,0,0));
+			vertices.push_back(vertex(comprimento/2 * cos(graus), cam , comprimento/2 * sin(graus),cos(graus),0,sin(graus))); 				
+			vertices.push_back(vertex(comprimento/2 * cos(graus + rotacao), cam +incA, comprimento/2 * sin(graus + rotacao),cos(graus+rotacao),0,sin(graus+rotacao)));
+			vertices.push_back(vertex(comprimento/2 * cos(graus + rotacao), cam, comprimento/2 * sin(graus + rotacao),cos(graus+rotacao),0,sin(graus+rotacao)));
 			cam = cam + incA;		//Incrementa a altura, para fazer as outras camadas;
 		}
 
 		incA = (comprimento*0.1)/this->camadas;
 		cam = 0;
 		for(int i = 0; i < this->camadas; i++) {
-			//Parte exterior do anel
-			vertices.push_back(vertex((comprimento/2-comprimento*0.2) * cos(graus), cam, (comprimento/2-comprimento*0.2) * sin(graus),0,0,0));
-			vertices.push_back(vertex((comprimento/2-comprimento*0.2) * cos(graus + rotacao), cam + incA, (comprimento/2-comprimento*0.2) * sin(graus + rotacao),0,0,0));
-			vertices.push_back(vertex((comprimento/2-comprimento*0.2) * cos(graus), cam + incA, (comprimento/2-comprimento*0.2) * sin(graus),0,0,0));
+			//Parte interior do anel
+			vertices.push_back(vertex((comprimento/2-comprimento*0.2) * cos(graus), cam, (comprimento/2-comprimento*0.2) * sin(graus),-cos(graus),0,-sin(graus)));
+			vertices.push_back(vertex((comprimento/2-comprimento*0.2) * cos(graus + rotacao), cam + incA, (comprimento/2-comprimento*0.2) * sin(graus + rotacao),-cos(graus+rotacao),0,-sin(graus+rotacao)));
+			vertices.push_back(vertex((comprimento/2-comprimento*0.2) * cos(graus), cam + incA, (comprimento/2-comprimento*0.2) * sin(graus),-cos(graus),0,-sin(graus)));
 			
-			vertices.push_back(vertex((comprimento/2-comprimento*0.2) * cos(graus), cam , (comprimento/2-comprimento*0.2) * sin(graus),0,0,0)); 
-			vertices.push_back(vertex((comprimento/2-comprimento*0.2) * cos(graus + rotacao), cam, (comprimento/2-comprimento*0.2) * sin(graus + rotacao),0,0,0));
-			vertices.push_back(vertex((comprimento/2-comprimento*0.2) * cos(graus + rotacao), cam +incA, (comprimento/2-comprimento*0.2) * sin(graus + rotacao),0,0,0));
+			vertices.push_back(vertex((comprimento/2-comprimento*0.2) * cos(graus), cam , (comprimento/2-comprimento*0.2) * sin(graus),-cos(graus),0,-sin(graus))); 
+			vertices.push_back(vertex((comprimento/2-comprimento*0.2) * cos(graus + rotacao), cam, (comprimento/2-comprimento*0.2) * sin(graus + rotacao),-cos(graus+rotacao),0,-sin(graus+rotacao)));
+			vertices.push_back(vertex((comprimento/2-comprimento*0.2) * cos(graus + rotacao), cam +incA, (comprimento/2-comprimento*0.2) * sin(graus + rotacao),-cos(graus+rotacao),0,-sin(graus+rotacao)));
 			cam = cam + incA;		//Incrementa a altura, para fazer as outras camadas;
 		}
 		
@@ -360,5 +360,6 @@ void Candeeiro::desenhaA(){
 
 	 glBindBuffer(GL_ARRAY_BUFFER,vbo);
 	 glVertexPointer(3,GL_FLOAT,sizeof(vertex),(void*)offsetof(vertex,vertices));
+	 glNormalPointer(GL_FLOAT,sizeof(vertex),(void*)offsetof(vertex,normais));
 	 glDrawArrays(GL_TRIANGLES,0,nVertices);
  }

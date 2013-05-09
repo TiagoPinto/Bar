@@ -67,40 +67,40 @@ Piramide::Piramide(float c, float a,float l, float f, float p){
 				z = larg3;
 			}
 			//Face Frontal Triangulo
-			vertices.push_back(vertex(comp, alt, larg,1,0,0));
-			vertices.push_back(vertex(comp + incrementoX, alt, larg,1,0,0));
-			vertices.push_back(vertex(comp2, alt + incrementoY, decrementoL,1,0,0));
+			vertices.push_back(vertex(comp, alt, larg,0,alt,1));
+			vertices.push_back(vertex(comp + incrementoX, alt, larg,0,alt,1));
+			vertices.push_back(vertex(comp2, alt + incrementoY, decrementoL,0,alt+incrementoY,1));
 				
-			vertices.push_back(vertex(comp + incrementoX, alt, larg,1,0,0));
-			vertices.push_back(vertex(comp2 + incrementoX2, alt + incrementoY, decrementoL,1,0,0));
-			vertices.push_back(vertex(comp2, alt + incrementoY, decrementoL,1,0,0)); 
+			vertices.push_back(vertex(comp + incrementoX, alt, larg,0,alt,1));
+			vertices.push_back(vertex(comp2 + incrementoX2, alt + incrementoY, decrementoL,0,alt+incrementoY,1));
+			vertices.push_back(vertex(comp2, alt + incrementoY, decrementoL,0,alt+incrementoY,1)); 
 				
 			//Face Traseira Triangulo
-			vertices.push_back(vertex(comp, alt, -larg,1,0,0));
-			vertices.push_back(vertex(comp2, alt + incrementoY, -decrementoL,1,0,0));
-			vertices.push_back(vertex(comp2 + incrementoX2, alt + incrementoY, -decrementoL,1,0,0));
+			vertices.push_back(vertex(comp, alt, -larg, 0, alt, -1));
+			vertices.push_back(vertex(comp2, alt + incrementoY, -decrementoL, 0, alt+incrementoY, -1));
+			vertices.push_back(vertex(comp2 + incrementoX2, alt + incrementoY, -decrementoL, 0, alt+incrementoY, -1));
 
-			vertices.push_back(vertex(comp, alt, -larg,1,0,0));
-			vertices.push_back(vertex(comp2 + incrementoX2, alt + incrementoY, -decrementoL,1,0,0));
-			vertices.push_back(vertex(comp + incrementoX, alt , -larg,1,0,0));
+			vertices.push_back(vertex(comp, alt, -larg, 0, alt, -1));
+			vertices.push_back(vertex(comp2 + incrementoX2, alt + incrementoY, -decrementoL, 0, alt+incrementoY, -1));
+			vertices.push_back(vertex(comp + incrementoX, alt , -larg, 0, alt, -1));
 
 			//Face Lateral Direita
-			vertices.push_back(vertex(comprimentoL,alt,larg2,1,0,0));
-			vertices.push_back(vertex(decrementoL,alt + incrementoY, larg3,1,0,0));
-			vertices.push_back(vertex(decrementoL, alt + incrementoY,larg3 + incrementoZ2,1,0,0));
+			vertices.push_back(vertex(comprimentoL,alt,larg2, 1, alt, 0));
+			vertices.push_back(vertex(decrementoL,alt + incrementoY, larg3, 1, alt+incrementoY, 0));
+			vertices.push_back(vertex(decrementoL, alt + incrementoY,larg3 + incrementoZ2, 1, alt+incrementoY, 0));
 
-			vertices.push_back(vertex(comprimentoL, alt, larg2,1,0,0));
-			vertices.push_back(vertex(decrementoL, alt + incrementoY, larg3 + incrementoZ2,1,0,0));
-			vertices.push_back(vertex(comprimentoL, alt, larg2 + incrementoZ,1,0,0));
+			vertices.push_back(vertex(comprimentoL, alt, larg2, 1, alt, 0));
+			vertices.push_back(vertex(decrementoL, alt + incrementoY, larg3 + incrementoZ2, 1, alt+incrementoY, 0));
+			vertices.push_back(vertex(comprimentoL, alt, larg2 + incrementoZ, 1, alt, 0));
 
 			//Face Lateral Esquerda
-			vertices.push_back(vertex(-comprimentoL,alt,larg2,1,0,0));
-			vertices.push_back(vertex(-decrementoL, alt + incrementoY, larg3 + incrementoZ2,1,0,0));
-			vertices.push_back(vertex(-decrementoL,alt + incrementoY, larg3,1,0,0));			
+			vertices.push_back(vertex(-comprimentoL,alt,larg2, -1, alt, 0));
+			vertices.push_back(vertex(-decrementoL, alt + incrementoY, larg3 + incrementoZ2, -1, alt+incrementoY, 0));
+			vertices.push_back(vertex(-decrementoL,alt + incrementoY, larg3, -1, alt+incrementoY, 0));			
 
-			vertices.push_back(vertex(-comprimentoL, alt, larg2,1,0,0));
-			vertices.push_back(vertex(-comprimentoL, alt, larg2 + incrementoZ,1,0,0));
-			vertices.push_back(vertex(-decrementoL, alt + incrementoY, larg3 + incrementoZ2,1,0,0));
+			vertices.push_back(vertex(-comprimentoL, alt, larg2, -1, alt, 0));
+			vertices.push_back(vertex(-comprimentoL, alt, larg2 + incrementoZ, -1, alt, 0));
+			vertices.push_back(vertex(-decrementoL, alt + incrementoY, larg3 + incrementoZ2, -1, alt+incrementoY, 0));
 
 			comp = comp + incrementoX;
 			comp2 = comp2 + incrementoX2;
@@ -130,13 +130,13 @@ Piramide::Piramide(float c, float a,float l, float f, float p){
 		float larg = -this->largura/2;
 		for(int x = 0; x < this->fatias; x++){
 			//Face de Baixo
-			vertices.push_back(vertex(comp, -altura/2, larg,1,0,0));
-			vertices.push_back(vertex(comp + incrementoX, -altura/2, larg + incrementoZ,1,0,0));
-			vertices.push_back(vertex(comp, -altura/2, larg + incrementoZ,1,0,0));			
+			vertices.push_back(vertex(comp, -altura/2, larg,0,-1,0));
+			vertices.push_back(vertex(comp + incrementoX, -altura/2, larg + incrementoZ,0,-1,0));
+			vertices.push_back(vertex(comp, -altura/2, larg + incrementoZ,0,-1,0));			
 
-			vertices.push_back(vertex(comp, -altura/2, larg,1,0,0));
-			vertices.push_back(vertex(comp + incrementoX, -altura/2, larg,1,0,0));
-			vertices.push_back(vertex(comp + incrementoX, -altura/2, larg + incrementoZ,1,0,0));
+			vertices.push_back(vertex(comp, -altura/2, larg,0,-1,0));
+			vertices.push_back(vertex(comp + incrementoX, -altura/2, larg,0,-1,0));
+			vertices.push_back(vertex(comp + incrementoX, -altura/2, larg + incrementoZ,0,-1,0));
 			larg = larg + incrementoZ;
 		}
 		comp = comp + incrementoX;
@@ -156,6 +156,7 @@ Piramide::Piramide(float c, float a,float l, float f, float p){
 void Piramide::desenha(){
 	glBindBuffer(GL_ARRAY_BUFFER,vbo);
 	glVertexPointer(3,GL_FLOAT,sizeof(vertex),(void*)offsetof(vertex,vertices));
+	glNormalPointer(GL_FLOAT,sizeof(vertex),(void*)offsetof(vertex,normais));
 	glDrawArrays(GL_TRIANGLES,0,nVertices);
 }
 

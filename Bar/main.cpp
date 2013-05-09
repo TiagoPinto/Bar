@@ -3,17 +3,16 @@
 
 Bar *bar = new Bar(50, 60, 6, 8, 2);
 Plano *plano1, *plano2, *plano3;
-Cubo *cubo;/*
+Cubo *cubo;
 Cilindro *cilindro;
 Esfera *esfera;
 Torus *torus;
 Piramide *piramide;
 Mesa *mesa;
-Cadeira *cadeira = new Cadeira(2.0f, 1.0f, 1.5f, 0.1f, 5.0f, 5.0f);
+Cadeira *cadeira;
 Copo *copo, *caneca;
-
 Candeeiro *candeeiro, *candelabro;
-*/
+
 
 void changeSize(int w, int h) {
 
@@ -44,13 +43,13 @@ void changeSize(int w, int h) {
 
 void renderScene(void) {
 
-	float pos[4] = {000.0, 000.0, 100.0, 0.0};
+	float pos[4] = {0.0, 0.0, 1.0, 0.0};
 	GLfloat whiteSpecularLight[] = {0.8, 0.8, 0.8}; 
-	GLfloat blackAmbientLight[] = {0.1, 0.1, 0.1};
-	GLfloat whiteDiffuseLight[] = {0.8, 0.8, 0.8};
+	GLfloat blackAmbientLight[] = {0.2, 0.2, 0.2};
+	GLfloat whiteDiffuseLight[] = {1.0, 1.0, 1.0};
 	// clear buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, whiteSpecularLight);
+	//glLightfv(GL_LIGHT0, GL_SPECULAR, whiteSpecularLight);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, blackAmbientLight);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, whiteDiffuseLight);
 
@@ -88,7 +87,7 @@ void renderScene(void) {
 		case 12: plano2->desenha(); break;
 		case 13: plano3->desenha(); break;
 		case 14: cubo->desenha(); break;
-		/*case 15: cilindro->desenha(); break;
+		case 15: cilindro->desenha(); break;
 		case 16: esfera->desenha(); break;
 		case 17: torus->desenha(); break;
 		case 18: piramide->desenha(); break;
@@ -103,7 +102,7 @@ void renderScene(void) {
 		case 27: candelabro->desenhaB(); break;
 		case 28: copo->desenha(); break;
 		case 29: caneca->desenha(); break;
-		case 30: copo->desenhaC(); break;
+		/*case 30: copo->desenhaC(); break;
 		case 31: copo->desenhaD(); break;*/
 
 	}
@@ -186,20 +185,21 @@ int main(int argc, char **argv) {
 
 //init
 	converte();
-	/*esfera = new Esfera(1.0f,20.0f,20.0f,1);
+	esfera = new Esfera(1.0f,20.0f,20.0f,1);
 	mesa = new Mesa(3.0f,2.0f,1.0f, 0.2f, 20.0f, 4.0f);
-	cilindro = new Cilindro(2.0f,1.0f,70.0f,3.0f,1);*/
+	cadeira = new Cadeira(2.0f, 1.0f, 1.5f, 0.1f, 5.0f, 5.0f);
+	cilindro = new Cilindro(5.0f,1.0f,50.0f,3.0f,1);
 	cubo = new Cubo(2.0f,1.0f,1.5f,4.0f,2.0f);
 	plano1 = new Plano(2.0f,1.0f,1.0f,3.0f,1);
 	plano2 = new Plano(2.0f,1.0f,1.0f,3.0f,2);
 	plano3 = new Plano(2.0f,1.0f,1.0f,3.0f,3);
-	/*torus = new Torus(1.0f,0.5f,6.0f,3.0f,1);
+	torus = new Torus(1.0f,0.5f,6.0f,3.0f,1);
 	piramide = new Piramide(2.0f, 2.0f, 2.0f, 3.0f, 2.0f);
 	candeeiro = new Candeeiro(2.0f,3.0f,14.0f,4.0f);
 	candelabro = new Candeeiro(2.0f,3.0f,14.0f,4.0f);
 	candelabro->preparaB();
-	copo = new Copo(0.8f,2.0f,0.1f,50.0f,2.0f,1);
-	caneca = new Copo(0.8f,2.0f,0.1f,20.0f,3.0f,2);*/
+	copo = new Copo(0.8f,2.0f,0.1f,50.0f,5.0f,1);
+	caneca = new Copo(0.8f,2.0f,0.1f,20.0f,3.0f,2);
 
 	// inicialização da luz
 	glEnable(GL_LIGHTING);

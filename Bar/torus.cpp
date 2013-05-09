@@ -46,21 +46,21 @@ Torus::Torus(float ri, float re, float f, float c, int t){
 		for(int a = 0; a < camadas; a++){
 			float grausR = 0.0f;
 			for(int l = 0; l < fatias; l++){
-				vertices.push_back(vertex((raioI + raioE + somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR),1,0,0)); 
-				vertices.push_back(vertex((raioI + raioE + somatorio2)  * cos(grausR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR),1,0,0));
-				vertices.push_back(vertex((raioI + raioE + somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR + incR),1,0,0));
+				vertices.push_back(vertex((raioI + raioE + somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR),cos(grausR),cos(grausA),sin(grausR))); 
+				vertices.push_back(vertex((raioI + raioE + somatorio2)  * cos(grausR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR),cos(grausR),cos(grausA+incA),sin(grausR)));
+				vertices.push_back(vertex((raioI + raioE + somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR + incR),cos(grausR+incR),cos(grausA+incA),sin(grausR+incR)));
 
-				vertices.push_back(vertex((raioI + raioE + somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR),1,0,0)); 
-				vertices.push_back(vertex((raioI + raioE + somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR + incR),1,0,0));
-				vertices.push_back(vertex((raioI + raioE + somatorio)  * cos(grausR + incR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR + incR),1,0,0));
+				vertices.push_back(vertex((raioI + raioE + somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR),cos(grausR),cos(grausA),sin(grausR))); 
+				vertices.push_back(vertex((raioI + raioE + somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR + incR),cos(grausR+incR),cos(grausA+incA),sin(grausR+incR)));
+				vertices.push_back(vertex((raioI + raioE + somatorio)  * cos(grausR + incR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR + incR),cos(grausR+incR),cos(grausA),sin(grausR+incR)));
 			
-				vertices.push_back(vertex((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR),1,0,0));
-				vertices.push_back(vertex((raioI + raioE - somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR),1,0,0));
-				vertices.push_back(vertex((raioI + raioE - somatorio2)  * cos(grausR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR),1,0,0));
+				vertices.push_back(vertex((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR),-cos(grausR),cos(grausA),-sin(grausR)));
+				vertices.push_back(vertex((raioI + raioE - somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR),-cos(grausR+incR),cos(grausA+incA),-sin(grausR+incR)));
+				vertices.push_back(vertex((raioI + raioE - somatorio2)  * cos(grausR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR),-cos(grausR),cos(grausA+incA),-sin(grausR)));
 			
-				vertices.push_back(vertex((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR),1,0,0)); 
-				vertices.push_back(vertex((raioI + raioE - somatorio) * cos(grausR + incR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR + incR),1,0,0));
-				vertices.push_back(vertex((raioI + raioE - somatorio2)  * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR),1,0,0));
+				vertices.push_back(vertex((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR),-cos(grausR),cos(grausA),-sin(grausR))); 
+				vertices.push_back(vertex((raioI + raioE - somatorio) * cos(grausR + incR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR + incR),-cos(grausR+incR),cos(grausA),-sin(grausR+incR)));
+				vertices.push_back(vertex((raioI + raioE - somatorio2)  * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR),-cos(grausR+incR),cos(grausA+incA),-sin(grausR+incR)));
 				grausR = grausR + incR;
 			}
 			grausA = grausA + incA;
@@ -81,21 +81,21 @@ Torus::Torus(float ri, float re, float f, float c, int t){
 		for(int a = 0; a < camadas; a++){
 			float grausR = 0.0f;
 			for(int l = 0; l < fatias; l++){
-				vertices.push_back(vertex((raioI + raioE + somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR),1,0,0)); 
-				vertices.push_back(vertex((raioI + raioE + somatorio2)  * cos(grausR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR),1,0,0));
-				vertices.push_back(vertex((raioI + raioE + somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR + incR),1,0,0));
+				vertices.push_back(vertex((raioI + raioE + somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR),cos(grausR),cos(grausA),sin(grausR))); 
+				vertices.push_back(vertex((raioI + raioE + somatorio2)  * cos(grausR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR),cos(grausR),cos(grausA+incA),sin(grausR)));
+				vertices.push_back(vertex((raioI + raioE + somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR + incR),cos(grausR+incR),cos(grausA+incA),sin(grausR+incR)));
 
-				vertices.push_back(vertex((raioI + raioE + somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR),1,0,0)); 
-				vertices.push_back(vertex((raioI + raioE + somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR + incR),1,0,0));
-				vertices.push_back(vertex((raioI + raioE + somatorio)  * cos(grausR + incR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR + incR),1,0,0));
+				vertices.push_back(vertex((raioI + raioE + somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR),cos(grausR),cos(grausA),sin(grausR))); 
+				vertices.push_back(vertex((raioI + raioE + somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE + somatorio2) * sin(grausR + incR),cos(grausR+incR),cos(grausA+incA),sin(grausR+incR)));
+				vertices.push_back(vertex((raioI + raioE + somatorio)  * cos(grausR + incR), raioE * cos(grausA), (raioI + raioE + somatorio) * sin(grausR + incR),cos(grausR+incR),cos(grausA),sin(grausR+incR)));
 			
-				vertices.push_back(vertex((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR),1,0,0));
-				vertices.push_back(vertex((raioI + raioE - somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR),1,0,0));
-				vertices.push_back(vertex((raioI + raioE - somatorio2)  * cos(grausR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR),1,0,0));
+				vertices.push_back(vertex((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR),cos(grausR),cos(grausA),sin(grausR)));
+				vertices.push_back(vertex((raioI + raioE - somatorio2) * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR),cos(grausR+incR),cos(grausA+incA),sin(grausR+incR)));
+				vertices.push_back(vertex((raioI + raioE - somatorio2)  * cos(grausR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR),cos(grausR),cos(grausA+incA),sin(grausR)));
 			
-				vertices.push_back(vertex((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR),1,0,0)); 
-				vertices.push_back(vertex((raioI + raioE - somatorio) * cos(grausR + incR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR + incR),1,0,0));
-				vertices.push_back(vertex((raioI + raioE - somatorio2)  * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR),1,0,0));
+				vertices.push_back(vertex((raioI + raioE - somatorio) * cos(grausR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR),cos(grausR),cos(grausA),sin(grausR))); 
+				vertices.push_back(vertex((raioI + raioE - somatorio) * cos(grausR + incR), raioE * cos(grausA), (raioI + raioE - somatorio) * sin(grausR + incR),cos(grausR+incR),cos(grausA),sin(grausR+incR)));
+				vertices.push_back(vertex((raioI + raioE - somatorio2)  * cos(grausR + incR), raioE * cos(grausA + incA), (raioI + raioE - somatorio2) * sin(grausR + incR),cos(grausR+incR),cos(grausA+incA),sin(grausR+incR)));
 				grausR = grausR + incR;
 			}
 			grausA = grausA + incA;
@@ -113,6 +113,7 @@ Torus::Torus(float ri, float re, float f, float c, int t){
 void Torus::desenha(){
 	glBindBuffer(GL_ARRAY_BUFFER,vbo);
 	glVertexPointer(3,GL_FLOAT,sizeof(vertex),(void*)offsetof(vertex,vertices));
+	glNormalPointer(GL_FLOAT,sizeof(vertex),(void*)offsetof(vertex,normais));
 	glDrawArrays(GL_TRIANGLES,0,nVertices);
 }
 
