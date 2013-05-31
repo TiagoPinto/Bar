@@ -1,0 +1,39 @@
+#include "plano.h"
+#include "cubo.h"
+#include "cilindro.h"
+#include "esfera.h"
+#include "torus.h"
+#include "piramide.h"
+#include "MesaStandart.h"
+#include "MesaRedonda.h"
+#include "MesaRectangular.h"
+#include "cadeiraComprido.h"
+#include "cadeiraStandart.h"
+#include "CadeiraRei.h"
+#include "CadeiraBanco.h"
+#include "copo.h"
+#include "Candeeirocandelabro.h"
+#include "CandeeiroParede.h"
+#include "CandeeiroMesa.h"
+#include "bar.h"
+#include "Anel.h"
+
+Bar *bar;
+Plano *plano1, *plano2, *plano3;
+Cubo *cubo;
+Cilindro *cilindro;
+Esfera *esfera;
+Torus *torus;
+Piramide *piramide;
+MesaRectangular *mesarectangular;
+MesaRedonda *mesaredonda;
+MesaStandart *mesastandart;
+CadeiraComprido *cadeira;
+CadeiraStandart *cadeiraStandart;
+CadeiraRei *cadeiraRei;
+CadeiraBanco *cadeiraBanco;
+Copo *copo, *caneca;
+CandeeiroParede *candeeiroParede;
+CandeeiroCandelabro *candelabro;
+CandeeiroMesa *candeeiroMesa;
+Anel *anel;

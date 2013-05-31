@@ -1,30 +1,20 @@
-#include "plano.h"
-#include "cubo.h"
-#include "cilindro.h"
-#include "esfera.h"
-#include "torus.h"
-#include "piramide.h"
-#include "mesa.h"
-#include "cadeira.h"
-#include "copo.h"
-#include "candeeiro.h"
-#include "bar.h"
-
+#include "Camara.h"
 //angulos de rotacao Sobre a propria figura
 float angX= 0.0f, angY = 0.0f;
 //angulos de rotacao da camara
-float alfa = 0.0f, beta = 0.0f, raio = 10.0f;
+float alfa = 0.0f, beta = 0.0f, raio = 6.0f;
 float camX, camY, camZ;
 float x = 0.0f;
 float y = 0.0f;
 float speed = 2.0f;
+float camCamara = 0;
 //Cores Iniciais
 float red = 1.0f;
-float green = 0.5f;
-float blue = 0.0f;
+float green = 1.0f;
+float blue = 1.0f;
 //Opcao do menu para desenhar os objectos
 int objecto = 0;
-
+CCamera camara;
 //Funcao da Camara em coordenadas polares
 void converte() {
 
@@ -32,7 +22,6 @@ void converte() {
 	camY = raio * sin(beta);
 	camZ = raio * cos(beta) * cos(alfa);
 }
-
 
 //opcoes usadas no menuprincipal
 void  menuPrincipal(int operador){
@@ -43,9 +32,20 @@ void  menuPrincipal(int operador){
 		angX= 0.0f, angY = 0.0f;
 		alfa = 0.0f; beta = 0.0f; raio = 6.0f;
 		converte();
-		x = 0.0f, y = 0.0f, speed = 3.0f; break;
-		case 3: red = 1.0f, green = 0.5f, blue = 0.0f; break;
+		x = 0.0f, y = 0.0f, speed = 3.0f; 
+		camara.m_vPosition.x = 0.0f;
+		camara.m_vPosition.y = 0.0f;
+		camara.m_vPosition.z = 6.0f; 
+		camara.m_vView.x = 0.0f;		
+		camara.m_vView.y = 0.0f;		
+		camara.m_vView.z = 0.0f;
+		camara.m_vUpVector.x = 0.0f;
+		camara.m_vUpVector.y = 1.0f;
+		camara.m_vUpVector.z = 0.0f;
+		break;
+		case 3: red = 1.0f, green = 1.0f, blue = 1.0f; break;
 	}
+	glutPostRedisplay();
 }
 
 //opcoes do sub-menu do estilo
@@ -57,14 +57,18 @@ void  menuEstilo(int operador){
 		case 4: glFrontFace(GL_CCW); break;
 		case 5: glFrontFace(GL_CW); break;
 	}
+	glutPostRedisplay();
 }
 
 //opcoes do sub-menu da camara
 void menuCamara(int operador){
 	switch(operador){
-		case 6: ; break;
-		case 7: ; break;
+		case 6: camCamara=0; 
+			break;
+		case 7: camCamara=1; 
+			break;
 	}
+	glutPostRedisplay();
 }
 
 //opcoes do sub-menu das cores
@@ -95,7 +99,6 @@ void menuObjecto(int operador)	{
 
 // escrever função de processamento do menu
 void criarMenu(){
-	glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 	int principal, estilo, camara, cor, objecto, plano, mesa, cadeira, candeeiro, copo;
 
 	estilo = glutCreateMenu(menuEstilo);
@@ -134,13 +137,14 @@ void criarMenu(){
 	candeeiro = glutCreateMenu(menuObjecto);
 		glutAddMenuEntry("Parede",26);
 		glutAddMenuEntry("Candelabro",27);
+		glutAddMenuEntry("Mesa",30);
 
 
 	copo = glutCreateMenu(menuObjecto);
 		glutAddMenuEntry("Standard", 28);
 		glutAddMenuEntry("Caneca", 29);
-		glutAddMenuEntry("Calice", 30);
-		glutAddMenuEntry("Corno", 31);
+		//glutAddMenuEntry("Calice", 30);
+		//glutAddMenuEntry("Corno", 31);
 
 	objecto = glutCreateMenu(menuObjecto);
 		glutAddSubMenu("Planos", plano);

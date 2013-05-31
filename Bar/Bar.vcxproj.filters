@@ -30,12 +30,6 @@
     <ClCompile Include="esfera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mesa.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cadeira.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="copo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -45,10 +39,46 @@
     <ClCompile Include="bar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="candeeiro.cpp">
+    <ClCompile Include="piramide.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="piramide.cpp">
+    <ClCompile Include="texturas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cadeiraStandart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CadeiraRei.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CadeiraBanco.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CadeiraComprido.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MesaRedonda.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MesaRectangular.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MesaStandart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CandeeiroParede.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CandeeiroCandelabro.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Anel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CandeeiroMesa.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camara.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,12 +95,6 @@
     <ClInclude Include="esfera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mesa.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cadeira.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="copo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -80,19 +104,58 @@
     <ClInclude Include="bar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="candeeiro.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="piramide.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vbo.h">
+    <ClInclude Include="includes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="includes.h">
+    <ClInclude Include="texturas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cadeiraStandart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CadeiraRei.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CadeiraBanco.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CadeiraComprido.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MesaRedonda.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MesaRectangular.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MesaStandart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CandeeiroParede.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CandeeiroCandelabro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Anel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CandeeiroMesa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objectos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="recurso.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camara.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,12 +5,13 @@ class Cubo{
 		float l;	//largura
 		float f;	//camadas
 		float p;	//fatias
+		GLuint textura;
 		GLuint vbo;
-		int nVertices;	//Numero de Vertices 
+		int nVertices;
 
 	public:
 		Cubo();
-		Cubo(float c, float a, float l, float f, float p);
+		Cubo(float c, float a, float l, float f, float p, GLuint idTextura);
 		void desenha();
 		~Cubo();
 

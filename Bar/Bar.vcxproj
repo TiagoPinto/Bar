@@ -59,7 +59,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;DevIL.lib;ILU.lib;ILUT.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -81,34 +81,55 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Anel.cpp" />
     <ClCompile Include="bar.cpp" />
-    <ClCompile Include="cadeira.cpp" />
-    <ClCompile Include="candeeiro.cpp" />
+    <ClCompile Include="CadeiraComprido.cpp" />
+    <ClCompile Include="CadeiraBanco.cpp" />
+    <ClCompile Include="CadeiraRei.cpp" />
+    <ClCompile Include="cadeiraStandart.cpp" />
+    <ClCompile Include="Camara.cpp" />
+    <ClCompile Include="CandeeiroCandelabro.cpp" />
+    <ClCompile Include="CandeeiroMesa.cpp" />
+    <ClCompile Include="CandeeiroParede.cpp" />
     <ClCompile Include="cilindro.cpp" />
     <ClCompile Include="copo.cpp" />
     <ClCompile Include="cubo.cpp" />
     <ClCompile Include="esfera.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="mesa.cpp" />
+    <ClCompile Include="MesaStandart.cpp" />
+    <ClCompile Include="MesaRectangular.cpp" />
+    <ClCompile Include="MesaRedonda.cpp" />
     <ClCompile Include="piramide.cpp" />
     <ClCompile Include="plano.cpp" />
+    <ClCompile Include="texturas.cpp" />
     <ClCompile Include="torus.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Anel.h" />
     <ClInclude Include="bar.h" />
-    <ClInclude Include="cadeira.h" />
-    <ClInclude Include="candeeiro.h" />
+    <ClInclude Include="CadeiraComprido.h" />
+    <ClInclude Include="CadeiraBanco.h" />
+    <ClInclude Include="CadeiraRei.h" />
+    <ClInclude Include="cadeiraStandart.h" />
+    <ClInclude Include="Camara.h" />
+    <ClInclude Include="CandeeiroCandelabro.h" />
+    <ClInclude Include="CandeeiroMesa.h" />
+    <ClInclude Include="CandeeiroParede.h" />
     <ClInclude Include="cilindro.h" />
     <ClInclude Include="copo.h" />
     <ClInclude Include="cubo.h" />
     <ClInclude Include="esfera.h" />
     <ClInclude Include="includes.h" />
     <ClInclude Include="menu.h" />
-    <ClInclude Include="mesa.h" />
+    <ClInclude Include="MesaRectangular.h" />
+    <ClInclude Include="MesaRedonda.h" />
+    <ClInclude Include="MesaStandart.h" />
+    <ClInclude Include="objectos.h" />
     <ClInclude Include="piramide.h" />
     <ClInclude Include="plano.h" />
+    <ClInclude Include="recurso.h" />
+    <ClInclude Include="texturas.h" />
     <ClInclude Include="torus.h" />
-    <ClInclude Include="vbo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
