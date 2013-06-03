@@ -17,6 +17,8 @@
 #include "CandeeiroMesa.h"
 #include "bar.h"
 #include "Anel.h"
+#include "balcao.h"
+#include "Luz.h"
 
 Bar *bar;
 Plano *plano1, *plano2, *plano3;
@@ -37,3 +39,4 @@ CandeeiroParede *candeeiroParede;
 CandeeiroCandelabro *candelabro;
 CandeeiroMesa *candeeiroMesa;
 Anel *anel;
+Balcao *balcao;

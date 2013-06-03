@@ -4,6 +4,7 @@ class Cubo;
 class Plano;
 class Piramide;
 class Cilindro;
+class Luz;
 class CandeeiroParede{
 	private:
 		float comprimento;
@@ -20,6 +21,7 @@ class CandeeiroParede{
 		Plano *caixa[9];
 		Cilindro *vela;
 		Piramide *topo;
+		Luz *luz;
 
 	public:
 		CandeeiroParede();

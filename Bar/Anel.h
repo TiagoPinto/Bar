@@ -5,13 +5,14 @@ private:
 	float altura;
 	float fatias;
 	float camadas;
+	int tipo;
 	GLuint textura;
 	GLuint vbo;
 	int nVertices;
 
 public:
 	Anel();
-	Anel(float ri, float re, float altura, float f, float c, GLuint idtex);
+	Anel(float ri, float re, float altura, float f, float c,int tipo, GLuint idtex);
 	void desenha();
 	~Anel();
 };

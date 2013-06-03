@@ -3,6 +3,7 @@
 #include "cilindro.h"
 #include "cubo.h"
 #include "Anel.h"
+#include "Luz.h"
 /**
  * Construtor da class Cilindro.
  * Inicializa as variaveis de comprimento, altura, fatias e camadas do cilindro.
@@ -36,14 +37,15 @@ CandeeiroCandelabro::CandeeiroCandelabro(float c, float a, float f, float p, GLu
 	this->texturaFerro = idferro;
 	this->texturaVela = idvela;
 	this->texturaMadeira = idMadeira;
+	this->luz = new Luz(0,this->altura,0);
 }
 
  void CandeeiroCandelabro::preparaB(){
 	 float graus = 0;
 	//Anel Superior
-	anel[0] = new Anel(comprimento/2-comprimento*0.2, comprimento*0.2, comprimento*0.1, fatias, camadas, texturaMadeira);
+	anel[0] = new Anel(comprimento/2-comprimento*0.2, comprimento*0.2, comprimento*0.1, fatias, camadas,1, texturaMadeira);
 	//Anel Inferior
-	anel[1] = new Anel(comprimento-comprimento*0.2, comprimento*0.2, comprimento*0.1, fatias, camadas, texturaMadeira);
+	anel[1] = new Anel(comprimento-comprimento*0.2, comprimento*0.2, comprimento*0.1, fatias, camadas,1, texturaMadeira);
 
 	segurador = new Cilindro(comprimento*0.1, altura, fatias*2, camadas,1, texturaFerro);
 

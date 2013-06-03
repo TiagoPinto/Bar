@@ -37,8 +37,8 @@ void renderScene(void) {
 	// clear buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//glLightfv(GL_LIGHT0, GL_SPECULAR, whiteSpecularLight);
-	glLightfv(GL_LIGHT0, GL_AMBIENT, blackAmbientLight);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, whiteDiffuseLight);
+	//glLightfv(GL_LIGHT0, GL_AMBIENT, blackAmbientLight);
+	//glLightfv(GL_LIGHT0, GL_DIFFUSE, whiteDiffuseLight);
 
 	// set the camera
 	glLoadIdentity();
@@ -58,6 +58,7 @@ void renderScene(void) {
 	glColor3f(red, green, blue);
 	switch(objecto) {
 		case 100: bar->desenha(); break;
+			//balcao->desenha(); break;
 		case 11: plano1->desenha(); break;
 		case 12: plano2->desenha(); break;
 		case 13: plano3->desenha(); break;
@@ -214,6 +215,7 @@ int main(int argc, char **argv) {
 	GLuint madeira2 = getTextura("texturas/madeira3.jpg");
 	GLuint porta = getTextura("texturas/porta.jpg");
 	GLuint vidro = getTextura("texturas/vidro.jpg");
+	GLuint metal = getTextura("texturas/metal.jpg");
 	esfera = new Esfera(1.0f,20.0f,20.0f,1, globo);
 	mesastandart = new MesaStandart(3.0f,2.0f,1.0f, 0.2f, 20.0f, 4.0f, madeira2);
 	mesaredonda = new MesaRedonda(3.0f,2.0f,1.0f, 0.2f, 20.0f, 4.0f, madeira2);
@@ -231,18 +233,20 @@ int main(int argc, char **argv) {
 	piramide = new Piramide(2.0f, 2.0f, 2.0f, 2.0f, 2.0f, globo);
 	candeeiroParede = new CandeeiroParede(2.0f,3.0f,14.0f,4.0f,madeira,vidro,vela);
 	candelabro = new CandeeiroCandelabro(2.0f,3.0f,14.0f,4.0f, ferro, vela, madeira);
-	candeeiroMesa = new CandeeiroMesa(1,2,10,10,ferro, vela);
+	candeeiroMesa = new CandeeiroMesa(1,2,20,10,ferro, vela);
 	candelabro->preparaB();
 	copo = new Copo(0.8f,2.0f,0.1f,30.0f,5.0f,1, vidro);
-	caneca = new Copo(0.8f,2.0f,0.1f,20.0f,3.0f,2, vidro);
-	bar = new Bar(15, 25, 2, 15, 5);
+	caneca = new Copo(0.8f,2.0f,0.1f,20.0f,3.0f,2, metal);
+	bar = new Bar(15, 15, 2, 15, 5);
+	anel = new Anel(1,1,0.2,10,1,1,vidro);
+	balcao = new Balcao(1, 3, 1, 10, 10, madeira, vidro, ferro);
 
 	// inicialização da luz
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 
 	glEnable(GL_COLOR_MATERIAL);
-
+	//initLuz();
 // entrar no ciclo do GLUT 
 	glutMainLoop();
 	

@@ -81,6 +81,12 @@
     <ClCompile Include="Camara.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="balcao.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="luz.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="plano.h">
@@ -156,6 +162,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Camara.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="balcao.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Luz.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

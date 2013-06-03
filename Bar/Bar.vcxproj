@@ -82,6 +82,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Anel.cpp" />
+    <ClCompile Include="balcao.cpp" />
     <ClCompile Include="bar.cpp" />
     <ClCompile Include="CadeiraComprido.cpp" />
     <ClCompile Include="CadeiraBanco.cpp" />
@@ -95,6 +96,7 @@
     <ClCompile Include="copo.cpp" />
     <ClCompile Include="cubo.cpp" />
     <ClCompile Include="esfera.cpp" />
+    <ClCompile Include="luz.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MesaStandart.cpp" />
     <ClCompile Include="MesaRectangular.cpp" />
@@ -106,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Anel.h" />
+    <ClInclude Include="balcao.h" />
     <ClInclude Include="bar.h" />
     <ClInclude Include="CadeiraComprido.h" />
     <ClInclude Include="CadeiraBanco.h" />
@@ -120,6 +123,7 @@
     <ClInclude Include="cubo.h" />
     <ClInclude Include="esfera.h" />
     <ClInclude Include="includes.h" />
+    <ClInclude Include="Luz.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="MesaRectangular.h" />
     <ClInclude Include="MesaRedonda.h" />

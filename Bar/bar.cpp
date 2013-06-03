@@ -2,6 +2,7 @@
 #include "bar.h"
 #include "plano.h"
 #include "cubo.h"
+#include "copo.h"
 #include "CadeiraBanco.h"
 #include "CadeiraComprido.h"
 #include "CadeiraRei.h"
@@ -12,6 +13,7 @@
 #include "MesaRectangular.h"
 #include "MesaRedonda.h"
 #include "MesaStandart.h"
+#include "balcao.h"
 
 /**
  * Construtor da class Bar.
@@ -59,9 +61,16 @@ Bar::Bar(float c, float l, float a, float f, float p){
 	GLuint ferro = getTextura("texturas/ferro.jpg");
 	GLuint vela = getTextura("texturas/vela.jpg");
 	GLuint madeira = getTextura("texturas/madeira.jpg");
-	GLuint madeiraR = getTextura("texturas/madeira5.jpg");
+	GLuint madeira5 = getTextura("texturas/madeirinha.jpg");
+	GLuint madeira4 = getTextura("texturas/madeira7.jpg");
+	GLuint mobilia = getTextura("texturas/mobilia.jpg");
 	GLuint porta = getTextura("texturas/porta.jpg");
 	GLuint vidro = getTextura("texturas/vidro.jpg");
+	GLuint tapete = getTextura("texturas/tapete2.jpg");
+	GLuint espadarei = getTextura("texturas/espadaRei.jpg");
+	GLuint metal = getTextura("texturas/metal.jpg");
+	GLuint ouro = getTextura("texturas/ouro.jpg");
+	//GLuint aranha = getTextura("texturas/aranhico.jpg");
 	/*Desenha o Chao do bar */
 
 	chaoP = new Plano(comp, 2*larg / 3, this->f, this->p,2, texchao);
@@ -88,16 +97,30 @@ Bar::Bar(float c, float l, float a, float f, float p){
 	candeeiroTecto[1] = new CandeeiroCandelabro(0.2,alt/4, f, p, ferro, vela, madeira);
 	candeeiroTecto[1]->preparaB();
 	candeeiroParede[0] = new CandeeiroParede(0.09f,0.15f,f,p, madeira, vidro, vela);
+	candeeiroMesa[0] = new CandeeiroMesa(0.05,0.2,f,p,ferro, vela);
 
 	/*MESAS*/
-	mesaRedonda[0] = new MesaRedonda(0.5,0.5,alt/4, 0.05, f, p, madeira);
-	mesaRectangular[0] = new MesaRectangular(comp/3,0.5, alt/4,0.05, f, p, madeira);
+	mesaRedonda[0] = new MesaRedonda(0.7,2.0,alt/4, 0.04, f, p, mobilia);
+	mesaRectangular[0] = new MesaRectangular(comp/3,0.5, alt/4,0.05, f, p, mobilia);
 
-	/*BANCO*/
-	cadeiracomprido[0] = new CadeiraComprido(comp/7, 0.17, alt/4, 0.01, f, p, madeira);
+	/*CADEIRA*/
+	cadeiracomprido[0] = new CadeiraComprido(comp/7, 0.17, alt/4, 0.01, f, p, mobilia);
+	cadeiraRei = new CadeiraRei(0.35f, 0.3f, alt/2, 0.05f, f, p, mobilia, ferro);
+	banco = new CadeiraBanco(0.1, 0.09, alt/7, 0.01, f, p, madeira5);
+	cadeiraStandart = new CadeiraStandart(0.20f, 0.18f, alt/3, 0.02f, f, p, mobilia);
+
+	/* Balcao */
+	balcao = new Balcao(0.3f,comp/5, alt/3, f*2, c, madeira4, vidro, metal);
 
 	/*ENFEITES*/
 	enfeites[0] = new Plano(1.5f, 2*alt/3-0.05f, 1, 1, 1, porta);
+	enfeites[1] = new Plano((6*comp/8)/2, larg/6, f, c, 2, tapete);
+	enfeites[2] = new Plano(0.1f, 0.5f, 1, 1, 1, espadarei);
+	//enfeites[3] = new Plano(1.5, alt/3, 1, 1, 1, aranha);
+
+	/*COPOS*/
+	caneca = new Copo(0.03, 0.06, 0.001, f, c, 2, metal);
+	copo = new Copo(0.02, 0.04, 0.001, f, c, 1, ouro);
 }
 /**
  * Desenha as 4 paredes, o chão e o tecto.
@@ -115,7 +138,7 @@ void Bar::desenha(){
 	glPopMatrix();
 	
 	glPushMatrix();
-		glTranslatef(- comp / 8, 0.05/2,-1* larg / 3);
+		glTranslatef(- comp / 8, 0.05/2,-larg / 3);
 		chaoC->desenha();
 	glPopMatrix();
 	
@@ -178,7 +201,7 @@ void Bar::desenha(){
 		pilares[0]->desenha();
 	glPopMatrix();
 
-	/*DESENHA OS CANDEEIROS */
+	/*------------------------------------DESENHA OS CANDEEIROS------------------------------------------ */
 	glPushMatrix();
 		glTranslatef(-comp/8, alt-(1.5*alt)/8,0);		
 		candeeiroTecto[0]->desenhaB();
@@ -218,9 +241,24 @@ void Bar::desenha(){
 		candeeiroParede[0]->desenhaA();
 	glPopMatrix();
 
-	/*DESENHA AS MESAS*/
 	glPushMatrix();
-		glTranslatef(comp/8, 0.0f,0.0f);
+		glTranslatef(0.0f, alt/4+0.1,larg/6);
+		candeeiroMesa[0]->desenha();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-comp/4, alt/4+0.1,larg/6);
+		candeeiroMesa[0]->desenha();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(comp/4+0.5, alt/4+0.1,larg/3+0.5);
+		candeeiroMesa[0]->desenha();
+	glPopMatrix();
+
+	/*---------------------------------------DESENHA AS MESAS-----------------------------------------*/
+	glPushMatrix();
+		glTranslatef(comp/4+0.5, 0.0f,larg/3+0.5);
 		mesaRedonda[0]->desenhaB();
 	glPopMatrix();
 
@@ -236,21 +274,131 @@ void Bar::desenha(){
 		mesaRectangular[0]->desenhaC();
 	glPopMatrix();
 
-	/*DESENHA AS CADEIRAS*/
+	/*---------------------------------------DESENHA AS CADEIRAS-----------------------------------------*/
 	glPushMatrix();
 		glTranslatef(-comp/4-0.4, 0.0f,larg/9);
 		glRotatef(90,0,1,0);
 		cadeiracomprido[0]->desenhaC();
 	glPopMatrix();
 
+	glPushMatrix();
+		glTranslatef(-comp/4-0.4, 0.0f,larg/9+comp/7+larg/36);
+		glRotatef(90,0,1,0);
+		cadeiracomprido[0]->desenhaC();
+	glPopMatrix();
 
+	glPushMatrix();
+		glTranslatef(-comp/4+0.4, 0.0f,larg/9+comp/7+larg/36);
+		glRotatef(90,0,1,0);
+		cadeiracomprido[0]->desenhaC();
+	glPopMatrix();
 
+	glPushMatrix();
+		glTranslatef(-comp/4+0.4, 0.0f,larg/9);
+		glRotatef(90,0,1,0);
+		cadeiracomprido[0]->desenhaC();
+	glPopMatrix();
 
-	/*ENFEITES*/
+	glPushMatrix();
+		glTranslatef(0.4, 0.0f,larg/9+comp/7+larg/36);
+		glRotatef(90,0,1,0);
+		cadeiracomprido[0]->desenhaC();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(0.4, 0.0f,larg/9);
+		glRotatef(90,0,1,0);
+		cadeiracomprido[0]->desenhaC();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-0.4, 0.0f,larg/9+comp/7+larg/36);
+		glRotatef(90,0,1,0);
+		cadeiracomprido[0]->desenhaC();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-0.4, 0.0f,larg/9);
+		glRotatef(90,0,1,0);
+		cadeiracomprido[0]->desenhaC();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-comp/8, 0.0f,-larg/2+0.15);
+		cadeiraRei->desenhaD();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(alt/14, 0.09f,-0.09f*2);
+		glRotatef(90,1,0,0);
+		glRotatef(90,0,0,1);
+		banco->desenhaB();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(comp/4+0.2, 0.0f,larg/3+0.7);
+		glRotatef(90,0,1,0);
+		cadeiraStandart->desenhaA();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(comp/4+0.2+0.7, 0.0f,larg/3+0.7);
+		glRotatef(-90,0,1,0);
+		cadeiraStandart->desenhaA();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(comp/4+0.2+0.7, 0.0f,larg/3+0.3);
+		glRotatef(-90,0,1,0);
+		cadeiraStandart->desenhaA();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(comp/4+0.2, 0.0f,larg/3+0.3);
+		glRotatef(90,0,1,0);
+		cadeiraStandart->desenhaA();
+	glPopMatrix();
+
+	/*---------------------------------------DESENHA O BALCAO--------------------------------------------*/
+	glPushMatrix();
+		glTranslatef(comp/4+0.3, alt/8,-larg/15);
+		balcao->desenha();
+	glPopMatrix();
+
+	/*---------------------------------------DESENHA OS ENFEITES-----------------------------------------*/
 	glPushMatrix();
 		glTranslatef(-comp/8, alt/3,larg/2-0.1f);
 		glRotatef(180,0,1,0);
 		enfeites[0]->desenha();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-comp/8, 0.06f,-larg/3);
+		enfeites[1]->desenha();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-comp/8+0.28, 0.27f,-larg/2+0.01);
+		glRotatef(20,0,0,1);
+		enfeites[2]->desenha();
+	glPopMatrix();
+
+
+	/*--------------------------------------------DESENHA OS COPOS --------------------------------------------------*/
+
+	glPushMatrix();
+		glTranslatef(-comp/4+0.15, alt/4+0.03,larg/6+0.3);
+		caneca->desenha();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(-comp/4-0.15, alt/4+0.03,larg/6+1);
+		caneca->desenha();
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(comp/4+0.5+0.2, alt/4+0.02,larg/3+0.5+0.2);
+		copo->desenha();
 	glPopMatrix();
 }
 
@@ -272,6 +420,18 @@ Bar::~Bar(){
 	delete parede[5];
 	delete candeeiroTecto[0];
 	delete candeeiroTecto[1];
+	delete candeeiroMesa[0];
+	delete candeeiroParede[0];
 	delete mesaRedonda[0];
 	delete mesaRectangular[0];
+	delete enfeites[0];
+	delete enfeites[1];
+	delete enfeites[2];
+	delete enfeites[3];
+	delete enfeites[4];
+	delete cadeiracomprido[0];
+	delete cadeiraRei;
+	delete cadeiraStandart;
+	delete copo;
+	delete caneca;
 }	

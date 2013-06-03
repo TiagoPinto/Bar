@@ -2,6 +2,7 @@
 class Cubo;
 class Cilindro;
 class Anel;
+class Luz;
 class CandeeiroCandelabro{
 	private:
 		float comprimento;
@@ -17,6 +18,7 @@ class CandeeiroCandelabro{
 		Cilindro *vela[2];
 		Cubo *ferros[8];
 		Anel *anel[2];
+		Luz *luz;
 
 	public:
 		CandeeiroCandelabro();

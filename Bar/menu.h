@@ -7,7 +7,7 @@ float camX, camY, camZ;
 float x = 0.0f;
 float y = 0.0f;
 float speed = 2.0f;
-float camCamara = 0;
+float camCamara = 1;
 //Cores Iniciais
 float red = 1.0f;
 float green = 1.0f;

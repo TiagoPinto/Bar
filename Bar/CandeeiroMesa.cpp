@@ -1,7 +1,7 @@
 #include "includes.h"
 #include "CandeeiroMesa.h"
 #include "cilindro.h"
-
+#include "Luz.h"
 /**
  * Construtor da class Cilindro.
  * Inicializa as variaveis de comprimento, altura, fatias e camadas do cilindro.
@@ -35,6 +35,7 @@ CandeeiroMesa::CandeeiroMesa(float c, float a, float f, float p, GLuint idferro,
 	this->camadas = p;
 	this->texturaFerro = idferro;
 	this->texturaVela = idvela;
+	this->luz = new Luz(0,this->altura,0);
 
 	base = new Cilindro(comprimento/2, 0.5*altura/5, fatias, camadas, 1, texturaFerro);
 	//parede da caixa, parte traseira

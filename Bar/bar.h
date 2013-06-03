@@ -1,12 +1,18 @@
 #pragma once
 class Plano;
 class Cubo;
+class Balcao;
 class CadeiraComprido;
+class CadeiraBanco;
+class CadeiraRei;
+class CadeiraStandart;
 class CandeeiroCandelabro;
 class CandeeiroParede;
+class CandeeiroMesa;
 class MesaRedonda;
 class MesaRectangular;
 class MesaStandart;
+class Copo;
 class Bar{
 	private:
 		float c;	//comprimento
@@ -26,10 +32,18 @@ class Bar{
 		Cubo *pilares[10];
 		CandeeiroCandelabro *candeeiroTecto[2];
 		CandeeiroParede *candeeiroParede[1];
+		CandeeiroMesa *candeeiroMesa[1];
 		MesaRedonda *mesaRedonda[1];
 		MesaRectangular *mesaRectangular[2];
-		Plano *enfeites[1];
+		Plano *enfeites[5];
 		CadeiraComprido *cadeiracomprido[1];
+		CadeiraRei *cadeiraRei;
+		CadeiraBanco *banco;
+		CadeiraStandart *cadeiraStandart;
+		Balcao *balcao;
+		Copo *copo;
+		Copo *caneca;
+		
 		
 	public:
 		Bar();

@@ -4,6 +4,7 @@
 #include "cubo.h"
 #include "plano.h"
 #include "piramide.h"
+#include "Luz.h"
 /**
  * Construtor da class Cilindro.
  * Inicializa as variaveis de comprimento, altura, fatias e camadas do cilindro.
@@ -38,6 +39,7 @@ CandeeiroParede::CandeeiroParede(float c, float a, float f, float p, GLuint idte
 	this->texturaVidro = idvidro;
 	this->texturaMadeira = idtex;
 	this->texturaVela = idvela;
+	this->luz = new Luz(0,this->altura,0);
 
 	base = new Cubo(this->comprimento, this->altura / 6, this->comprimento, this->fatias, this->camadas, texturaMadeira);
 	//parede da caixa, parte traseira
